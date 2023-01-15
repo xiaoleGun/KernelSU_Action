@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote  name="aosp" fetch="https://android.googlesource.com" review="https://android-review.googlesource.com/" />
+  <default revision="master-kernel-build-2021" remote="aosp" sync-j="4" />
+
+  <superproject name="kernel/superproject" remote="aosp" />
+
+  <project path="build" name="kernel/build" />
+  <project path="kernel/tests" name="kernel/tests" />
+  <project path="kernel/configs" name="kernel/configs" />
+  <project path="prebuilts-master/clang/host/linux-x86" name="platform/prebuilts/clang/host/linux-x86" clone-depth="1" revision="master-kernel-build-2022" />
+  <project path="prebuilts/build-tools" name="platform/prebuilts/build-tools" clone-depth="1" />
+  <project path="prebuilts/kernel-build-tools" name="kernel/prebuilts/build-tools" clone-depth="1" />
+  <project path="tools/mkbootimg" name="platform/system/tools/mkbootimg" />
+</manifest>

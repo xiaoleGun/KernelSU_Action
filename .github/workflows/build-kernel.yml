@@ -1,0 +1,65 @@
+name: Build Kernel
+on:
+  workflow_dispatch:
+     inputs:
+      KERNEL_SOURCE:
+        description: 'Kernel Source'
+        required: true
+        default: 'https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne'
+      KERNEL_SOURCE_BRANCH:
+        description: 'Branch'
+        required: true
+        default: 'TDA'
+      KERNEL_BUILD_CONFIG:
+        description: 'Kernel Build Config'
+        required: true
+        default: 'https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/configs/build.config.wayne'
+      BOOTIMAGE:
+        description: 'Boot image to get ramdisk'
+        required: true
+        default: 'https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img'
+
+jobs:
+  build:
+    name: Build Kernel
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup build kernel environment
+      run: |
+        echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
+        cd $GITHUB_WORKSPACE
+        git clone https://gerrit.googlesource.com/git-repo
+        mkdir kernel_workspace && cd kernel_workspace
+        git config --global user.name "Github Action"
+        git config --global user.email "Action@github.com"
+        ../git-repo/repo init --depth=1 -u https://github.com/xiaoleGun/KernelSU_action -b main
+        ../git-repo/repo sync -j$(nproc --all)
+        wget -O boot.img ${{ github.event.inputs.BOOTIMAGE }}
+        tools/mkbootimg/unpack_bootimg.py --boot_img=boot.img
+
+    - name: Download kernel source
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        git clone ${{ github.event.inputs.KERNEL_SOURCE }} -b ${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
+
+    - name: Download kernel build config
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        wget -O build.config ${{ github.event.inputs.KERNEL_BUILD_CONFIG }}
+
+    - name: Setup KernelSU
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+        echo "CONFIG_KPROBES=y" >> arch/arm64/configs/$(cat build.config | grep "DEFCONFIG" | head -n 1 | cut -d "=" -f 2)
+
+    - name: Build boot-su.img
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        BRANCH=${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} BUILD_CONFIG=android-kernel/build.config build/build.sh
+
+    - name: Upload boot-su.img
+      uses: actions/upload-artifact@v3
+      with:
+        name: boot-su-${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}-${{ env.BUILD_TIME }}.img
+        path: out/${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}/dist/boot.img
