@@ -62,4 +62,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: boot-su-${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}-${{ env.BUILD_TIME }}.img
-        path: out/${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}/dist/boot.img
+        path: kernel_workspace/out/${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}/dist/boot.img
