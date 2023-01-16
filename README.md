@@ -1,3 +1,5 @@
+**中文** | [English](README_EN.md)
+
 # KernelSU Action
 用于Non-GKI Kernel的Action，具有一定的普遍性，需要了解内核及Android的相关知识得以运用。
 
