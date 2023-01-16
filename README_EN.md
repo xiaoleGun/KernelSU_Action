@@ -44,3 +44,6 @@ More to visits [build/build.sh](https://android.googlesource.com/kernel/build/+/
 Provide a boot image that will boot successfully, with the same kernel source code and the same device tree as your current system built from aosp, the ramdisk contains the partition table and init, without which it may reboot to fastboot.
 
 e.g. https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
+
+## Credits
+- [KernelSU](https://github.com/tiann/KernelSU)

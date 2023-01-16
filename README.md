@@ -46,3 +46,6 @@ Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build K
 故名思义，提供一个可以正常开机的boot镜像，需要直链，最好是同一套内核源码以及与你当前系统同一套设备树从aosp构建出来的。ramdisk里面包含分区表以及init，没有的话可能会重启到fastboot。
 
 例如: https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
+
+## 感谢
+- [KernelSU](https://github.com/tiann/KernelSU)
