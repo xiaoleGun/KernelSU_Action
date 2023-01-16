@@ -34,6 +34,7 @@ jobs:
         git config --global user.email "Action@github.com"
         ../git-repo/repo init --depth=1 -u https://github.com/xiaoleGun/KernelSU_action -b main
         ../git-repo/repo sync -j$(nproc --all)
+        sed -i '/SOURCE_DATE_EPOCH/d' build/_setup_env.sh
         wget -O boot.img ${{ github.event.inputs.BOOTIMAGE }}
         tools/mkbootimg/unpack_bootimg.py --boot_img=boot.img
 
