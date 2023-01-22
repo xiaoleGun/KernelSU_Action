@@ -6,7 +6,9 @@ Action for Non-GKI Kernel has some common and requires knowledge of kernel and A
 - `4.14`
 ## Usage
 First fork this repo, then click on action, you will see the `Build Kernel` option, click on the option and you will see a dialog box on the right hand side with `Run workflows` in it, there are configurations that you need to type, see the section below to understand how to type them in.
-### Build Kernel Common
+
+Or use config.env, edit config.env and submit it, click star or run workflows, this function is convenient for the phone to modify the parameters.
+### Build Kernel
 After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
 #### Kernel Source
 Type your kernel link

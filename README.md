@@ -8,7 +8,9 @@
 - `4.14`
 ## 使用
 Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build Kernel Common`/`Build boot image`选项，点击选项会看见右边的大对话框的上面会有`Run workflows`，里面有需要你填写的配置，看下面的部分，了解如何填写。
-### Build Kernel Common
+
+或者使用config.env，编辑config.env然后提交，按star或者run workflows，这个功能是方便手机修改参数。
+### Build Kernel
 编译成功后，会在`Action`上传AnyKernel3，已经关闭设备检查，请在Twrp刷入
 #### Kernel Source
 填写你的内核仓库地址
@@ -26,7 +28,7 @@ Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build K
 填写需要刷写的image，一般与你的aosp-device tree里的BOARD_KERNEL_IMAGE_NAME是一致的
 
 例如: Image.gz-dtb
-#### Clang-version
+#### Clang version
 填写需要使用的Clang版本
 | Clang 版本 | 对应 Android 版本 | AOSP-Clang 版本 |
 | ---------- | ----------------- | --------------- |
