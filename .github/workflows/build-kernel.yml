@@ -35,22 +35,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Load Configuration
-      uses: falti/dotenv-action@v0.2.5
-      id: config
-      with:
-        path: config.env
-
     - name: Setup Configuration
       run: |
-        if [ ${{ steps.config.outputs.use_config }} = true ];then
-            echo "KERNEL_SOURCE=${{ steps.config.outputs.kernel_source }}" >> $GITHUB_ENV
-            echo "KERNEL_SOURCE_BRANCH=${{ steps.config.outputs.kernel_source_branch }}" >> $GITHUB_ENV
-            echo "KERNEL_DEFCONFIG=${{ steps.config.outputs.kernel_defconfig }}" >> $GITHUB_ENV
-            echo "KERNEL_FILE=${{ steps.config.outputs.kernel_file }}" >> $GITHUB_ENV
-            echo "CLANG_VERSION=${{ steps.config.outputs.clang_version }}" >> $GITHUB_ENV
-            echo "BUILD_EXTRA_COMMAND=${{ steps.config.outputs.extra_build_command }}" >> $GITHUB_ENV
-            echo "USE_KPROBES=${{ steps.config.outputs.use_kprobes }}" >> $GITHUB_ENV
+        if [ $(cat config.env | grep "USE_CONFIG" | head -n 1 | cut -d "=" -f 2) = true ];then
+            echo "KERNEL_SOURCE=$(cat config.env | grep "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "KERNEL_SOURCE_BRANCH=$(cat config.env | grep "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "KERNEL_DEFCONFIG=$(cat config.env | grep "KERNEL_DEFCONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "KERNEL_FILE=$(cat config.env | grep "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "CLANG_VERSION=$(cat config.env | grep "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "BUILD_EXTRA_COMMAND=$(cat config.env | grep "BUILD_EXTRA_COMMAND" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "USE_KPROBES=$(cat config.env | grep "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         else
             echo "KERNEL_SOURCE=${{ github.event.inputs.KERNEL_SOURCE }}" >> $GITHUB_ENV
             echo "KERNEL_SOURCE_BRANCH=${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}" >> $GITHUB_ENV
