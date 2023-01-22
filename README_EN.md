@@ -28,7 +28,7 @@ e.g. Image.gz-dtb
 Type the version of Clang you need to use
 | Clang version | Corresponding Android version | AOSP-Clang version |
 | ------------- | ----------------------------- | ------------------ |
-| 12.0.5        | Android S                     | r416183b1          |
+| 12.0.5        | Android S                     | r416183b           |
 | 14.0.6        | Android T                     | r450784d           |
 | 14.0.7        |                               | r450784e           |
 | 15.0.1        |                               | r458507            |
