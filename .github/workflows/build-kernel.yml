@@ -84,10 +84,10 @@ jobs:
         sed -i 's!block=/dev/block/platform/omap/omap_hsmmc.0/by-name/boot;!block=auto;!g' AnyKernel3/anykernel.sh
         sed -i 's/is_slot_device=0;/is_slot_device=auto;/g' AnyKernel3/anykernel.sh
         cp android-kernel/out/arch/arm64/boot/${{ github.event.inputs.KERNEL_FILE }} AnyKernel3/
-        cd AnyKernel3 && zip -r AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }} . -x ".git*" -x "README.md" -x "*.zip"
+        zip -r AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }} ./AnyKernel3/* -x ".git*" -x "README.md"
 
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v3
       with:
         name: AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }}.zip
-        path: kernel_workspace/AnyKernel3/AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }}.zip
+        path: kernel_workspace/AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }}.zip
