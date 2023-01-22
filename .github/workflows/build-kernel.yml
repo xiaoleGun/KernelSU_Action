@@ -93,5 +93,5 @@ jobs:
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v3
       with:
-        name: AnyKernel3-KernelSU-${{ env.DEVICE }}-${{ env.BUILD_TIME }}.zip
+        name: AnyKernel3-KernelSU-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3-KernelSU-${{ env.DEVICE }}-${{ env.BUILD_TIME }}.zip
