@@ -1,5 +1,8 @@
 name: Build Kernel
 on:
+  watch:
+    types: [started]
+
   workflow_dispatch:
      inputs:
       KERNEL_SOURCE:
