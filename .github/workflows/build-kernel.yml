@@ -37,6 +37,7 @@ jobs:
     - name: Setup build kernel environment
       run: |
         echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
+        echo "DEVICE=$(echo ${{ github.event.inputs.KERNEL_DEFCONFIG }} | sed 's!vendor/!!;s/_defconfig//;s/_user//')" >> $GITHUB_ENV
         cd $GITHUB_WORKSPACE
         git clone https://gerrit.googlesource.com/git-repo
         mkdir kernel_workspace && cd kernel_workspace
@@ -86,7 +87,6 @@ jobs:
         sed -i 's/do.devicecheck=1/do.devicecheck=0/g' AnyKernel3/anykernel.sh
         sed -i 's!block=/dev/block/platform/omap/omap_hsmmc.0/by-name/boot;!block=auto;!g' AnyKernel3/anykernel.sh
         sed -i 's/is_slot_device=0;/is_slot_device=auto;/g' AnyKernel3/anykernel.sh
-        echo "DEVICE=$(echo ${{ github.event.inputs.KERNEL_DEFCONFIG }} | sed 's!vendor/!!;s/_defconfig//;s/_user//')" >> $GITHUB_ENV
         cp android-kernel/out/arch/arm64/boot/${{ github.event.inputs.KERNEL_FILE }} AnyKernel3/
         zip -r AnyKernel3-KernelSU-${{ env.DEVICE }}-${{ env.BUILD_TIME }} ./AnyKernel3/* -x ".git*" -x "README.md"
 
