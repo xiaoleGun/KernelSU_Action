@@ -1,4 +1,4 @@
-name: Build Kernel Common
+name: Build Kernel
 on:
   workflow_dispatch:
      inputs:
@@ -28,7 +28,7 @@ on:
 
 jobs:
   build:
-    name: Build Kernel Common
+    name: Build Kernel
     runs-on: ubuntu-latest
     steps:
     - name: Setup build kernel environment
