@@ -3,17 +3,51 @@ Action for Non-GKI Kernel has some common and requires knowledge of kernel and A
 
 ## Support Kernel
 - `4.19`
+- `4.14`
 ## Usage
 First fork this repo, then click on action, you will see the `Build Kernel` option, click on the option and you will see a dialog box on the right hand side with `Run workflows` in it, there are configurations that you need to type, see the section below to understand how to type them in.
-### Kernel Source
+### Build Kernel Common
+After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
+#### Kernel Source
 Type your kernel link
 
 e.g. https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
-### Branch
+#### Branch
 Type your kernel branch
 
 e.g. TDA
-### Kernel Build Config
+#### Kernel defconfig
+Type your kernel defconfig
+
+e.g. vendor/wayne_defconfig
+#### Kernel file
+Type in the image you need, usually the same as BOARD_KERNEL_IMAGE_NAME in your aosp-device tree.
+
+e.g. Image-gz-dtb
+#### Clang-version
+Type the version of Clang you need to use
+| Clang version | Corresponding Android version | AOSP-Clang version |
+| ------------- | ----------------------------- | ------------------ |
+| 12.0.5        | Android S                     | r416183b1          |
+| 14.0.6        | Android T                     | r450784d           |
+| 14.0.7        |                               | r450784e           |
+| 15.0.1        |                               | r458507            |
+
+Usually Clang12 will pass most kernel builds of 4.14 and above.
+My own MI 6X 4.19 is using r450784d.
+#### Kprobes
+If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
+### Build boot image
+After a successful build, boot-su.img will be uploaded in `Action` and flashed to the phone using fastboot.
+#### Kernel Source
+Type your kernel link
+
+e.g. https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
+#### Branch
+Type your kernel branch
+
+e.g. TDA
+#### Kernel Build Config
 Type your kernel build config link
 
 e.g. https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/configs/build.config.wayne

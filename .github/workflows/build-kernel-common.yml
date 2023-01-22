@@ -1,0 +1,89 @@
+name: Build Kernel Common
+on:
+  workflow_dispatch:
+     inputs:
+      KERNEL_SOURCE:
+        description: 'Kernel Source'
+        required: true
+        default: 'https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne'
+      KERNEL_SOURCE_BRANCH:
+        description: 'Branch'
+        required: true
+        default: 'TDA'
+      KERNEL_DEFCONFIG:
+        description: 'Defconfig'
+        required: true
+        default: 'vendor/wayne_defconfig'
+      KERNEL_FILE:
+        description: 'Your kernel out image name'
+        required: true
+        default: 'Image-gz-dtb'
+      CLANG_VERSION:
+        description: 'Clang version'
+        required: true
+        default: 'r450784d'
+      USE_KPROBES:
+        description: 'If you want to use kprobes, please type "true"'
+        required: false
+
+jobs:
+  build:
+    name: Build Kernel Common
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup build kernel environment
+      run: |
+        echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
+        cd $GITHUB_WORKSPACE
+        git clone https://gerrit.googlesource.com/git-repo
+        mkdir kernel_workspace && cd kernel_workspace
+        git config --global user.name "Github Action"
+        git config --global user.email "Action@github.com"
+        sudo apt-get update
+        sudo apt-get install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 g++-multilib python-networkx libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev 11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler
+
+    - name: Download Clang-aosp and Gcc-aosp
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        mkdir clang-aosp
+        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master-kernel-build-2022/clang-${{ github.event.inputs.CLANG_VERSION }}.tar.gz
+        tar -C clang-aosp/ -zxvf clang-${{ github.event.inputs.CLANG_VERSION }}.tar.gz
+        mkdir gcc-aosp
+        wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/tags/android-11.0.0_r35.tar.gz
+        tar -C gcc-aosp/ -zxvf android-11.0.0_r35.tar.gz
+
+    - name: Download kernel source
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        git clone ${{ github.event.inputs.KERNEL_SOURCE }} -b ${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
+
+    - name: Setup KernelSU
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+        if [ ${{ github.event.inputs.USE_KPROBES }} = true ]; then
+          echo "CONFIG_KPROBES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
+        fi
+
+    - name: Build kernel
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
+        make -j$(nproc --all) O=out ARCH=arm64 CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-aosp/bin/aarch64-linux-android- CC=clang LD=ld.lld ${{ github.event.inputs.KERNEL_DEFCONFIG }}
+        make -j$(nproc --all) O=out ARCH=arm64 CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-aosp/bin/aarch64-linux-android- CC=clang LD=ld.lld
+
+    - name: Make Anykernel for your kernel
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        git clone https://github.com/osm0sis/AnyKernel3
+        sed -i 's/do.devicecheck=1/do.devicecheck=0/g' AnyKernel3/anykernel.sh
+        sed -i 's/block=/dev/block/platform/omap/omap_hsmmc.0/by-name/boot;/block=auto;/g' AnyKernel3/anykernel.sh
+        sed -i 's/is_slot_device=0;/is_slot_device=auto;/g' AnyKernel3/anykernel.sh
+        cp android-kernel/out/arch/arm64/boot/${{ github.event.inputs.KERNEL_FILE }} AnyKernel3/
+        cd AnyKernel3 && zip -r AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }} . -x ".git*" -x "README.md" -x "*.zip"
+
+    - name: Upload AnyKernel3
+      uses: actions/upload-artifact@v3
+      with:
+        name: AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }}.zip
+        path: kernel_workspace/AnyKernel3/AnyKernel3-KernelSU-${{ github.event.inputs.KERNEL_DEFCONFIG }}-${{ env.BUILD_TIME }}.zip

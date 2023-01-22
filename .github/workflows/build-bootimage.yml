@@ -1,4 +1,4 @@
-name: Build Kernel
+name: Build boot image
 on:
   workflow_dispatch:
      inputs:
@@ -18,10 +18,13 @@ on:
         description: 'Boot image to get ramdisk'
         required: true
         default: 'https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img'
+      USE_KPROBES:
+        description: 'If you want to use kprobes, please type "true"'
+        required: false
 
 jobs:
   build:
-    name: Build Kernel
+    name: Build boot image
     runs-on: ubuntu-latest
     steps:
     - name: Setup build kernel environment
@@ -54,7 +57,9 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-        echo "CONFIG_KPROBES=y" >> arch/arm64/configs/$(cat build.config | grep "DEFCONFIG" | head -n 1 | cut -d "=" -f 2)
+        if [ ${{ github.event.inputs.USE_KPROBES }} = true ]; then
+          echo "CONFIG_KPROBES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
+        fi
 
     - name: Build boot-su.img
       run: |
