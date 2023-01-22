@@ -25,7 +25,7 @@ Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build K
 #### Kernel file
 填写需要刷写的image，一般与你的aosp-device tree里的BOARD_KERNEL_IMAGE_NAME是一致的
 
-例如: Image-gz-dtb
+例如: Image.gz-dtb
 #### Clang-version
 填写需要使用的Clang版本
 | Clang 版本 | 对应 Android 版本 | AOSP-Clang 版本 |

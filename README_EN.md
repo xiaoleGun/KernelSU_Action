@@ -23,7 +23,7 @@ e.g. vendor/wayne_defconfig
 #### Kernel file
 Type in the image you need, usually the same as BOARD_KERNEL_IMAGE_NAME in your aosp-device tree.
 
-e.g. Image-gz-dtb
+e.g. Image.gz-dtb
 #### Clang-version
 Type the version of Clang you need to use
 | Clang version | Corresponding Android version | AOSP-Clang version |
