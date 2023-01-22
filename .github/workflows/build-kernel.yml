@@ -31,7 +31,6 @@ on:
 
 jobs:
   build:
-    name: Build Kernel
     runs-on: ubuntu-latest
     steps:
     - name: Setup build kernel environment
