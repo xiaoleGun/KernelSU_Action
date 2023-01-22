@@ -85,4 +85,6 @@ Provide a boot image that will boot successfully, with the same kernel source co
 e.g. https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
 
 ## Credits
+- [AnyKernel3](https://github.com/osm0sis/AnyKernel3)
+- [AOSP](https://android.googlesource.com)
 - [KernelSU](https://github.com/tiann/KernelSU)

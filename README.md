@@ -87,4 +87,6 @@ Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build K
 例如: https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
 
 ## 感谢
+- [AnyKernel3](https://github.com/osm0sis/AnyKernel3)
+- [AOSP](https://android.googlesource.com)
 - [KernelSU](https://github.com/tiann/KernelSU)
