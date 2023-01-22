@@ -37,6 +37,11 @@ Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build K
 
 一般Clang12就能通过大部分4.14及以上的内核的编译
 我自己的MI 6X 4.19使用的是r450784d
+#### Extra build commands
+有的内核需要手动加入一些编译命令，才能正常编译，不需要的话不填写即可
+请在命令与命令之间用空格隔开
+
+例如: LLVM=1 LLVM_IAS=1
 #### Kprobes
 如果你的内核Kprobes工作正常这项改成true即可自动在defconfig注入参数
 ### Build boot image

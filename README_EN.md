@@ -35,6 +35,11 @@ Type the version of Clang you need to use
 
 Usually Clang12 will pass most kernel builds of 4.14 and above.
 My own MI 6X 4.19 is using r450784d.
+#### Extra build commands
+Some kernels require some build commands to be typed in manually in order to build properly, so please don't type them in if you don't need to.
+Separate commands with spaces.
+
+e.g. LLVM=1 LLVM_IAS=1
 #### Kprobes
 If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
 ### Build boot image
