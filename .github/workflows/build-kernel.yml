@@ -35,9 +35,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - uses: actions/checkout@v3
-
     - name: Setup Configuration
       run: |
         if [ $(cat config.env | grep "USE_CONFIG" | head -n 1 | cut -d "=" -f 2) = true ];then
