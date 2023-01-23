@@ -9,7 +9,7 @@
 ## 使用
 Fork本仓库到你的储存库然后点击`Action`，在左侧可看见`Build Kernel Common`/`Build boot image`选项，点击选项会看见右边的大对话框的上面会有`Run workflows`，里面有需要你填写的配置，看下面的部分，了解如何填写。
 
-或者使用config.env，编辑config.env然后提交，按star或者run workflows，这个功能是方便手机修改参数。
+或者使用config.env(设置USE_CONFIG为true)，编辑config.env然后提交，按star或者run workflows，这个功能是方便手机修改参数。
 ### Build Kernel
 编译成功后，会在`Action`上传AnyKernel3，已经关闭设备检查，请在Twrp刷入
 #### Kernel Source
