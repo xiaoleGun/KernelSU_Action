@@ -32,6 +32,14 @@ on:
       USE_KPROBES:
         description: 'If you want to use kprobes, please type "true"'
         required: false
+      KERNELSU_CONFIG:
+        description: 'Would you want to integrate KernelSU into the kernel?'
+        required: true
+        default: 'Yes'
+        type: choice
+        options:
+        - Yes
+        - No
 
 jobs:
   build:
@@ -82,6 +90,7 @@ jobs:
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
 
     - name: Setup KernelSU
+      if: github.event.inputs.KERNELSU_CONFIG == 'Yes'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
