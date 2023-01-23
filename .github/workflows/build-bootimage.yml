@@ -21,6 +21,9 @@ on:
       USE_KPROBES:
         description: 'If you want to use kprobes, please type "true"'
         required: false
+      LTO_CONFIG:
+        description: 'If you want to disable LTO, please type "true"'
+        required: false
       KERNELSU_CONFIG:
         description: 'Would you want to integrate KernelSU into the kernel?'
         required: true
@@ -71,6 +74,12 @@ jobs:
             echo "CONFIG_KPROBES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
             echo "CONFIG_HAVE_KPROBES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
             echo "CONFIG_KPROBE_EVENTS=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
+        fi
+        if [ ${{ github.event.inputs.LTO_CONFIG }} = true ]; then
+            sed -i 's/CONFIG_LTO=y/CONFIG_LTO=n/' arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
+            sed -i 's/CONFIG_LTO_CLANG=y/CONFIG_LTO_CLANG=n/' arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
+            sed -i 's/CONFIG_THINLTO=y/CONFIG_THINLTO=n/' arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
+            echo "CONFIG_LTO_NONE=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
         fi
 
     - name: Build boot-su.img
