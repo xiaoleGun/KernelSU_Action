@@ -67,6 +67,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
         if [ ${{ github.event.inputs.USE_KPROBES }} = true ]; then
+            echo "CONFIG_MODULES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
             echo "CONFIG_KPROBES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
             echo "CONFIG_HAVE_KPROBES=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
             echo "CONFIG_KPROBE_EVENTS=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
