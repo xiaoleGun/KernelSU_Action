@@ -2,6 +2,10 @@
 
 Action for Non-GKI Kernel has some common and requires knowledge of kernel and Android to be used.
 
+## Warning:warning: :warning: :warning:
+
+If you are not a kernel author and use someone else's source code to build KernelSU, please use it for your own use only and do not share it with others, it is respectful to the author.
+
 ## Support Kernel
 
 - `4.19`
