@@ -33,26 +33,17 @@ on:
         description: 'Disable LTO'
         required: false
         default: 'false'
-        type: choice
-        options:
-        - true
-        - false
+        type: boolean
       USE_KERNELSU:
         description: 'Use KernelSU'
         required: true
         default: 'true'
-        type: choice
-        options:
-        - true
-        - false
+        type: boolean
       USE_KPROBES:
         description: 'Use Kprobes'
         required: false
         default: 'true'
-        type: choice
-        options:
-        - true
-        - false
+        type: boolean
 
 jobs:
   build:
