@@ -27,11 +27,11 @@ on:
       KERNELSU_CONFIG:
         description: 'Would you want to integrate KernelSU into the kernel?'
         required: true
-        default: 'Yes'
+        default: 'Y'
         type: choice
         options:
-        - Yes
-        - No
+        - Y
+        - N
 
 jobs:
   build:
@@ -65,7 +65,7 @@ jobs:
         wget -O build.config ${{ github.event.inputs.KERNEL_BUILD_CONFIG }}
 
     - name: Setup KernelSU
-      if: github.event.inputs.KERNELSU_CONFIG == 'Yes'
+      if: github.event.inputs.KERNELSU_CONFIG == 'Y'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
