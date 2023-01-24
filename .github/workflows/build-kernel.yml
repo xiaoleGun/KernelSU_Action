@@ -29,14 +29,6 @@ on:
         description: 'Extra build commands(e.g. LLVM=1 LLVM_IAS=1)'
         required: false
         default: 'LD=ld.lld'
-      USE_KPROBES:
-        description: 'Use Kprobes'
-        required: false
-        default: 'true'
-        type: choice
-        options:
-        - true
-        - false
       DISABLE_LTO:
         description: 'Disable LTO'
         required: false
@@ -48,6 +40,14 @@ on:
       USE_KERNELSU:
         description: 'Use KernelSU'
         required: true
+        default: 'true'
+        type: choice
+        options:
+        - true
+        - false
+      USE_KPROBES:
+        description: 'Use Kprobes'
+        required: false
         default: 'true'
         type: choice
         options:
@@ -69,6 +69,8 @@ jobs:
             echo "KERNEL_FILE=$(cat config.env | grep "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
             echo "CLANG_VERSION=$(cat config.env | grep "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
             echo "BUILD_EXTRA_COMMAND=$(cat config.env | grep "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
+            echo "DISABLE_LTO=$(cat config.env | grep "DISABLE_LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+            echo "USE_KERNELSU=$(cat config.env | grep "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
             echo "USE_KPROBES=$(cat config.env | grep "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         else
             echo "KERNEL_SOURCE=${{ github.event.inputs.KERNEL_SOURCE }}" >> $GITHUB_ENV
@@ -77,6 +79,8 @@ jobs:
             echo "KERNEL_FILE=${{ github.event.inputs.KERNEL_FILE }}" >> $GITHUB_ENV
             echo "CLANG_VERSION=${{ github.event.inputs.CLANG_VERSION }}" >> $GITHUB_ENV
             echo "BUILD_EXTRA_COMMAND=${{ github.event.inputs.BUILD_EXTRA_COMMAND }}" >> $GITHUB_ENV
+            echo "DISABLE_LTO=${{ github.event.inputs.DISABLE_LTO }}" >> $GITHUB_ENV
+            echo "USE_KERNELSU=${{ github.event.inputs.USE_KERNELSU }}" >> $GITHUB_ENV
             echo "USE_KPROBES=${{ github.event.inputs.USE_KPROBES }}" >> $GITHUB_ENV
         fi
 
@@ -103,7 +107,7 @@ jobs:
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
 
     - name: Setup KernelSU
-      if: github.event.inputs.USE_KERNELSU == 'true'
+      if: env.USE_KERNELSU == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
@@ -113,7 +117,7 @@ jobs:
             echo "CONFIG_HAVE_KPROBES=y" >> arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
             echo "CONFIG_KPROBE_EVENTS=y" >> arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
         fi
-        if [ ${{ github.event.inputs.DISABLE_LTO }} = true ]; then
+        if [ ${{ env.DISABLE_LTO }} = true ]; then
             sed -i 's/CONFIG_LTO=y/CONFIG_LTO=n/' arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
             sed -i 's/CONFIG_LTO_CLANG=y/CONFIG_LTO_CLANG=n/' arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
             sed -i 's/CONFIG_THINLTO=y/CONFIG_THINLTO=n/' arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
