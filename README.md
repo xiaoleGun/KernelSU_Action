@@ -19,6 +19,8 @@ Fork 本仓库到你的储存库然后点击`Action`，在左侧可看见`Build 
 
 或者使用 config.env(设置 USE_CONFIG 为 true)，按照以下内容编辑 config.env 然后提交，按 Star 或者 Run workflows，这个功能是方便手机修改参数。
 
+如果你的电脑性能足够好，你也可以将[local.sh](https://github.com/xiaoleGun/KernelSU_Action/blob/main/local.sh)下载放入内核源代码根目录并进行修改后，执行`bash ./local.sh`在本地编译内核。
+
 ### Build Kernel
 
 编译成功后，会在`Action`上传 AnyKernel3，已经关闭设备检查，请在 Twrp 刷入

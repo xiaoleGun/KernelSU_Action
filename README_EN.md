@@ -17,6 +17,8 @@ First fork this repo, then click on action, you will see the `Build Kernel` opti
 
 Or use config.env(set USE_CONFIG to true), edit config.env and commit it, click star or run workflows, this function is convenient for the phone to modify the parameters.
 
+If your PC's performance is good enough, you can also download [local.sh](https://github.com/xiaoleGun/KernelSU_Action/blob/main/local.sh) into kernel source root directory and modify it, then execute `bash . /local.sh` to compile the kernel locally.
+
 ### Build Kernel
 
 After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
