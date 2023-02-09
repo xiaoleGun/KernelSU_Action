@@ -114,6 +114,7 @@ jobs:
             sed -i 's/CONFIG_THINLTO=y/CONFIG_THINLTO=n/' arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
             echo "CONFIG_LTO_NONE=y" >> arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
         fi
+        echo "ANYKERNELNAME=-KernelSU" >> $GITHUB_ENV
 
     - name: Build kernel
       run: |
@@ -137,5 +138,5 @@ jobs:
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v3
       with:
-        name: AnyKernel3-KernelSU-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
+        name: AnyKernel3${{ env.ANYKERNELNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3/*

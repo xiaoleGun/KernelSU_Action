@@ -51,6 +51,9 @@ jobs:
     - name: Setup build kernel environment
       run: |
         echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
+        if [ ${{ github.event.inputs.USE_KERNELSU }} = true ];than
+            echo "OUTPUTNAME=-su" >> $GITHUB_ENV
+        fi
         cd $GITHUB_WORKSPACE
         git clone https://gerrit.googlesource.com/git-repo
         mkdir kernel_workspace && cd kernel_workspace
@@ -92,13 +95,13 @@ jobs:
             echo "CONFIG_LTO_NONE=y" >> arch/arm64/configs/${{ github.event.inputs.KERNEL_DEFCONFIG }}
         fi
 
-    - name: Build boot-su.img
+    - name: Build boot${{ env.OUTPUTNAME }}.img
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         BRANCH=${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} BUILD_CONFIG=android-kernel/build.config build/build.sh
 
-    - name: Upload boot-su.img
+    - name: Upload boot${{ env.OUTPUTNAME }}.img
       uses: actions/upload-artifact@v3
       with:
-        name: boot-su-${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}-${{ env.BUILD_TIME }}.img
+        name: boot${{ env.OUTPUTNAME }}-${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}-${{ env.BUILD_TIME }}.img
         path: kernel_workspace/out/${{ github.event.inputs.KERNEL_SOURCE_BRANCH }}/dist/boot.img
