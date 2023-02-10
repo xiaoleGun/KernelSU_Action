@@ -75,6 +75,10 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 如果你的内核 Kprobes 工作正常这项改成 true 即可自动在 defconfig 注入参数
 
+### Use overlayfs
+
+内核没有该参数的话请启用，模块需要
+
 ### Need DTBO
 
 如果你的内核还需要刷入DTBO，请设置为true

@@ -73,6 +73,10 @@ For debug kernel or build it separately
 
 If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
 
+### Use overlayfs
+
+Please enable this parameter if the kernel does not have it, the module requires
+
 ### Need DTBO
 
 If your kernel also needs to be flashed with DTBO image, set it to true.

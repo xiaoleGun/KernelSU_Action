@@ -23,6 +23,7 @@ jobs:
         echo "DISABLE-LTO=$(cat config.env | grep "DISABLE-LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "USE_KERNELSU=$(cat config.env | grep "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "USE_KPROBES=$(cat config.env | grep "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_OVERLAYFS=$(cat config.env | grep "USE_OVERLAYFS" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "NEED_DTBO=$(cat config.env | grep "NEED_DTBO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "MAKE_BOOT_IMAGE=$(cat config.env | grep "MAKE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "SOURCE_BOOT_IMAGE=$(cat config.env | grep "SOURCE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
@@ -74,6 +75,9 @@ jobs:
             echo "CONFIG_HAVE_KPROBES=y" >> arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
             echo "CONFIG_KPROBE_EVENTS=y" >> arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
         fi
+        if [ ${{ env.USE_OVERLAYFS }} = true ]; then
+            echo "CONFIG_OVERLAY_FS=y" >> arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
+        fi
         if [ ${{ env.DISABLE-LTO }} = true ]; then
             sed -i 's/CONFIG_LTO=y/CONFIG_LTO=n/' arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
             sed -i 's/CONFIG_LTO_CLANG=y/CONFIG_LTO_CLANG=n/' arch/arm64/configs/${{ env.KERNEL_DEFCONFIG }}
@@ -105,7 +109,7 @@ jobs:
         fi
 
     - name: Make boot image
-      if: ${{ env.MAKE_BOOT_IMAGE }} == 'true'
+      if: env.MAKE_BOOT_IMAGE == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         tools/unpack_bootimg.py --boot_img boot-source.img
@@ -125,14 +129,14 @@ jobs:
         path: kernel_workspace/AnyKernel3/*
 
     - name: Upload DTBO image
-      if: ${{ env.NEED_DTBO }} == 'true'
+      if: env.NEED_DTBO == 'true'
       uses: actions/upload-artifact@v3
       with:
         name: dtbo-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/android-kernel/out/arch/arm64/boot/dtbo.img
 
     - name: Upload boot image
-      if: ${{ env.MAKE_BOOT_IMAGE }} == 'true'
+      if: env.MAKE_BOOT_IMAGE == 'true'
       uses: actions/upload-artifact@v3
       with:
         name: boot${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
