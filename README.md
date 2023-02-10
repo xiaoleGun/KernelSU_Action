@@ -103,3 +103,4 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 - [AnyKernel3](https://github.com/osm0sis/AnyKernel3)
 - [AOSP](https://android.googlesource.com)
 - [KernelSU](https://github.com/tiann/KernelSU)
+- [xiaoxindada](https://github.com/xiaoxindada)
