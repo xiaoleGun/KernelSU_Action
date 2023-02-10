@@ -13,39 +13,39 @@ If you are not a kernel author and use someone else's source code to build Kerne
 
 ## Usage
 
+> After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
+
+> Because the build boot image was merged and two variables were added, the official Github requirement for input is up to 10 variables, so the auto-injection `Kprobes` parameter has been changed to auto-determination, with the condition that: the minor version number is greater than 9, and the grep CONFIG_KPROBES is empty or equal to # CONFIG_KPROBES is not set is injected.
+
 First fork this repo, then click on action, you will see the `Build Kernel` option, click on the option and you will see a dialog box on the right hand side with `Run workflows` in it, there are configurations that you need to type, see the section below to understand how to type them in.
 
 Or use config.env(set USE_CONFIG to true), edit config.env and commit it, click star or run workflows, this function is convenient for the phone to modify the parameters.
 
-### Build Kernel
-
-After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
-
-#### Kernel Source
+### Kernel Source
 
 Type your kernel link
 
 e.g. https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
 
-#### Kernel Source Branch
+### Kernel Source Branch
 
 Type your kernel branch
 
 e.g. TDA
 
-#### Kernel defconfig
+### Kernel defconfig
 
 Type your kernel defconfig
 
 e.g. vendor/wayne_defconfig
 
-#### Kernel file
+### Kernel file
 
 Type in the image you need, usually the same as BOARD_KERNEL_IMAGE_NAME in your aosp-device tree.
 
 e.g. Image.gz-dtb
 
-#### Clang version
+### Clang version
 
 Type the version of Clang you need to use
 | Clang version | Corresponding Android version | AOSP-Clang version |
@@ -58,71 +58,27 @@ Type the version of Clang you need to use
 Usually Clang12 will pass most kernel builds of 4.14 and above.
 My own MI 6X 4.19 is using r450784d.
 
-#### Extra build commands
+### Extra build commands
 
 Some kernels require some build commands to be typed in manually in order to build properly, so please don't type them in if you don't need to.
 Separate commands with spaces.
 
 e.g. LLVM=1 LLVM_IAS=1
 
-#### Disable LTO
+### Disable LTO
 
 This is used to optimize the kernel, but sometimes it causes errors, so it is provided that it can be disabled, set to true to disable.
 
-#### Use KernelSU
+### Use KernelSU
 
 For debug kernel or build it separately
 
-#### Use Kprobes
+### Make boot image
+> Merge from build_boot_image.yml
 
-If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
+Set to true, boot.img will be Make, you need to provide `Source boot image`
 
-### Build boot image
-
-After a successful build, boot-su.img will be uploaded in `Action` and flashed to the phone using fastboot.
-
-#### Kernel Source
-
-Type your kernel link
-
-e.g. https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
-
-#### Branch
-
-Type your kernel branch
-
-e.g. TDA
-
-#### Kernel Build Config
-
-Type your kernel build config link
-
-e.g. https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/configs/build.config.wayne
-
-There is not much you need to change in there, here is a comparison between the build config and the BoardConfig/BoardConfigCommon in the device tree.
-| build config | BoardConfig/BoardConfigCommon |
-| ------------------------- | ----------------------------- |
-| DEFCONFIG | TARGET_KERNEL_CONFIG |
-| BOOT_IMAGE_HEADER_VERSION | BOARD_BOOT_HEADER_VERSION |
-| BASE_ADDRESS | BOARD_KERNEL_BASE |
-| PAGE_SIZE | BOARD_KERNEL_PAGESIZE |
-| KERNEL_CMDLINE | BOARD_KERNEL_CMDLINE |
-| MKBOOTIMG_EXTRA_ARGS | BOARD_MKBOOTIMG_ARGS |
-| KERNEL_BINARY | BOARD_KERNEL_IMAGE_NAME |
-
-Here's what some of the options in the build config do
-| build config | do |
-| --------------------- | -----------------------------------|
-| VENDOR_RAMDISK_BINARY | ramdisk path |
-| ARCH | Architecture arm/arm64/x86_64 |
-| BUILD_BOOT_IMG | Create boot image for 1 |
-| SKIP_VENDOR_BOOT | Skip create vendor_boot for 1 |
-| FILES | Need out files |
-| CLANG_VERSION | Define clang version |
-
-More to visits [build/build.sh](https://android.googlesource.com/kernel/build/+/refs/heads/master-kernel-build-2022/build.sh)
-
-### Boot image to get ramdisk
+### Source boot image
 
 Provide a boot image that will boot successfully, with the same kernel source code and the same device tree as your current system built from aosp, the ramdisk contains the partition table and init, without which it may reboot to fastboot.
 
