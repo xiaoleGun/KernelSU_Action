@@ -15,11 +15,7 @@ If you are not a kernel author and use someone else's source code to build Kerne
 
 > After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
 
-> Because the build boot image was merged and two variables were added, the official Github requirement for input is up to 10 variables, so the auto-injection `Kprobes` parameter has been changed to auto-determination, with the condition that: the minor version number is greater than 9, and the grep CONFIG_KPROBES is empty or equal to # CONFIG_KPROBES is not set is injected.
-
-First fork this repo, then click on action, you will see the `Build Kernel` option, click on the option and you will see a dialog box on the right hand side with `Run workflows` in it, there are configurations that you need to type, see the section below to understand how to type them in.
-
-Or use config.env(set USE_CONFIG to true), edit config.env and commit it, click star or run workflows, this function is convenient for the phone to modify the parameters.
+First fork this repository to your repository and edit config.env as follows, then click `Star` or `Action`, you will see `Build Kernel` option on the left side, click it and you will see `Run workflows` on the top of the big dialog box on the right side, click it and it will start the build.
 
 ### Kernel Source
 
@@ -72,6 +68,10 @@ This is used to optimize the kernel, but sometimes it causes errors, so it is pr
 ### Use KernelSU
 
 For debug kernel or build it separately
+
+### Use Kprobes
+
+If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
 
 ### Make boot image
 > Merge from build_boot_image.yml

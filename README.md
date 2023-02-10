@@ -17,11 +17,7 @@
 
 > 编译成功后，会在`Action`上传 AnyKernel3，已经关闭设备检查，请在 Twrp 刷入。
 
-> 由于合并了build boot image，添加了两个变量，Github官方要求input最多10个变量，所以自动注入`Kprobes`参数已经改为自动判断，条件为: 小版本号大于9，且满足grep CONFIG_KPROBES为空或等于# CONFIG_KPROBES is not set则注入。
-
-Fork 本仓库到你的储存库然后点击`Action`，在左侧可看见`Build Kernel Common`/`Build boot image`选项，点击选项会看见右边的大对话框的上面会有`Run workflows`，里面有需要你填写的配置，看下面的部分，了解如何填写。
-
-或者使用 config.env(设置 USE_CONFIG 为 true)，按照以下内容编辑 config.env 然后提交，按 Star 或者 Run workflows，这个功能是方便手机修改参数。
+Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之后点击`Star`或`Action`，在左侧可看见`Build Kernel`选项，点击选项会看见右边的大对话框的上面会有`Run workflows`点击它会启动构建。
 
 ### Kernel Source
 
@@ -74,6 +70,10 @@ Fork 本仓库到你的储存库然后点击`Action`，在左侧可看见`Build 
 ### Use KernelSU
 
 是否使用 KernelSU，用于排查内核故障或单独编译内核
+
+### Use Kprobes
+
+如果你的内核 Kprobes 工作正常这项改成 true 即可自动在 defconfig 注入参数
 
 ### Make boot image
 > 从之前的Workflows合并进来的，可以查看历史提交
