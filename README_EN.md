@@ -73,6 +73,10 @@ For debug kernel or build it separately
 
 If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
 
+### Need DTBO
+
+If your kernel also needs to be flashed with DTBO image, set it to true.
+
 ### Make boot image
 > Merge from build_boot_image.yml
 
