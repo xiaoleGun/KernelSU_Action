@@ -37,6 +37,10 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 例如: vendor/wayne_defconfig
 
+### Target arch
+
+例如: arm64
+
 ### Kernel file
 
 填写需要刷写的 image，一般与你的 aosp-device tree 里的 BOARD_KERNEL_IMAGE_NAME 是一致的

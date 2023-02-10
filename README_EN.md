@@ -35,6 +35,10 @@ Type your kernel defconfig
 
 e.g. vendor/wayne_defconfig
 
+### Target arch
+
+e.g. arm64
+
 ### Kernel file
 
 Type in the image you need, usually the same as BOARD_KERNEL_IMAGE_NAME in your aosp-device tree.
