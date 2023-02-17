@@ -9,7 +9,6 @@ jobs:
   build:
     name: Build Kernel by ${{ github.actor }}
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - uses: actions/checkout@v3
     - name: Setup Configuration
