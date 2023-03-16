@@ -95,11 +95,15 @@ jobs:
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
-        export KBUILD_BUILD_HOST=Github-Action
+        export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH
+        export ARCH=${{ env.TARGET_ARCH }}
+        export SUBARCH=${{ env.TARGET_ARCH }}
+        export KBUILD_COMPILER_STRING="$(clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
+        export KBUILD_BUILD_HOST=GitHub-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-aosp/bin/aarch64-linux-android- CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.KERNEL_DEFCONFIG }}
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-aosp/bin/aarch64-linux-android- CC=clang ${{ env.BUILD_EXTRA_COMMAND }}
+        make -j$(nproc --all) O=out ARCH=arm64 savedefconfig
+        cp -f out/defconfig arch/${{ env.TARGET_ARCH }}/configs/${{ env.KERNEL_DEFCONFIG }}
+        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CC=clang CROSS_COMPILE=aarch64-linux-gnu- ${{ env.BUILD_EXTRA_COMMAND }}
 
     - name: Check a kernel output files
       run: |
