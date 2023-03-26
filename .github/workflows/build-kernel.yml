@@ -40,8 +40,8 @@ jobs:
     - name: Download Clang Toolchain
       run: |
         mkdir clang
-        wget -q ${{ env.CLANG_URL }} -O clang.tar.gz
-        tar -C clang/ -zxf clang.tar.gz
+        wget https://github.com/ZyCromerZ/Clang/releases/download/17.0.0-20230204-release/Clang-17.0.0-20230204.tar.gz
+        tar -C clang/ -zxf Clang-17.0.0-20230204.tar.gz
 
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
