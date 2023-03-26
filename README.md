@@ -98,3 +98,4 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 - [AOSP](https://android.googlesource.com)
 - [KernelSU](https://github.com/tiann/KernelSU)
 - [xiaoxindada](https://github.com/xiaoxindada)
+- [xiaoleGun](https://github.com/xiaoleGun)
