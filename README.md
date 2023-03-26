@@ -49,10 +49,10 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 ### Clang version
 
-默认版本为zyc clang17.0.0，如果需要更改，可前往
+默认版本为zyc clang17.0.0，如果需要更改，可前往build-kernel.yml进行修改
 
-一般 Clang14 就能通过大部分 4.14 及以上的内核的编译
-我自己的 Redmi Note 8 Pro 4.14 使用的是 r487747
+一般 Clang12 就能通过大部分 4.14 及以上的内核的编译
+我自己的 Redmi Note 8 Pro 4.14 使用的是 clang17.0.0
 
 ### Extra build commands
 
