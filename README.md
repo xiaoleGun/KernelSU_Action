@@ -23,19 +23,19 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 填写你的内核仓库地址
 
-例如: https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
+例如: https://github.com/begonia-dev/android_kernel_xiaomi_mt6785
 
 ### Kernel Source Branch
 
 填写你的内核分支
 
-例如: TDA
+例如: 13.0
 
 ### Kernel defconfig
 
 填写你的内核配置文件名
 
-例如: vendor/wayne_defconfig
+例如: begonia_user_defconfig
 
 ### Target arch
 
@@ -52,13 +52,13 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 填写需要使用的 Clang 版本
 | Clang 版本 | 对应 Android 版本 | AOSP-Clang 版本 |
 | ---------- | ----------------- | --------------- |
-| 12.0.5 | Android S | r416183b |
-| 14.0.6 | Android T | r450784d |
+| 12.0.5 | | r416183b |
+| 14.0.6 | | r450784d |
 | 14.0.7 | | r450784e |
 | 15.0.1 | | r458507 |
 
 一般 Clang12 就能通过大部分 4.14 及以上的内核的编译
-我自己的 MI 6X 4.19 使用的是 r450784d
+我自己的 Redmi Note 8 Pro 4.14 使用的是 r487747
 
 ### Extra build commands
 
