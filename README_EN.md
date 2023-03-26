@@ -47,17 +47,10 @@ e.g. Image.gz-dtb
 
 ### Clang version
 
-Type the version of Clang you need to use
-| Clang version | Corresponding Android version | AOSP-Clang version |
-| ------------- | ----------------------------- | ------------------ |
-| 14.0.7 | | r450784e |
-| 15.0.1 | | r458507 |
-| 15.0.3 | | r468909b |
-| 16.0.2 | | r475365b |
-| 17.0.0 | | r487747 |
+The default version is zyc clang17.0.0, if you need to change it, you can go to build-kernel.yml to modify it
 
-Usually Clang14 will pass most kernel builds of 4.14 and above.
-My own Redmi Note 8 Pro 4.14 is using r487747.
+Usually Clang12 will pass most kernel builds of 4.14 and above.
+My own Redmi Note 8 Pro 4.14 is using clang17.0.0
 
 ### Extra build commands
 
@@ -103,3 +96,4 @@ e.g. https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-
 - [AOSP](https://android.googlesource.com)
 - [KernelSU](https://github.com/tiann/KernelSU)
 - [xiaoxindada](https://github.com/xiaoxindada)
+- [xiaoleGun](https://github.com/xiaoleGun)
