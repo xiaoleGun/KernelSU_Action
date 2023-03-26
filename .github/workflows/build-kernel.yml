@@ -37,15 +37,11 @@ jobs:
         sudo apt-get install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler python2 python3
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
 
-    - name: Download Clang-aosp and gcc-aosp
+    - name: Download Clang Toolchain
       run: |
-        cd $GITHUB_WORKSPACE/kernel_workspace
-        mkdir clang-aosp
-        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-${{ env.CLANG_VERSION }}.tar.gz
-        tar -C clang-aosp/ -zxvf clang-${{ env.CLANG_VERSION }}.tar.gz
-        mkdir gcc-aosp
-        wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/961622e926a1b21382dba4dd9fe0e5fb3ee5ab7c.tar.gz
-        tar -C gcc-aosp/ -zxvf 961622e926a1b21382dba4dd9fe0e5fb3ee5ab7c.tar.gz
+        mkdir clang
+        wget -q ${{ env.CLANG_URL }} -O clang.tar.gz
+        tar -C clang/ -zxf clang.tar.gz
 
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
