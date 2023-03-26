@@ -1,6 +1,6 @@
 **中文** | [English](README_EN.md)
 
-# KernelSU Action
+# KernelSU Action For Begonia
 
 用于 Non-GKI Kernel 的 Action，具有一定的普遍性，需要了解内核及 Android 的相关知识得以运用。
 
