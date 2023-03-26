@@ -1,4 +1,4 @@
-# KernelSU Action
+# KernelSU Action For Begonia
 
 Action for Non-GKI Kernel has some common and requires knowledge of kernel and Android to be used.
 
@@ -21,19 +21,19 @@ First fork this repository to your repository and edit config.env as follows, th
 
 Type your kernel link
 
-e.g. https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
+e.g. https://github.com/begonia-dev/android_kernel_xiaomi_mt6785
 
 ### Kernel Source Branch
 
 Type your kernel branch
 
-e.g. TDA
+e.g. 13.0
 
 ### Kernel defconfig
 
 Type your kernel defconfig
 
-e.g. vendor/wayne_defconfig
+e.g. begonia_user_defconfig
 
 ### Target arch
 
@@ -50,13 +50,14 @@ e.g. Image.gz-dtb
 Type the version of Clang you need to use
 | Clang version | Corresponding Android version | AOSP-Clang version |
 | ------------- | ----------------------------- | ------------------ |
-| 12.0.5 | Android S | r416183b |
-| 14.0.6 | Android T | r450784d |
 | 14.0.7 | | r450784e |
 | 15.0.1 | | r458507 |
+| 15.0.3 | | r468909b |
+| 16.0.2 | | r475365b |
+| 17.0.0 | | r487747 |
 
-Usually Clang12 will pass most kernel builds of 4.14 and above.
-My own MI 6X 4.19 is using r450784d.
+Usually Clang14 will pass most kernel builds of 4.14 and above.
+My own Redmi Note 8 Pro 4.14 is using r487747.
 
 ### Extra build commands
 
