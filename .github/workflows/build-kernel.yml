@@ -91,7 +91,7 @@ jobs:
         fi
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
-- name: Build kernel
+    - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
