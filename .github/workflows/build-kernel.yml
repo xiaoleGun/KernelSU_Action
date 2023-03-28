@@ -90,11 +90,6 @@ jobs:
             echo "CONFIG_LTO_NONE=y" >> arch/${{ env.TARGET_ARCH }}/configs/${{ env.KERNEL_DEFCONFIG }}
         fi
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
-        else
-            if git apply --check ../KernelSU.patch ; then
-               git apply ../KernelSU.patch
-               curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-               echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
     - name: Generate kernel configuration
       run: |
