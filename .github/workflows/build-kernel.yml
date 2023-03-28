@@ -95,10 +95,6 @@ jobs:
                git apply ../KernelSU.patch
                curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
                echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
-            else
-               echo "KernelSU Patching failed"
-            fi
-        fi
 
     - name: Generate kernel configuration
       run: |
