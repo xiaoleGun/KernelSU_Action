@@ -75,6 +75,13 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 是否使用 KernelSU，用于排查内核故障或单独编译内核
 
+### KernelSU Branch or Tag
+
+选择KernelSU的分支或tag:
+- main分支(开发版): `KERNELSU_TAG=main`
+- 最新TAG(稳定版): `KERNELSU_TAG=`
+- 指定TAG(如`v0.5.2`): `KERNELSU_TAG=v0.5.2`
+
 ### Use Kprobes
 
 如果你的内核 Kprobes 工作正常这项改成 true 即可自动在 defconfig 注入参数
