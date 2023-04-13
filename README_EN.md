@@ -73,6 +73,13 @@ This is used to optimize the kernel, but sometimes it causes errors, so it is pr
 
 For debug kernel or build it separately
 
+### KernelSU Branch or tag
+
+Select the branch or tag of KernelSU:
+- main Branch: `KERNELSU_TAG=main`(dev)
+- Latest TAG: `KERNELSU_TAG=`(stable)
+- Select TAG(Such as `v0.5.2`): `KERNELSU_TAG=v0.5.2`
+
 ### Use Kprobes
 
 If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
