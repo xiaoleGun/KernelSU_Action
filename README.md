@@ -75,7 +75,7 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 是否使用 KernelSU，用于排查内核故障或单独编译内核
 
-### KernelSU Branch or Tag
+#### KernelSU Branch or Tag
 
 选择KernelSU的分支或tag:
 - main分支(开发版): `KERNELSU_TAG=main`

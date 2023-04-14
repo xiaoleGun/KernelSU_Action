@@ -73,12 +73,12 @@ This is used to optimize the kernel, but sometimes it causes errors, so it is pr
 
 For debug kernel or build it separately
 
-### KernelSU Branch or tag
+#### KernelSU Branch or Tag
 
 Select the branch or tag of KernelSU:
 - main Branch(dev): `KERNELSU_TAG=main`
 - Latest TAG(stable): `KERNELSU_TAG=`
-- Select TAG(Such as `v0.5.2`): `KERNELSU_TAG=v0.5.2`
+- Select TAG(e.g. `v0.5.2`): `KERNELSU_TAG=v0.5.2`
 
 ### Use Kprobes
 
