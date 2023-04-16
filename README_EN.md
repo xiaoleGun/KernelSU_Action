@@ -45,7 +45,19 @@ Type in the image you need, usually the same as BOARD_KERNEL_IMAGE_NAME in your 
 
 e.g. Image.gz-dtb
 
-### Clang version
+### Clang
+
+#### Clang Branch
+Because of the need of [#23](https://github.com/xiaoleGun/KernelSU_Action/issues/23), we have the option to customize the upstream branch of Google. The main branches are
+| Clang Branch |
+| ---------- |
+| master |
+| master-kernel-build-2021 |
+| master-kernel-build-2022 |
+
+Or other branches, please visit according to your needs: https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
+
+#### Clang version
 
 Type the version of Clang you need to use
 | Clang version | Corresponding Android version | AOSP-Clang version |

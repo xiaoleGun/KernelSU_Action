@@ -47,7 +47,19 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 例如: Image.gz-dtb
 
-### Clang version
+### Clang
+
+#### Clang Branch
+由于 [#23](https://github.com/xiaoleGun/KernelSU_Action/issues/23) 的需要，我们提供可自定义Google上游分支的选项，主要的有分支有
+| Clang 分支 |
+| ---------- |
+| master |
+| master-kernel-build-2021 |
+| master-kernel-build-2022 |
+
+或者其它分支，请根据自己的需求在 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 中寻找
+
+#### Clang version
 
 填写需要使用的 Clang 版本
 | Clang 版本 | 对应 Android 版本 | AOSP-Clang 版本 |
