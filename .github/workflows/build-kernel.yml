@@ -67,8 +67,6 @@ jobs:
         if [ -f boot-source.img ]; then
             echo "FORMAT_MKBOOTING=$(echo `tools/unpack_bootimg.py --boot_img=boot-source.img --format mkbootimg`)" >> $GITHUB_ENV
             echo "HAVE_SOURCE_BOOT_IMAGE=true" >> $GITHUB_ENV
-        else
-            echo "Source boot image is empty"
         fi
   
     - name: Setup KernelSU
@@ -109,11 +107,13 @@ jobs:
            echo "CHECK_FILE_IS_OK=true" >> $GITHUB_ENV
        else
            echo "Kernel output file is empty"
+           exit 1
        fi
        if [ -f android-kernel/out/arch/${{ env.TARGET_ARCH }}/boot/dtbo.img ]; then
            echo "CHECK_DTBO_IS_OK=true" >> $GITHUB_ENV
        else
            echo "DTBO image is empty"
+           exit 1
        fi
 
     - name: Make Anykernel3
@@ -141,6 +141,7 @@ jobs:
             echo "MAKE_BOOT_IMAGE_IS_OK=true" >> $GITHUB_ENV
         else
             echo "Boot image is empty"
+            exit 1
         fi
     
     - name: Upload ${{ env.KERNEL_FILE }}
