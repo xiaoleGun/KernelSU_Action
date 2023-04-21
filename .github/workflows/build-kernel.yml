@@ -110,13 +110,15 @@ jobs:
            echo "Kernel output file is empty"
            exit 1
        fi
-       if [ -f android-kernel/out/arch/${{ env.TARGET_ARCH }}/boot/dtbo.img ]; then
-           echo "CHECK_DTBO_IS_OK=true" >> $GITHUB_ENV
-       else
-           echo "DTBO image is empty"
-           exit 1
-       fi
-
+       if [ ${{ env.NEED_DTBO }} = true ]; then
+           if [ -f android-kernel/out/arch/${{ env.TARGET_ARCH }}/boot/dtbo.img ]; then
+               echo "CHECK_DTBO_IS_OK=true" >> $GITHUB_ENV
+           else
+               echo "DTBO image is empty"
+               exit 1
+           fi
+       if
+  
     - name: Make Anykernel3
       if: env.CHECK_FILE_IS_OK == 'true'
       run: |
