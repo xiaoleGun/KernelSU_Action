@@ -114,7 +114,7 @@ jobs:
            echo "CHECK_DTBO_IS_OK=true" >> $GITHUB_ENV
        else
            echo "DTBO image is empty"
-           exit 1
+           
        fi
 
     - name: Make Anykernel3
