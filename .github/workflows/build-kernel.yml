@@ -14,26 +14,26 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup Configuration
       run: |
-        echo "KERNEL_SOURCE=$(cat config.env | grep "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNEL_SOURCE_BRANCH=$(cat config.env | grep "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNEL_DEFCONFIG=$(cat config.env | grep "KERNEL_DEFCONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "TARGET_ARCH=$(cat config.env | grep "TARGET_ARCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNEL_FILE=$(cat config.env | grep "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_CUSTOM_CLANG=$(cat config.env | grep "USE_CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CUSTOM_CLANG=$(cat config.env | grep "CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CUSTOM_CLANG_BRANCH=$(cat config.env | grep "CUSTOM_CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CUSTOM_CLANG_BUILD_COMMAND=$(cat config.env | grep "CUSTOM_CLANG_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
-        echo "CLANG_BRANCH=$(cat config.env | grep "CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CLANG_VERSION=$(cat config.env | grep "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "BUILD_EXTRA_COMMAND=$(cat config.env | grep "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
-        echo "DISABLE-LTO=$(cat config.env | grep "DISABLE-LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_KERNELSU=$(cat config.env | grep "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNELSU_TAG=$(cat config.env | grep "KERNELSU_TAG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_KPROBES=$(cat config.env | grep "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_OVERLAYFS=$(cat config.env | grep "USE_OVERLAYFS" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "NEED_DTBO=$(cat config.env | grep "NEED_DTBO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "MAKE_BOOT_IMAGE=$(cat config.env | grep "MAKE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "SOURCE_BOOT_IMAGE=$(cat config.env | grep "SOURCE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_SOURCE=$(cat config.env | grep -w "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_SOURCE_BRANCH=$(cat config.env | grep -w "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_DEFCONFIG=$(cat config.env | grep -w "KERNEL_DEFCONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "TARGET_ARCH=$(cat config.env | grep -w "TARGET_ARCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_FILE=$(cat config.env | grep -w "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_CUSTOM_CLANG=$(cat config.env | grep -w "USE_CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG=$(cat config.env | grep -w "CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG_BRANCH=$(cat config.env | grep -w "CUSTOM_CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG_BUILD_COMMAND=$(cat config.env | grep -w "CUSTOM_CLANG_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
+        echo "CLANG_BRANCH=$(cat config.env | grep -w "CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CLANG_VERSION=$(cat config.env | grep -w "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "BUILD_EXTRA_COMMAND=$(cat config.env | grep -w "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
+        echo "DISABLE-LTO=$(cat config.env | grep -w "DISABLE-LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_KERNELSU=$(cat config.env | grep -w "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNELSU_TAG=$(cat config.env | grep -w "KERNELSU_TAG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_KPROBES=$(cat config.env | grep -w "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_OVERLAYFS=$(cat config.env | grep -w "USE_OVERLAYFS" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "NEED_DTBO=$(cat config.env | grep -w "NEED_DTBO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "MAKE_BOOT_IMAGE=$(cat config.env | grep -w "MAKE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "SOURCE_BOOT_IMAGE=$(cat config.env | grep -w "SOURCE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
 
     - name: Setup build kernel environment
       run: |
