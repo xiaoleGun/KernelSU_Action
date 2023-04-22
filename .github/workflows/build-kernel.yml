@@ -19,6 +19,10 @@ jobs:
         echo "KERNEL_DEFCONFIG=$(cat config.env | grep "KERNEL_DEFCONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "TARGET_ARCH=$(cat config.env | grep "TARGET_ARCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_FILE=$(cat config.env | grep "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_CUSTOM_CLANG=$(cat config.env | grep "USE_CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG=$(cat config.env | grep "CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG_BRANCH=$(cat config.env | grep "CUSTOM_CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG_BUILD_COMMAND=$(cat config.env | grep "CUSTOM_CLANG_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
         echo "CLANG_BRANCH=$(cat config.env | grep "CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "CLANG_VERSION=$(cat config.env | grep "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "BUILD_EXTRA_COMMAND=$(cat config.env | grep "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
@@ -40,6 +44,7 @@ jobs:
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
 
     - name: Download Clang-aosp and Gcc-aosp
+      if: env.USE_CUSTOM_CLANG == 'false'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir clang-aosp
@@ -48,6 +53,18 @@ jobs:
         mkdir gcc-aosp
         wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/tags/android-12.1.0_r27.tar.gz
         tar -C gcc-aosp/ -zxvf android-12.1.0_r27.tar.gz
+
+    - name: Download Custom-Clang
+      if: env.USE_CUSTOM_CLANG == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        if [[ ${{ env.CUSTOM_CLANG }} =~ github ]]; then
+            git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp
+        else
+            wget -O clang.zip ${{ env.CUSTOM_CLANG }}
+            mkdir clang-aosp
+            unzip clang.zip -d clang-aosp/
+        fi
 
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
@@ -98,8 +115,8 @@ jobs:
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-aosp/bin/aarch64-linux-android- CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.KERNEL_DEFCONFIG }}
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-aosp/bin/aarch64-linux-android- CC=clang ${{ env.BUILD_EXTRA_COMMAND }}
+        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.KERNEL_DEFCONFIG }}
+        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }}
 
     - name: Check a kernel output files
       run: |

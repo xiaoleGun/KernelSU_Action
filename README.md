@@ -49,6 +49,19 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 ### Clang
 
+#### Use custom clang
+
+改成true
+可以使用除google官方的clang，如[proton-clang](https://github.com/kdrag0n/proton-clang)
+
+#### Custom Clang
+
+支持github仓库或者zip压缩包的直链
+
+#### Custom Clang Commands
+
+都用自定义clang了，自己改改编译器位置应该会吧 :)
+
 #### Clang Branch
 由于 [#23](https://github.com/xiaoleGun/KernelSU_Action/issues/23) 的需要，我们提供可自定义Google上游分支的选项，主要的有分支有
 | Clang 分支 |
