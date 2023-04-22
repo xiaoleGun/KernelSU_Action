@@ -1,4 +1,4 @@
-name: Build Kernel
+name: Build Kernel MeteoricSU
 on:
   watch:
     types: [started]
