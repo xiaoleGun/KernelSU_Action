@@ -17,24 +17,24 @@ jobs:
     - name: Setup Configuration
       run: |
         echo "KERNEL_SOURCE=$(cat config_Meteoric.env | grep -w "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNEL_SOURCE_BRANCH=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNEL_DEFCONFIG=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "KERNEL_DEFCONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "TARGET_ARCH=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "TARGET_ARCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNEL_FILE=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_CUSTOM_CLANG=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "USE_CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CUSTOM_CLANG=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CUSTOM_CLANG_BRANCH=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "CUSTOM_CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CUSTOM_CLANG_BUILD_COMMAND=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "CUSTOM_CLANG_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
-        echo "CLANG_BRANCH=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "CLANG_VERSION=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "BUILD_EXTRA_COMMAND=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
-        echo "DISABLE-LTO=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "DISABLE-LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_KERNELSU=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "KERNELSU_TAG=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "KERNELSU_TAG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_KPROBES=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "USE_OVERLAYFS=$(cat config_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "USE_OVERLAYFS" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "NEED_DTBO=$(cat config_Meteoricconfig_Meteoricconfig_Meteoric.env | grep -w "NEED_DTBO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "MAKE_BOOT_IMAGE=$(cat config_Meteoricconfig_Meteoric.env | grep -w "MAKE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_SOURCE_BRANCH=$(cat config_Meteoric.env | grep -w "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_DEFCONFIG=$(cat config_Meteoric.env | grep -w "KERNEL_DEFCONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "TARGET_ARCH=$(cat config_Meteoric.env | grep -w "TARGET_ARCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_FILE=$(cat config_Meteoric.env | grep -w "KERNEL_FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_CUSTOM_CLANG=$(cat config_Meteoric.env | grep -w "USE_CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG=$(cat config_Meteoric.env | grep -w "CUSTOM_CLANG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG_BRANCH=$(cat config_Meteoric.env | grep -w "CUSTOM_CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CUSTOM_CLANG_BUILD_COMMAND=$(cat config_Meteoric.env | grep -w "CUSTOM_CLANG_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
+        echo "CLANG_BRANCH=$(cat config_Meteoric.env | grep -w "CLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "CLANG_VERSION=$(cat config_Meteoric.env | grep -w "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "BUILD_EXTRA_COMMAND=$(cat config_Meteoric.env | grep -w "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
+        echo "DISABLE-LTO=$(cat config_Meteoric.env | grep -w "DISABLE-LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_KERNELSU=$(cat config_Meteoric.env | grep -w "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNELSU_TAG=$(cat config_Meteoric.env | grep -w "KERNELSU_TAG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_KPROBES=$(cat config_Meteoric.env | grep -w "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_OVERLAYFS=$(cat config_Meteoric.env | grep -w "USE_OVERLAYFS" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "NEED_DTBO=$(cat config_Meteoric.env | grep -w "NEED_DTBO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "MAKE_BOOT_IMAGE=$(cat config_Meteoric.env | grep -w "MAKE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "SOURCE_BOOT_IMAGE=$(cat config_Meteoric.env | grep -w "SOURCE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
 
     - name: Setup build kernel environment
