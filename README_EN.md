@@ -1,121 +1,133 @@
 # KernelSU Action
 
-Action for Non-GKI Kernel has some common and requires knowledge of kernel and Android to be used.
+Action for Non-GKI Kernel, with certain universality, requires understanding of kernel and Android related knowledge to apply.
 
 ## Warning:warning: :warning: :warning:
 
-If you are not a kernel author and use someone else's source code to build KernelSU, please use it for your own use only and do not share it with others, it is respectful to the author.
+If you are not a kernel author, use other people's labor to build KernelSU for personal use only. Do not share it with others. This is respect for the original author's labor results.
 
-## Support Kernel
+## Supported kernels
 
 - `4.19`
 - `4.14`
 
 ## Usage
 
-> After successful build, it will upload AnyKernel3 in `Action`, which has turned off device check, please flash to phone in Twrp.
+> After successful compilation, AnyKernel3 will be uploaded in `Action`, and device check has been turned off. Please flash it in TWRP.
 
-First fork this repository to your repository and edit config.env as follows, then click `Star` or `Action`, you will see `Build Kernel` option on the left side, click it and you will see `Run workflows` on the top of the big dialog box on the right side, click it and it will start the build.
+Fork this repository to your storage, then edit config.env according to the following content. After that, click `Star` or `Action`. You can see the option `Build Kernel` on the left side. Clicking on it will show `Run workflows` on the top of the large dialog box on the right side. Clicking on it will start the build.
 
 ### Kernel Source
 
-Type your kernel link
+Fill in your kernel repository address.
 
-e.g. https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
+For example: https://github.com/Diva-Room/Miku_kernel_xiaomi_wayne
 
 ### Kernel Source Branch
 
-Type your kernel branch
+Fill in your kernel branch.
 
-e.g. TDA
+For example: TDA
 
 ### Kernel defconfig
 
-Type your kernel defconfig
+Fill in the name of your kernel configuration file.
 
-e.g. vendor/wayne_defconfig
+For example: vendor/wayne_defconfig
 
 ### Target arch
 
-e.g. arm64
+For example: arm64
 
 ### Kernel file
 
-Type in the image you need, usually the same as BOARD_KERNEL_IMAGE_NAME in your aosp-device tree.
+Fill in the image that needs to be flashed, which is generally consistent with BOARD_KERNEL_IMAGE_NAME in your AOSP-device tree.
 
-e.g. Image.gz-dtb
+For example: Image.gz-dtb
 
 ### Clang
 
+#### Use custom clang
+
+Change it to true. You can use non-Google official clang, such as [proton-clang](https://github.com/kdrag0n/proton-clang).
+
+#### Custom Clang
+
+Supports direct links to GitHub repositories or zip archives.
+
+#### Custom Clang Commands
+
+If you are using custom clang, you should change the compiler location yourself.
+
 #### Clang Branch
-Because of the need of [#23](https://github.com/xiaoleGun/KernelSU_Action/issues/23), we have the option to customize the upstream branch of Google. The main branches are
+
+Due to the need of [#23](https://github.com/xiaoleGun/KernelSU_Action/issues/23), we provide an option to customize the Google upstream branch. The main branches are:
 | Clang Branch |
-| ---------- |
+| ------------ |
 | master |
 | master-kernel-build-2021 |
 | master-kernel-build-2022 |
 
-Or other branches, please visit according to your needs: https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
+Or other branches, please look for them in https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 according to your needs.
 
 #### Clang version
 
-Type the version of Clang you need to use
-| Clang version | Corresponding Android version | AOSP-Clang version |
-| ------------- | ----------------------------- | ------------------ |
+Fill in the Clang version you need to use.
+| Clang Version | Corresponding Android Version | AOSP-Clang Version |
+| ---------- | ----------------- | --------------- |
 | 12.0.5 | Android S | r416183b |
 | 14.0.6 | Android T | r450784d |
 | 14.0.7 | | r450784e |
 | 15.0.1 | | r458507 |
 
-Usually Clang12 will pass most kernel builds of 4.14 and above.
-My own MI 6X 4.19 is using r450784d.
+Generally, Clang12 can compile most kernels above 4.14. My own MI 6X 4.19 uses r450784d.
 
 ### Extra build commands
 
-Some kernels require some build commands to be typed in manually in order to build properly, so please don't type them in if you don't need to.
-Separate commands with spaces.
+Some kernels need to manually add some compilation commands to compile normally. If not needed, leave it blank.
+Please separate the commands with spaces.
 
-e.g. LLVM=1 LLVM_IAS=1
+For example: LLVM=1 LLVM_IAS=1
 
 ### Disable LTO
 
-This is used to optimize the kernel, but sometimes it causes errors, so it is provided that it can be disabled, set to true to disable.
+Used to optimize the kernel, but sometimes it may cause errors, so it is provided to disable it. Set it to true to disable it.
 
 ### Use KernelSU
 
-For debug kernel or build it separately
+Whether to use KernelSU, used to troubleshoot kernel faults or compile kernels separately.
 
 #### KernelSU Branch or Tag
 
 Select the branch or tag of KernelSU:
-- main Branch(dev): `KERNELSU_TAG=main`
-- Latest TAG(stable): `KERNELSU_TAG=`
-- Select TAG(e.g. `v0.5.2`): `KERNELSU_TAG=v0.5.2`
+- Main branch (development version): `KERNELSU_TAG=main`
+- Latest TAG (stable version): `KERNELSU_TAG=`
+- Specify TAG (such as `v0.5.2`): `KERNELSU_TAG=v0.5.2`
 
 ### Use Kprobes
 
-If your kernel Kprobes is working properly, changing this to "true" will automatically add the parameter to defconfig.
+If your kernel Kprobes work normally, change this to true to automatically inject parameters into defconfig.
 
 ### Use overlayfs
 
-Please enable this parameter if the kernel does not have it, the module requires
+If the kernel does not have this parameter, please enable it. The module needs it.
 
 ### Need DTBO
 
-If your kernel also needs to be flashed with DTBO image, set it to true.
+If your kernel also needs to flash DTBO, please set it to true.
 
 ### Make boot image
-> Merge from build_boot_image.yml
+> Merged from previous Workflows, you can view historical submissions
 
-Set to true, boot.img will be Make, you need to provide `Source boot image`
+Setting it to true will compile boot.img. You need to provide `Source boot image`.
 
 ### Source boot image
 
-Provide a boot image that will boot successfully, with the same kernel source code and the same device tree as your current system built from aosp, the ramdisk contains the partition table and init, without which it may reboot to fastboot.
+As the name suggests, provide a boot image that can boot the source system normally. It needs a direct link, preferably built from the same kernel source code and device tree as your current system from AOSP. The ramdisk contains partition tables and init. If not, the built image will not be able to boot normally.
 
-e.g. https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
+For example: https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
 
-## Credits
+## Thanks
 
 - [AnyKernel3](https://github.com/osm0sis/AnyKernel3)
 - [AOSP](https://android.googlesource.com)
