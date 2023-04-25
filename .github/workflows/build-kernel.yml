@@ -113,12 +113,6 @@ jobs:
         fi
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
-    - name : Upload artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: Test
-        path: $GITHUB_WORKSPACE/kernel_workspace/android-kernel/out/arch/arm64/boot
-
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
@@ -127,6 +121,12 @@ jobs:
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.KERNEL_DEFCONFIG }}
         make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }}
+
+    - name : Upload artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: Test
+        path: $GITHUB_WORKSPACE/kernel_workspace/android-kernel/out/arch/arm64/boot
 
     - name: Check a kernel output files
       run: |
