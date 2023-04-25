@@ -113,6 +113,12 @@ jobs:
         fi
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
+    - name : Upload artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: Test
+        path: $GITHUB_WORKSPACE/kernel_workspace/android-kernel/out/arch/arm64/boot
+
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
