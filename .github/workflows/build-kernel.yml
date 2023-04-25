@@ -126,7 +126,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: Test
-        path: $GITHUB_WORKSPACE/kernel_workspace/android-kernel/out/arch/arm64/boot
+        path: /home/runner/work/KernelSU_Action/KernelSU_Action/kernel_workspace/android-kernel/out/arch/arm64/boot
 
     - name: Check a kernel output files
       run: |
