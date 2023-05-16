@@ -1,4 +1,4 @@
-name: Build Kernel
+name: Build Kernel realmegtneo2
 on:
   watch:
     types: [started]
