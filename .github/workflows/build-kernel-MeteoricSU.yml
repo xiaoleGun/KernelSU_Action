@@ -56,11 +56,23 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         if [[ ${{ env.CUSTOM_CLANG }} =~ github ]]; then
-            git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp
+            git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
         else
             wget -O clang.zip ${{ env.CUSTOM_CLANG }}
             mkdir clang-aosp
             unzip clang.zip -d clang-aosp/
+        fi
+
+    - name: Download Custom-Gcc
+      if: env.USE_CUSTOM_GCC == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        if [[ ${{ env.CUSTOM_GCC }} =~ github ]]; then
+            git clone ${{ env.CUSTOM_GCC }} -b ${{ env.CUSTOM_GCC_BRANCH }} gcc-aosp --depth=1
+        else
+            wget -O gcc.zip ${{ env.CUSTOM_GCC }}
+            mkdir gcc-aosp
+            unzip gcc.zip -d gcc-aosp/
         fi
 
     - name: Download mkbootimg tools
