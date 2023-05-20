@@ -1,8 +1,6 @@
 name: Build Kernel Meteoric
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 2,6'
 
 jobs:
   build:
