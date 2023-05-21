@@ -1,4 +1,4 @@
-name: Build KernelSU
+name: Build KernelSUU
 on:
   workflow_dispatch:
 
