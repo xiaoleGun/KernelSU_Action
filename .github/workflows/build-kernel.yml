@@ -55,7 +55,7 @@ jobs:
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        if [[ ${{ env.CUSTOM_CLANG }} =~ github ]]; then
+        if [[ ${{ env.CUSTOM_CLANG }} =~ git ]]; then
             if [[ ${{ env.CUSTOM_CLANG }} == *'.tar.gz' ]]; then
                 wget -O clang.tar.gz ${{ env.CUSTOM_CLANG }}
                 mkdir clang-aosp
