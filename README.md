@@ -54,13 +54,13 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 改成true
 可以使用除google官方的clang，如[proton-clang](https://github.com/kdrag0n/proton-clang)
 
+#### Use Custom Clang Scoure
+
+是否在github仓库拉取工具
+
 #### Custom Clang
 
 支持github仓库或者zip压缩包的直链
-
-#### Custom Clang Scoure
-
-是否在github仓库拉取工具
 
 #### Custom Clang Commands
 
