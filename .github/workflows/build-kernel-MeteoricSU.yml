@@ -50,10 +50,7 @@ jobs:
         mkdir clang-aosp
         wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/${{ env.CLANG_BRANCH }}/clang-${{ env.CLANG_VERSION }}.tar.gz
         tar -C clang-aosp/ -zxvf clang-${{ env.CLANG_VERSION }}.tar.gz
-        mkdir gcc-aosp
-        wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/tags/android-13.0.0_r0.71.tar.gz
-        tar -C gcc-aosp/ -zxvf android-13.0.0_r0.71.tar.gz
-
+        
     - name: Download Custom-Clang
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
@@ -71,7 +68,14 @@ jobs:
           mkdir clang-aosp
           unzip clang.zip -d clang-aosp/
         fi
-
+        
+    - name: Download Gcc-aosp
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        mkdir gcc-aosp
+        wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/tags/android-13.0.0_r0.71.tar.gz
+        tar -C gcc-aosp/ -zxvf android-13.0.0_r0.71.tar.gz
+        
     - name: Download Custom-Gcc
       if: env.USE_CUSTOM_GCC == 'true'
       run: |
