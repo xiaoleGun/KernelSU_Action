@@ -54,25 +54,25 @@ jobs:
         mkdir clang-aosp
         wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/${{ env.CLANG_BRANCH }}/clang-${{ env.CLANG_VERSION }}.tar.gz
         tar -C clang-aosp/ -zxvf clang-${{ env.CLANG_VERSION }}.tar.gz
-        
+
     - name: Download Custom-Clang
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         if [[ ${{ env.CUSTOM_CLANG }} =~ git ]]; then
-          if [[ ${{ env.CUSTOM_CLANG }} == *'.tar.gz' ]]; then
-            wget -O clang.tar.gz ${{ env.CUSTOM_CLANG }}
-            mkdir clang-aosp
-            tar -C clang-aosp/ -zxvf clang.tar.gz
-          else
-            git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
-          fi   
+            if [[ ${{ env.CUSTOM_CLANG }} == *'.tar.gz' ]]; then
+                wget -O clang.tar.gz ${{ env.CUSTOM_CLANG }}
+                mkdir clang-aosp
+                tar -C clang-aosp/ -zxvf clang.tar.gz
+            else
+                git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
+            fi        
         else
-          wget -O clang.zip ${{ env.CUSTOM_CLANG }}
-          mkdir clang-aosp
-          unzip clang.zip -d clang-aosp/
+            wget -O clang.zip ${{ env.CUSTOM_CLANG }}
+            mkdir clang-aosp
+            unzip clang.zip -d clang-aosp/
         fi
-        
+
     - name: Download Gcc-aosp
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -82,12 +82,13 @@ jobs:
             tar -C gcc-64/ -zxvf gcc-aarch64.tar.gz
             echo "GCC_64=CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/aarch64-linux-android-" >> $GITHUB_ENV
         fi
+
         if [ ${{ env.USE_GCC_ARM32 }} = true ]; then
             mkdir gcc-32
             wget -O gcc-arm.tar.gz https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/+archive/refs/tags/android-12.1.0_r27.tar.gz
             tar -C gcc-32/ -zxvf gcc-arm.tar.gz
             echo "GCC_32=CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin/arm-linux-androideabi-" >> $GITHUB_ENV
-        fi        
+        fi
 
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
@@ -131,7 +132,7 @@ jobs:
             echo "CONFIG_LTO_NONE=y" >> arch/${{ env.TARGET_ARCH }}/configs/${{ env.KERNEL_DEFCONFIG }}
         fi
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
-        
+
     - name: Setup ccache
       if: env.USE_CCACHE == 'true'
       uses: hendrikmuhs/ccache-action@v1.2
@@ -151,7 +152,7 @@ jobs:
         else
             make -j$(nproc --all) CC=clang O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.GCC_64 }} ${{ env.GCC_32 }}
         fi
-        
+
     - name: Check a kernel output files
       run: |
        cd $GITHUB_WORKSPACE/kernel_workspace
@@ -209,7 +210,7 @@ jobs:
       if: env.CHECK_FILE_IS_OK == 'true'
       uses: actions/upload-artifact@v3
       with:
-        name: Meteoric${{ env.UPLOADNAME }}-${{ env.BUILD_TIME }}
+        name: AnyKernel3${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3/*
 
     - name: Upload DTBO image
