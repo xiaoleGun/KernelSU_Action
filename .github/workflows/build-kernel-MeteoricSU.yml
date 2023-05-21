@@ -91,23 +91,6 @@ jobs:
             tar -C gcc-32/ -zxvf gcc-arm.tar.gz
             echo "GCC_32=CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin/arm-linux-androideabi-" >> $GITHUB_ENV
         fi        
-    - name: Download Custom-Gcc
-      if: env.USE_CUSTOM_GCC == 'true'
-      run: |
-        cd $GITHUB_WORKSPACE/kernel_workspace
-        if [[ ${{ env.CUSTOM_GCC }} =~ github ]]; then
-          if [[ ${{ env.CUSTOM_GCC }} == *'.tar.gz' ]]; then
-            wget -O clang.tar.gz ${{ env.CUSTOM_CLANG }}
-            mkdir clang-aosp
-            tar -C clang-aosp/ -zxvf clang.tar.gz
-          else
-            git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
-          fi 
-        else
-            wget -O gcc.zip ${{ env.CUSTOM_GCC }}
-            mkdir gcc-aosp
-            unzip gcc.zip -d gcc-aosp/
-        fi
 
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
