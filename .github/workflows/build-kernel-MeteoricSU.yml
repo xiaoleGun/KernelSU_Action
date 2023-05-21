@@ -63,9 +63,15 @@ jobs:
         if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == true ]]; then
             git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
         else
+          if [[ ${{ env.CUSTOM_CLANG }} =~ .tar.gz ]]; then
+            wget -O clang.tar.gz ${{ env.CUSTOM_CLANG }}
+            mkdir clang-aosp
+            tar -C clang-aosp/ -zxvf clang.tar.gz
+          else
             wget -O clang.zip ${{ env.CUSTOM_CLANG }}
             mkdir clang-aosp
             unzip clang.zip -d clang-aosp/
+          fi
         fi
 
     - name: Download Custom-Gcc
@@ -75,9 +81,15 @@ jobs:
         if [[ ${{ env.CUSTOM_GCC_SOURCE }} == true ]]; then
             git clone ${{ env.CUSTOM_GCC }} -b ${{ env.CUSTOM_GCC_BRANCH }} gcc-aosp --depth=1
         else
+          if [[ ${{ env.CUSTOM_GCC }} =~ .tar.gz ]]; then
+            wget -O gcc.tar.gz ${{ env.CUSTOM_CLANG }}
+            mkdir gcc-aosp
+            tar -C gcc-aosp/ -zxvf gcc.tar.gz
+          else
             wget -O gcc.zip ${{ env.CUSTOM_GCC }}
             mkdir gcc-aosp
             unzip gcc.zip -d gcc-aosp/
+          fi
         fi
 
     - name: Download mkbootimg tools
