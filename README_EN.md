@@ -53,7 +53,8 @@ Change it to true. You can use non-Google official clang, such as [proton-clang]
 
 #### Custom Clang
 
-Supports direct links to GitHub repositories or zip archives.
+Supports direct links to Git repositories or zip archives.
+> If it is a Git repository, please provide the link that contains '.git'
 
 #### Custom Clang Commands
 
