@@ -27,6 +27,8 @@ jobs:
         echo "CLANG_VERSION=$(cat config.env | grep -w "CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "BUILD_EXTRA_COMMAND=$(cat config.env | grep -w "EXTRA_BUILD_COMMAND" | head -n 1 | cut -d ":" -f 2)" >> $GITHUB_ENV
         echo "DISABLE-LTO=$(cat config.env | grep -w "DISABLE-LTO" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_GCC_ARM64=$(cat config.env | grep -w "USE_GCC_ARM64" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "USE_GCC_ARM32=$(cat config.env | grep -w "USE_GCC_ARM32" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "USE_KERNELSU=$(cat config.env | grep -w "USE_KERNELSU" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNELSU_TAG=$(cat config.env | grep -w "KERNELSU_TAG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "USE_KPROBES=$(cat config.env | grep -w "USE_KPROBES" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
@@ -72,9 +74,19 @@ jobs:
     - name: Download Gcc-aosp
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        mkdir gcc-aosp
-        wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/tags/android-12.1.0_r27.tar.gz
-        tar -C gcc-aosp/ -zxvf android-12.1.0_r27.tar.gz
+        if [ ${{ env.USE_GCC_ARM64 }} = true ]; then
+            mkdir gcc-64
+            wget -O gcc-aarch64.tar.gz https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/tags/android-12.1.0_r27.tar.gz
+            tar -C gcc-64/ -zxvf gcc-aarch64.tar.gz
+            echo "GCC_64=CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/aarch64-linux-android-" >> $GITHUB_ENV
+        fi
+
+        if [ ${{ env.USE_GCC_ARM32 }} = true ]; then
+            mkdir gcc-32
+            wget -O gcc-arm.tar.gz https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/+archive/refs/tags/android-12.1.0_r27.tar.gz
+            tar -C gcc-32/ -zxvf gcc-arm.tar.gz
+            echo "GCC_32=CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin/arm-linux-androideabi-" >> $GITHUB_ENV
+        fi
 
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
@@ -125,8 +137,8 @@ jobs:
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.KERNEL_DEFCONFIG }}
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }}
+        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.GCC_64 }} ${{ env.GCC_32 }} ${{ env.KERNEL_DEFCONFIG }}
+        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} ${{ env.CUSTOM_CLANG_BUILD_COMMAND }} CC=clang ${{ env.BUILD_EXTRA_COMMAND }} ${{ env.GCC_64 }} ${{ env.GCC_32 }}
 
     - name: Check a kernel output files
       run: |
