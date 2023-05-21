@@ -58,6 +58,10 @@ Fork 本仓库到你的储存库然后按照以下内容编辑config.env，之�
 
 支持github仓库或者zip压缩包的直链
 
+#### Custom Clang Scoure
+
+是否在github仓库拉取工具
+
 #### Custom Clang Commands
 
 都用自定义clang了，自己改改编译器位置应该会吧 :)
