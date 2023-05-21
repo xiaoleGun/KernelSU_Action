@@ -60,7 +60,7 @@ jobs:
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        if [[ ${{ env.CUSTOM_CLANG_SOURCE }} =true ]]; then
+        if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == true ]]; then
             git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
         else
             wget -O clang.zip ${{ env.CUSTOM_CLANG }}
@@ -72,7 +72,7 @@ jobs:
       if: env.USE_CUSTOM_GCC == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        if [[ ${{ env.CUSTOM_GCC_SOURCE }} =true ]]; then
+        if [[ ${{ env.CUSTOM_GCC_SOURCE }} == true ]]; then
             git clone ${{ env.CUSTOM_GCC }} -b ${{ env.CUSTOM_GCC_BRANCH }} gcc-aosp --depth=1
         else
             wget -O gcc.zip ${{ env.CUSTOM_GCC }}
