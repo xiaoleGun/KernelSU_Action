@@ -63,7 +63,7 @@ jobs:
         if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == true ]]; then
             git clone ${{ env.CUSTOM_CLANG }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
         else
-          if [[ ${{ env.CUSTOM_CLANG }} =~ .tar.gz ]]; then
+          if [[ ${{ env.CUSTOM_CLANG }} =~ tar.gz ]]; then
             wget -O clang.tar.gz ${{ env.CUSTOM_CLANG }}
             mkdir clang-aosp
             tar -C clang-aosp/ -zxvf clang.tar.gz
@@ -81,7 +81,7 @@ jobs:
         if [[ ${{ env.CUSTOM_GCC_SOURCE }} == true ]]; then
             git clone ${{ env.CUSTOM_GCC }} -b ${{ env.CUSTOM_GCC_BRANCH }} gcc-aosp --depth=1
         else
-          if [[ ${{ env.CUSTOM_GCC }} =~ .tar.gz ]]; then
+          if [[ ${{ env.CUSTOM_GCC }} =~ tar.gz ]]; then
             wget -O gcc.tar.gz ${{ env.CUSTOM_CLANG }}
             mkdir gcc-aosp
             tar -C gcc-aosp/ -zxvf gcc.tar.gz
