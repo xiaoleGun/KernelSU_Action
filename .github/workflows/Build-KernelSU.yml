@@ -1,4 +1,4 @@
-name: Build Kernel MeteoricSU
+name: Build KernelSU
 on:
   workflow_dispatch:
 
