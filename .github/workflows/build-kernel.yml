@@ -16,7 +16,7 @@ jobs:
       CCACHE_HARDLINK: "true"
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Configuration
+    - name: Prepare Configuration
       run: |
         echo "KERNEL_SOURCE=$(cat config.env | grep -w "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_SOURCE_BRANCH=$(cat config.env | grep -w "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
@@ -120,6 +120,10 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s ${{ env.KERNELSU_TAG }}
+        echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
+
+    - name: Setup Configuration for Kernel
+      run: |
         if [ ${{ env.ADD_KPROBES_CONFIG }} = true ]; then
             echo "CONFIG_MODULES=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
             echo "CONFIG_KPROBES=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
@@ -138,7 +142,6 @@ jobs:
         if [ ${{ env.DISABLE_CC_WERROR }} = true ]; then
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
-        echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
     - name: Setup ccache
       if: env.ENABLE_CCACHE == 'true'
