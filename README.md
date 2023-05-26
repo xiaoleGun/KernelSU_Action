@@ -110,10 +110,6 @@ Fork 本仓库到你的储存库然后按照以下内容编辑 config.env，之�
 
 例如: LLVM=1 LLVM_IAS=1
 
-### Disable LTO
-
-LTO 用于优化内核，但有些时候会导致错误
-
 ### Enable KernelSU
 
 启用 KernelSU，用于排查内核故障或单独编译内核
@@ -125,6 +121,14 @@ LTO 用于优化内核，但有些时候会导致错误
 - main 分支(开发版): `KERNELSU_TAG=main`
 - 最新 TAG(稳定版): `KERNELSU_TAG=`
 - 指定 TAG(如`v0.5.2`): `KERNELSU_TAG=v0.5.2`
+
+### Disable LTO
+
+LTO 用于优化内核，但有些时候会导致错误
+
+### Disable CC_WERROR
+
+用于修复某些不支持或关闭了Kprobes的内核，修复KernelSU未检测到开启Kprobes的变量抛出警告导致错误
 
 ### Add Kprobes Config
 
