@@ -112,7 +112,7 @@ jobs:
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
         patch -p0 < lxc.patch 
 
-        fi      
+
 
     - name: Setup lxc and docker
       if: env.LXC_DOCKER == 'true'
@@ -122,7 +122,7 @@ jobs:
        chmod -x LXC-DOCKER-OPEN-CONFIG.sh
        ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/${{ env.KERNEL_CONFIG }} -w
 
-        fi 
+
         
     - name: Download source boot image
       if: env.BUILD_BOOT_IMG == 'true'
