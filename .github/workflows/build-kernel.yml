@@ -104,23 +104,11 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
-
-    - name: Patch lxc.patch
-      if: env.PATCH == 'true'
-      run: |
-        cd $GITHUB_WORKSPACE/kernel_workspacwget
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
-        patch -p0 < lxc.patch 
-
-
-
-    - name: Setup lxc and docker
-      if: env.LXC_DOCKER == 'true'
-      run: |
-       cd $GITHUB_WORKSPACE/kernel_workspace
-       wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-config/LXC-DOCKER-OPEN-CONFIG.s
-       chmod -x LXC-DOCKER-OPEN-CONFIG.sh
-       ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/${{ env.KERNEL_CONFIG }} -w
+        patch -p0 < lxc.patch
+        wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-config/LXC-DOCKER-OPEN-CONFIG.sh
+        chmod -x LXC-DOCKER-OPEN-CONFIG.sh
+        ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/${{ env.KERNEL_CONFIG }} -w
 
 
         
