@@ -104,6 +104,10 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
+        
+    - name: Set LXC_DOCKER
+      if: env.LXC_DOCKER == 'true'
+      run: |
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
         patch -p0 < lxc.patch
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-config/LXC-DOCKER-OPEN-CONFIG.sh
