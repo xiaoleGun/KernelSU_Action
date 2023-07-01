@@ -108,6 +108,7 @@ jobs:
     - name: Set LXC_DOCKER
       if: env.LXC_DOCKER == 'true'
       run: |
+        git clone https://github.com/wu17481748/lxc-docker
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
         patch -p0 < lxc.patch
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-config/LXC-DOCKER-OPEN-CONFIG.sh
