@@ -120,7 +120,7 @@ jobs:
        cd $GITHUB_WORKSPACE/kernel_workspace
        wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-config/LXC-DOCKER-OPEN-CONFIG.s
        chmod -x LXC-DOCKER-OPEN-CONFIG.sh
-       ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/$KERNEL_CONFIG -w
+       ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/${{ env.KERNEL_CONFIG }} -w
 
     
     - name: Download source boot image
