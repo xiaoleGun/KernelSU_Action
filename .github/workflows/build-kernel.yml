@@ -1,4 +1,4 @@
-name: Build Kernel
+name: Build ksu docker lxc Kernel
 on:
   watch:
     types: [started]
