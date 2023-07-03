@@ -19,7 +19,7 @@ jobs:
     - name: Prepare Configuration
       run: |
         echo "LXC_DOCKER=$(cat config.env | grep -w "LXC_DOCKER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-        echo "PATCH=$(cat config.env | grep -w "PATCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "LXC_PATCH=$(cat config.env | grep -w "LXC_PATCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_SOURCE=$(cat config.env | grep -w "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_SOURCE_BRANCH=$(cat config.env | grep -w "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_CONFIG=$(cat config.env | grep -w "KERNEL_CONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
@@ -111,12 +111,17 @@ jobs:
       if: env.LXC_DOCKER == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
-        patch -p0 < lxc.patch
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-config/LXC-DOCKER-OPEN-CONFIG.sh
         chmod 777 LXC-DOCKER-OPEN-CONFIG.sh
         ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/arch/arm64/configs/${{ env.KERNEL_CONFIG }} -w
 
+      
+        - name: Setup LXC_PATCH
+           if: env.LXC_PATCH == 'true'
+           run: |
+           cd $GITHUB_WORKSPACE/kernel_workspace
+           wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
+           patch -p0 < lxc.patch
 
         
     - name: Download source boot image
