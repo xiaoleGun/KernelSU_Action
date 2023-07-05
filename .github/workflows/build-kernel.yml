@@ -20,6 +20,7 @@ jobs:
       run: |
         echo "LXC_DOCKER=$(cat config.env | grep -w "LXC_DOCKER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "LXC_PATCH=$(cat config.env | grep -w "LXC_PATCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "KERNEL_CONFIG_DOCKER_LXC=$(cat config.env | grep -w "KERNEL_CONFIG_DOCKER_LXC" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_SOURCE=$(cat config.env | grep -w "KERNEL_SOURCE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_SOURCE_BRANCH=$(cat config.env | grep -w "KERNEL_SOURCE_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "KERNEL_CONFIG=$(cat config.env | grep -w "KERNEL_CONFIG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
@@ -184,6 +185,17 @@ jobs:
             make -j$(nproc --all) CC=clang O=out ARCH=${{ env.ARCH }} ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.GCC_64 }} ${{ env.GCC_32 }}
         fi
 
+
+    - name: Check DOCKER and LXC CONFIG  OPEN
+      if: env.CHECK_KERNEL_CONFIG_DOCKER_LXC == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        cp android-kernel/out/.config ./1.config
+        wget https://github.com/wu17481748/lxc-docker/releases/download/check-docker-config/check-docker-config.sh
+        chmod 777 check-docker-config.sh
+        ./check-docker-config.sh
+        
+        
     - name: Check a kernel output files
       run: |
        cd $GITHUB_WORKSPACE/kernel_workspace
