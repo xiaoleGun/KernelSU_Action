@@ -185,15 +185,6 @@ jobs:
             make -j$(nproc --all) CC=clang O=out ARCH=${{ env.ARCH }} ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.GCC_64 }} ${{ env.GCC_32 }}
         fi
 
-
-    - name: Check DOCKER and LXC CONFIG  OPEN
-      if: env.CHECK_KERNEL_CONFIG_DOCKER_LXC == 'true'
-      run: |
-        cd $GITHUB_WORKSPACE/kernel_workspace
-        cp android-kernel/out/.config ./1.config
-        wget https://github.com/wu17481748/lxc-docker/releases/download/check-docker-config/check-docker-config.sh
-        chmod 777 check-docker-config.sh
-        ./check-docker-config.sh
         
         
     - name: Check a kernel output files
