@@ -1,4 +1,4 @@
-name: Build ksu docker lxc Kernel
+name: 编译 ksu docker lxc 内核
 on:
   watch:
     types: [started]
