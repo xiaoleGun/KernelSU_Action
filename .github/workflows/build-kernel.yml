@@ -124,6 +124,13 @@ jobs:
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
         patch -p0 < lxc.patch
 
+    - name: Setup CLOSE ANDROID_PARANOID_NETWORK
+      if: env.ANDROID_PARANOID_NETWORK_OFF == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        sed -i '/CONFIG_ANDROID_PARANOID_NETWORK/d' android-kernel/arch/arm64/configs/${{ env.KERNEL_CONFIG }}
+        echo "# CONFIG_ANDROID_PARANOID_NETWORK is not set" >> android-kernel/arch/arm64/configs/${{ env.KERNEL_CONFIG }}
+        
         
     - name: Download source boot image
       if: env.BUILD_BOOT_IMG == 'true'
