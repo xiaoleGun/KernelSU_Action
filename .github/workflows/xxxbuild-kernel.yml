@@ -107,7 +107,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
-        mv android-kernel/kernel-4.14 ./android-kernel
+        mv android-kernel/kernel-4.14/* ./android-kernel
         
     - name: Setup LXC_DOCKER
       if: env.LXC_DOCKER == 'true'
