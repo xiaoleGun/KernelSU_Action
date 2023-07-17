@@ -1,4 +1,4 @@
-name: 编译xxx内核
+name: 编译oppo a72内核
 on:
   watch:
     types: [started]
