@@ -113,7 +113,6 @@ jobs:
         mv android-kernel/kernel-4.14/* ./android-kernel
         git clone https://github.com/wu17481748/android_kernel_modules_oppo_mtk5g
         mv android_kernel_modules_oppo_mtk5g/* ./
-        sudo rm -rf 
         sudo ln -s vendor/mediatek/kernel_modules/connectivity/wlan/core/gen4m android-kernel/drivers/misc/mediatek/connectivity/wlan_drv_gen4m
         sudo ln -s vendor/mediatek/kernel_modules/connectivity/wlan/adaptor android-kernel/drivers/misc/mediatek/connectivity/wmt_chrdev_wifi
         sudo ln -s vendor/mediatek/kernel_modules/connectivity/common android-kernel/drivers/misc/mediatek/connectivity/wmt_drv
