@@ -123,6 +123,16 @@ Select the branch or tag of KernelSU:
 - Latest TAG (stable version): `KERNELSU_TAG=`
 - Specify the TAG (such as `v0.5.2`): `KERNELSU_TAG=v0.5.2`
 
+#### KernelSU Manager signature size and hash
+
+Customize the size and hash values of the KernelSU manager signature, if you don't need to customize the manager then please leave them empty or fill in the official default values:
+
+`KSU_EXPECTED_SIZE=0x033b`
+
+`KSU_EXPECTED_HASH=0xb0b91415`
+
+You can type `ksud debug get-sign <apk_path>` to get the size and hash of the apk signature.
+
 ### Add Kprobes Config
 
 Inject parameters into the defconfig automatically.

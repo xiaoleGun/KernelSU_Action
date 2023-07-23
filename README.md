@@ -122,6 +122,16 @@ Fork 本仓库到你的储存库然后按照以下内容编辑 config.env，之�
 - 最新 TAG(稳定版): `KERNELSU_TAG=`
 - 指定 TAG(如`v0.5.2`): `KERNELSU_TAG=v0.5.2`
 
+#### KernelSU Manager signature size and hash
+
+自定义KernelSU管理器签名的size值和hash值，如果不需要自定义管理器则请留空或填入官方默认值：
+
+`KSU_EXPECTED_SIZE=0x033b`
+
+`KSU_EXPECTED_HASH=0xb0b91415`
+
+可键入`ksud debug get-sign <apk_path>`获取apk签名的size值和hash值
+
 ### Disable LTO
 
 LTO 用于优化内核，但有些时候会导致错误
