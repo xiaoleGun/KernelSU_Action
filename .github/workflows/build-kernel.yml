@@ -19,6 +19,7 @@ jobs:
     - name: 工作配置
       run: |
         echo "LXC_DOCKER=$(cat config.env | grep -w "LXC_DOCKER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "FILE=$(cat config.env | grep -w "FILE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "LXC_PATCH=$(cat config.env | grep -w "LXC_PATCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "ANDROID_PARANOID_NETWORK_OFF=$(cat config.env | grep -w "ANDROID_PARANOID_NETWORK_OFF" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "CUT_PYTHON=$(cat config.env | grep -w "CUT_PYTHON" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
