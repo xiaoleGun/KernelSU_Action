@@ -120,7 +120,7 @@ jobs:
     - name: Install aarch64-linux-gnu
       run: |
         sudo apt-get install gcc-aarch64-linux-gnu
-        export PATH=/usr/aarch64-linux-gnu/bin/:$PATH:/usr/lib/gcc/x86_64-linux-gnu/9:/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+        export PATH=/usr/aarch64-linux-gnu/bin/:/usr/lib/gcc/x86_64-linux-gnu/9:/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper:$PATH
   
     - name: Setup KernelSU
       if: env.ENABLE_KERNELSU == 'true'
