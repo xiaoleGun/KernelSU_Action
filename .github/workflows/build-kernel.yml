@@ -127,9 +127,9 @@ jobs:
     - name: 打入lxc补丁
       if: env.LXC_PATCH == 'true'
       run: |
-        FILE=android-kernel/net//netfilter/xt_qtaguid.c
-        if [ ! -f "$FILE" ]; then
-         cd $GITHUB_WORKSPACE/kernel_workspace
+       cd $GITHUB_WORKSPACE/kernel_workspace
+       FILE=android-kernel/net//netfilter/xt_qtaguid.c
+       if [ ! -f "$FILE" ]; then
          wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
          patch -p0 < lxc.patch
         fi
