@@ -47,7 +47,7 @@ jobs:
         echo "BUILD_BOOT_IMG=$(cat config.env | grep -w "BUILD_BOOT_IMG" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "SOURCE_BOOT_IMAGE=$(cat config.env | grep -w "SOURCE_BOOT_IMAGE" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
 
-    - name: 构建编译内核环境(Setup build kernel environment)
+    - name: 构建编译内核环境
       run: |
         echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
         echo "DEVICE=$(echo ${{ env.KERNEL_CONFIG }} | sed 's!vendor/!!;s/_defconfig//;s/_user//;s/-perf//')" >> $GITHUB_ENV
@@ -55,13 +55,13 @@ jobs:
         sudo apt-get install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler python2 python3
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
 
-    - name: 设置python2.7(Setup CUT_PYTHON-2.7)
+    - name: 切换python2.7
       if: env.CUT_PYTHON == 'true'
       run: |
        sudo rm /bin/python
        sudo ln -s /bin/python2.7 /bin/python
       
-    - name: 下载Clang-aosp编译器(Download Clang-aosp)
+    - name: 下载Clang-aosp编译器
       if: env.USE_CUSTOM_CLANG == 'false'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -69,7 +69,7 @@ jobs:
         wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/${{ env.CLANG_BRANCH }}/clang-${{ env.CLANG_VERSION }}.tar.gz
         tar -C clang-aosp/ -zxvf clang-${{ env.CLANG_VERSION }}.tar.gz
 
-    - name: 下载Custom-Clang编译器(Download Custom-Clang)
+    - name: 下载Custom-Clang编译器
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -87,7 +87,7 @@ jobs:
             unzip clang.zip -d clang-aosp/
         fi
 
-    - name: 下载Gcc-aosp编译器(Download Gcc-aosp)
+    - name: 下载Gcc-aosp编译器
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         if [ ${{ env.ENABLE_GCC_ARM64 }} = true ]; then
@@ -104,18 +104,18 @@ jobs:
             echo "GCC_32=CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin/arm-linux-androideabi-" >> $GITHUB_ENV
         fi
 
-    - name: 下载mkbootimg解包工具(Download mkbootimg tools)
+    - name: 下载mkbootimg解包工具
       if: env.BUILD_BOOT_IMG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone https://android.googlesource.com/platform/system/tools/mkbootimg tools -b master-kernel-build-2022 --depth=1
 
-    - name: 下载内核源码(Download kernel source)
+    - name: 下载内核源码
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
         
-    - name: 开启lxc和docker配置(Setup LXC_DOCKER)
+    - name: 开启lxc和docker配置
       if: env.LXC_DOCKER == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -124,14 +124,14 @@ jobs:
         ./LXC-DOCKER-OPEN-CONFIG.sh android-kernel/arch/arm64/configs/${{ env.KERNEL_CONFIG }} -w
 
       
-    - name: 打入lxc补丁(Setup LXC_PATCH)
+    - name: 打入lxc补丁
       if: env.LXC_PATCH == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
         patch -p0 < lxc.patch
 
-    - name: 关闭ANDROID_PARANOID_NETWORK配置(Setup CLOSE ANDROID_PARANOID_NETWORK)
+    - name: 关闭ANDROID_PARANOID_NETWORK配置
       if: env.ANDROID_PARANOID_NETWORK_OFF == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -139,7 +139,7 @@ jobs:
         echo "# CONFIG_ANDROID_PARANOID_NETWORK is not set" >> android-kernel/arch/arm64/configs/${{ env.KERNEL_CONFIG }}
         
         
-    - name: 下载直链内核镜像(Download source boot image)
+    - name: 下载直链内核镜像
       if: env.BUILD_BOOT_IMG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -149,14 +149,14 @@ jobs:
             echo "HAVE_SOURCE_BOOT_IMAGE=true" >> $GITHUB_ENV
         fi
   
-    - name: 开启KSU(Setup KernelSU)
+    - name: 开启KSU
       if: env.ENABLE_KERNELSU == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s ${{ env.KERNELSU_TAG }}
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
-    - name: 开启补充内核配置(Setup Configuration for Kernel)
+    - name: 开启补充内核配置
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         if [ ${{ env.ADD_KPROBES_CONFIG }} = true ]; then
@@ -179,14 +179,14 @@ jobs:
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
 
-    - name: 设置ccache缓存(Setup ccache)
+    - name: 设置ccache缓存
       if: env.ENABLE_CCACHE == 'true'
       uses: hendrikmuhs/ccache-action@v1.2
       with:
         key: build-kernel-${{ env.DEVICE }}${{ env.UPLOADNAME }}
         max-size: 2G
 
-    - name: 开始编译内核(Build kernel)
+    - name: 开始编译内核
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
@@ -201,7 +201,7 @@ jobs:
 
         
         
-    - name: 检查编译内核生成文件(Check a kernel output files)
+    - name: 检查编译内核生成文件
       run: |
        cd $GITHUB_WORKSPACE/kernel_workspace
        if [ -f android-kernel/out/arch/${{ env.ARCH }}/boot/${{ env.KERNEL_IMAGE_NAME }} ]; then
@@ -219,7 +219,7 @@ jobs:
            fi
        fi
   
-    - name: 制作Anykernel3卡刷包(Make Anykernel3)
+    - name: 制作Anykernel3卡刷包
       if: env.CHECK_FILE_IS_OK == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -233,7 +233,7 @@ jobs:
         fi
         rm -rf AnyKernel3/.git* AnyKernel3/README.md
 
-    - name: 制作内核镜像(Make boot image)
+    - name: 制作合成新的内核镜像
       if: env.HAVE_SOURCE_BOOT_IMAGE == 'true' && env.CHECK_FILE_IS_OK == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -261,14 +261,14 @@ jobs:
         name: AnyKernel3${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3/*
 
-    - name: 上传Upload DTBO image
+    - name: 上传 DTBO image
       if: env.CHECK_DTBO_IS_OK == 'true'
       uses: actions/upload-artifact@v3
       with:
         name: dtbo-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/android-kernel/out/arch/${{ env.ARCH }}/boot/dtbo.img
 
-    - name: 上传Upload boot image
+    - name: 上传 boot image
       if: env.MAKE_BOOT_IMAGE_IS_OK == 'true'
       uses: actions/upload-artifact@v3
       with:
