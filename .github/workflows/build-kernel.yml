@@ -128,7 +128,7 @@ jobs:
       if: env.LXC_PATCH == 'true'
       run: |
        cd $GITHUB_WORKSPACE/kernel_workspace
-       FILE=android-kernel/net//netfilter/xt_qtaguid.c
+       FILE=android-kernel/net/netfilter/xt_qtaguid.c
        if [ ! -f "$FILE" ]; then
          wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
          patch -p0 < lxc.patch
