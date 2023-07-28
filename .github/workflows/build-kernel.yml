@@ -247,7 +247,7 @@ jobs:
             exit 1
         fi
     
-    - name: 上传Upload ${{ env.KERNEL_IMAGE_NAME }}
+    - name: 上传Upload Image or Image.gz-dtb
       if: env.CHECK_FILE_IS_OK == 'true'
       uses: actions/upload-artifact@v3
       with:
