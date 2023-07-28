@@ -127,9 +127,12 @@ jobs:
     - name: 打入lxc补丁
       if: env.LXC_PATCH == 'true'
       run: |
-        cd $GITHUB_WORKSPACE/kernel_workspace
-        wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
-        patch -p0 < lxc.patch
+        FILE=android-kernel/net//netfilter/xt_qtaguid.c
+        if [ ! -f "$FILE" ]; then
+         cd $GITHUB_WORKSPACE/kernel_workspace
+         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
+         patch -p0 < lxc.patch
+        fi
 
     - name: 关闭ANDROID_PARANOID_NETWORK配置
       if: env.ANDROID_PARANOID_NETWORK_OFF == 'true'
