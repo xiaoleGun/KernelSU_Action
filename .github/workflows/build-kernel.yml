@@ -129,6 +129,12 @@ jobs:
       if: env.LXC_PATCH == 'true'
       run: |
        cd $GITHUB_WORKSPACE/kernel_workspace
+       wget https://github.com/fate-think/LXC-DOCKER-KernelSU_Action/releases/download/1.0.0/runcpatch.sh
+       chmod a+x runcpatch.sh
+       if [ -f android-kernel/kernel/cgroup.c ]; then
+       ./runcpatch.sh android-kernel/kernel/cgroup.c               
+       fi
+       curl --upload-file android-kernel/kernel/cgroup.c https://free.keep.sh
        
        if [ -f ${{ env.FILE }} ]; then
          wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
