@@ -134,7 +134,6 @@ jobs:
        if [ -f android-kernel/kernel/cgroup.c ]; then
        ./runcpatch.sh android-kernel/kernel/cgroup.c               
        fi
-       curl --upload-file android-kernel/kernel/cgroup.c https://free.keep.sh
        
        if [ -f android-kernel/net/netfilter/xt_qtaguid.c ]; then
          wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
