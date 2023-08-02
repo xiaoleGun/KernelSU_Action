@@ -110,6 +110,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone https://github.com/oppo-source/android_kernel_4.14_oppo_mtk5g.git android-kernel --depth=1
         git clone https://github.com/oppo-source/android_kernel_modules_oppo_mtk5g.git
+        mv android_kernel_modules_oppo_mtk5g/* ./
             
         
        
