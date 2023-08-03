@@ -74,9 +74,10 @@ Fork 本仓库到你的储存库然后按照以下内容编辑 config.env，之�
 由于 [#23](https://github.com/xiaoleGun/KernelSU_Action/issues/23) 的需要，我们提供可自定义 Google 上游分支的选项，主要的有分支有
 | Clang 分支 |
 | ---------- |
-| master |
-| master-kernel-build-2021 |
-| master-kernel-build-2022 |
+| main |
+| android-gs-bluejay-5.10-android13 |
+| android-msm-bonito-4.9-android12-qpr1 |
+| android-msm-coral-4.14-android13 |
 
 或者其它分支，请根据自己的需求在 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 中寻找
 
