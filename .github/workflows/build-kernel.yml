@@ -129,7 +129,7 @@ jobs:
           fi
         fi
 
-        if [ ${{ env.USE_CUSTOM_GCC_64 }} = true ]; then
+        if [ ${{ env.USE_CUSTOM_GCC_32 }} = true ]; then
           if [[ ${{ env.CUSTOM_GCC_32_SOURCE }} =~ git ]]; then
               if [[ ${{ env.CUSTOM_GCC_32_SOURCE }} == *'.tar.gz' ]]; then
                 wget -O gcc-32.tar.gz ${{ env.CUSTOM_CLANG_SOURCE }}
