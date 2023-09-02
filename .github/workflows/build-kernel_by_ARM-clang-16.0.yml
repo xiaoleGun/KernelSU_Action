@@ -87,6 +87,7 @@ jobs:
         mkdir gcc-64
         wget -O gcc-64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-x86_64-aarch64-none-elf.tar.xz
         tar -C gcc-64/ -xf gcc-64.tar.xz
+        sudo chmod -R 777 ./arm-clang ./gcc-64 ./gcc-32
         sudo rm *.xz
         sudo rm *.gz
         
