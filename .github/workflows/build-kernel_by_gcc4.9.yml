@@ -1,4 +1,4 @@
-name: Google gcc-4.9 
+name: Build kernel by google-gcc-4.9 
 on:
   watch:
     types: [started]
