@@ -1,4 +1,4 @@
-name: Build kernel on ubuntu 22.04
+name: Build kernel use Google-git
 on:
   watch:
     types: [started]
