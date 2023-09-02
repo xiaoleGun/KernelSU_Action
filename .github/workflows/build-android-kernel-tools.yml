@@ -1,4 +1,4 @@
-name: build android kernel tools
+name: build android kernel tools(clang-r428724)
 on:
   watch:
     types: [started]
@@ -70,7 +70,7 @@ jobs:
 
   
 
-    - name: Download clang-383902b
+    - name: Download android kernel tools
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir clang-aosp
