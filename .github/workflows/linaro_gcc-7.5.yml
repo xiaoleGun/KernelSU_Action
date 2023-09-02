@@ -162,7 +162,7 @@ jobs:
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/google_gcc/aarch64-linux-android-4.9/bin:$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/google_gcc/arm-linux-androideabi-4.9/bin:$PATH
+        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/linaro_gcc/aarch64-linux-gnu-7.5.0-2019.12/bin:$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/linaro_gcc/aarch64-linux-gnu-7.5.0-2019.12/bin/bin:$PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         if [ ! -z ${{ env.KSU_EXPECTED_SIZE }} ] && [ ! -z ${{ env.KSU_EXPECTED_HASH }} ]; then
