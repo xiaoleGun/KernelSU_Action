@@ -73,8 +73,13 @@ jobs:
     - name: Download clang-383902b
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        mkdir clang-aosp
-        git clone https://github.com/tomxi1997/Toolchain.git clang-aosp --depth=1
+        mkdir google_gcc-4.9
+        cd ./google_gcc-4.9
+        wget https://gitlab.com/tomxi1997/google_gcc-4.9/-/raw/main/arm-linux-androideabi-4.9.tar.xz
+        tar -xf arm-linux-androideabi-4.9.tar.xz
+        wget https://gitlab.com/tomxi1997/google_gcc-4.9/-/raw/main/aarch64-linux-android-4.9.tar.xz
+        tar -xf aarch64-linux-android-4.9.tar.xz
+        rm *.xz
           
         
 
