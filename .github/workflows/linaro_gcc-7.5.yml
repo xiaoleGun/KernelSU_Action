@@ -1,4 +1,4 @@
-name: linaro_gcc-7.5
+name: Build kernel by linaro_gcc-7.5
 on:
   watch:
     types: [started]
