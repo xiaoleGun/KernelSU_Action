@@ -1,4 +1,4 @@
-name: Build kernel by clang383902b
+name: Build kernel by Google gcc-4.9 
 on:
   watch:
     types: [started]
