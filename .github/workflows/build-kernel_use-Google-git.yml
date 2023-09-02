@@ -83,7 +83,8 @@ jobs:
          git clone -q --depth=1 --single-branch  https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 -b ${{ env.CLANG_BRANCH }} gcc-32
 
     - name: Download mkbootimg tools
-      if: e
+      if: env.BUILD_BOOT_IMG == 'true'
+      run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone https://android.googlesource.com/platform/system/tools/mkbootimg tools -b master-kernel-build-2022 --depth=1
 
