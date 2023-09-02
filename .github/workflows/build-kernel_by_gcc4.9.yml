@@ -175,11 +175,8 @@ jobs:
           export KSU_EXPECTED_HASH=${{ env.KSU_EXPECTED_HASH }}
         fi 
         make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} ${{ env.CUSTOM_CMDS }} CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- ${{ env.KERNEL_CONFIG }}
-        
-            make -j$(nproc --all) CC="ccache clang" O=out ARCH=${{ env.ARCH }} ${{ env.CUSTOM_CMDS }} CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- 
-        else
         make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} ${{ env.CUSTOM_CMDS }} CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- 
-        fi
+        
 
     - name: Check a kernel output files
       run: |
