@@ -1,4 +1,4 @@
-name: Build kernel by clang383902b
+name: build android kernel tools
 on:
   watch:
     types: [started]
