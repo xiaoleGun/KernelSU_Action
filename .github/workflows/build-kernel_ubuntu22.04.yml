@@ -1,4 +1,4 @@
-name: Build Kernel on ubuntu 20.04
+name: Build Kernel on ubuntu 22.04
 on:
   watch:
     types: [started]
