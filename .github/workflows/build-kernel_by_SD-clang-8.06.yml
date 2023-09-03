@@ -73,7 +73,7 @@ jobs:
     - name: Download SD-clang
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        git clone -b 8.06 https://gitlab.com/HDTC/sdclang.git sd-clang --depth=1 
+        git clone -b 8.0.6 https://gitlab.com/HDTC/sdclang.git sd-clang --depth=1 
     
     - name: Download Google_gcc-4.9
       run: |
