@@ -4,8 +4,8 @@ WORK_DIR=$(pwd)
 cd "$HOME" || exit
 echo "Downloading patchelf binary from ArchLinux repos"
 mkdir -p patchelf-temp
-curl -L https://github.com/Jebaitedneko/docker/raw/ubuntu/patchelf | bsdtar -C patchelf-temp -xf -
-#curl -L https://archlinux.org/packages/community/x86_64/patchelf/download | bsdtar -C patchelf-temp -xf -
+#curl -L https://github.com/Jebaitedneko/docker/raw/ubuntu/patchelf | bsdtar -C patchelf-temp -xf -
+curl -L https://archlinux.org/packages/community/x86_64/patchelf/download | bsdtar -C patchelf-temp -xf -
 mv "$HOME"/patchelf-temp/usr/bin/patchelf "$HOME"/
 rm -rf "$HOME"/patchelf-temp
 echo "Downloading latest glibc from ArchLinux repos"
