@@ -76,21 +76,24 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir zyc-clang
         if [ ${{ env.LLVM_CLANG_VERSION }} = 18 ]; then
-             wget -O clang.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20230903-release/Clang-18.0.0-20230903.tar.gz
-        fi
-
+             wget -O clang18.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20230903-release/Clang-18.0.0-20230903.tar.gz
+             tar -C zyc-clang/ -xf clang18.tar.gz
+         fi
+         
         if [ ${{ env.LLVM_CLANG_VERSION }} = 17 ]; then
-             wget -O clag.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/17.0.0-20230725-release/Clang-17.0.0-20230725.tar.gz
+             wget -O clang17.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/17.0.0-20230725-release/Clang-17.0.0-20230725.tar.gz
+             tar -C zyc-clang/ -xf clang17.tar.gz
         fi
 
         if [ ${{ env.LLVM_CLANG_VERSION }} = 16.05 ]; then
-             wget -O clang.gz https://github.com/ZyCromerZ/Clang/releases/download/16.0.5-20230601-release/Clang-16.0.5-20230601.tar.gz
+             wget -O clang165.gz https://github.com/ZyCromerZ/Clang/releases/download/16.0.5-20230601-release/Clang-16.0.5-20230601.tar.gz
+             tar -C zyc-clang/ -xf clang165.tar.gz
         fi
 
         if [ ${{ env.LLVM_CLANG_VERSION }} = 16 ]; then                       
              wget -O clang.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/16.0.0-20230326-release/Clang-16.0.0-20230326.tar.gz
+             tar -C zyc-clang/ -xf clang16.tar.gz
         fi
-        tar -C zyc-clang/ -xf clang.tar.gz
 
     - name: Download mkbootimg tools
       if: env.BUILD_BOOT_IMG == 'true'
