@@ -172,7 +172,7 @@ jobs:
        
 
         if [ -f $GITHUB_WORKSPACE/kernel_workspace/android-kernel/net/netfilter/xt_qtaguid.c ]; then
-        patch -p0 < $GITHUB_WORKSPACE/kernel_workspace/android-kernel/utils/xt_qtaguid.patch
+            patch -p0 < $GITHUB_WORKSPACE/kernel_workspace/android-kernel/utils/xt_qtaguid.patch
         fi
        
     - name: Setup ccache
@@ -197,7 +197,7 @@ jobs:
           
         if [ ${{ env.ENABLE_CCACHE }} = true ]; then
             make -j$(nproc --all) CC="ccache clang" O=out ARCH=${{ env.ARCH }} CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip LLVM=1 LLVM_IAS=1
-            else
+        else
             make -j$(nproc --all) CC=clang O=out ARCH=${{ env.ARCH }} CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- LLVM=1 LLVM_IAS=1 AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
         fi
 
