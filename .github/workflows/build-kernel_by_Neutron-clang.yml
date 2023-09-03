@@ -76,7 +76,7 @@ jobs:
         cd glibc-2.3.6
         mkdir build
         cd build
-        .../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror && make -j$(nproc --all) && make install
+        ../glibc-2.3.6/configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror && make -j$(nproc --all) && make install
     
     - name: Download Neutron-clang
       run: |
