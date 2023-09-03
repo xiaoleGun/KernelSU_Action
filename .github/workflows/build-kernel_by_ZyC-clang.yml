@@ -87,7 +87,8 @@ jobs:
              wget -O clang.gz https://github.com/ZyCromerZ/Clang/releases/download/16.0.5-20230601-release/Clang-16.0.5-20230601.tar.gz
         fi
 
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 16 ]; then                            wget -O clang.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/16.0.0-20230326-release/Clang-16.0.0-20230326.tar.gz
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 16 ]; then                       
+             wget -O clang.tar.gz https://github.com/ZyCromerZ/Clang/releases/download/16.0.0-20230326-release/Clang-16.0.0-20230326.tar.gz
         fi
         tar -C zyc-clang/ -xf clang.tar.gz
 
