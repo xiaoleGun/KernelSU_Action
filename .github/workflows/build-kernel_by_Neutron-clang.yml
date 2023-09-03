@@ -91,11 +91,7 @@ jobs:
             wget -O clang16.tar.zst https://github.com/Neutron-Toolchains/clang-build-catalogue/releases/download/16012023/neutron-clang-16012023.tar.zst 
             tar -C Neutron-clang/ -I zstd -xf clang16.tar.zst
         fi
-        cd Neutron-clang
-        wget https://github.com/tomxi1997/LXC_KernelSU_Action/edit/main/patches/patch-for-old-glibc.sh
-        sudo chmod +x patch-for-old-glibc.sh
-        #sudo sh patch-for-old-glibc.sh
-        sudo rm *.zst
+        
 
         
     - name: Download mkbootimg tools
