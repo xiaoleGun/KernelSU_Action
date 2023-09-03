@@ -74,7 +74,9 @@ jobs:
         wget https://ftp.gnu.org/gnu/glibc/glibc-2.3.6.tar.gz
         tar -xf glibc-2.3.6.tar.gz
         cd glibc-2.3.6
-        ./configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror && make -j$(nproc --all) && make install
+        mkdir build
+        cd build
+        .../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror && make -j$(nproc --all) && make install
     
     - name: Download Neutron-clang
       run: |
