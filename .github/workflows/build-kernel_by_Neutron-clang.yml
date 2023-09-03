@@ -71,9 +71,7 @@ jobs:
         #sudo apt-get install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler python2 python3
         sudo apt install libarchive-tools -y curl zstd libdebuginfod1 elfutils libelf1 wget vim git ccache automake flex lzop bison gperf build-essential zip zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler kmod python3 python3-pip
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
-        wget https://github.com/tomxi1997/LXC_KernelSU_Action/edit/main/patches/patch-for-old-glibc.sh
-        sudo chmod +x patch-for-old-glibc.sh
-        sudo sh patch-for-old-glibc.sh
+        
     
     - name: Download Neutron-clang
       run: |
@@ -93,6 +91,10 @@ jobs:
             wget -O clang16.tar.zst https://github.com/Neutron-Toolchains/clang-build-catalogue/releases/download/16012023/neutron-clang-16012023.tar.zst 
             tar -C Neutron-clang/ -I zstd -xf clang16.tar.zst
         fi
+        cd Neutron-clang
+        wget https://github.com/tomxi1997/LXC_KernelSU_Action/edit/main/patches/patch-for-old-glibc.sh
+        sudo chmod +x patch-for-old-glibc.sh
+        sudo sh patch-for-old-glibc.sh
         sudo rm *.zst
 
         
