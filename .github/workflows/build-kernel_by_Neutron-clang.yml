@@ -94,7 +94,7 @@ jobs:
         cd Neutron-clang
         wget https://github.com/tomxi1997/LXC_KernelSU_Action/edit/main/patches/patch-for-old-glibc.sh
         sudo chmod +x patch-for-old-glibc.sh
-        sudo sh patch-for-old-glibc.sh
+        #sudo sh patch-for-old-glibc.sh
         sudo rm *.zst
 
         
