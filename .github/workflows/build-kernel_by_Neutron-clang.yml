@@ -76,8 +76,8 @@ jobs:
         cd glibc-2.36
         mkdir build
         cd build
-        #../configure --prefix= $GITHUB_WORKSPACE/kernel_workspace/glibc --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror
-        #make -j$(nproc --all) && sudo make install
+        ../configure --prefix= $GITHUB_WORKSPACE/kernel_workspace/glibc --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror
+        make -j$(nproc --all) && sudo make install
     
     - name: Download Neutron-clang
       run: |
@@ -186,7 +186,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/Neutron-clang/bin:$PATH
-        export LD_LIBRARY_PATH=$GITHUB_WORKSPACE/kernel_workspace/glibc/lib:$LD_LIBRARY_PATH
+        #export LD_LIBRARY_PATH=$GITHUB_WORKSPACE/kernel_workspace/glibc/lib:$LD_LIBRARY_PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         if [ ! -z ${{ env.KSU_EXPECTED_SIZE }} ] && [ ! -z ${{ env.KSU_EXPECTED_HASH }} ]; then
