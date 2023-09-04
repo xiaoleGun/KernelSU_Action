@@ -76,10 +76,10 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir -p ./gcc32 ./gcc64
         if [ ${{ env.ARM_GCC_VERSION }} = 12.3 ]; then
-             wget https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-x86_64-aarch64-none-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi.tar.xz
-             tar -C gcc64/ -xf arm-gnu-toolchain-12.3.rel1-x86_64-aarch64-none-elf.tar.xz
-             tar -C gcc32/ -xf arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi.tar.xz
+             wget -O gcc64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-x86_64-aarch64-none-elf.tar.xz
+             wget -O gcc32.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi.tar.xz
+             tar -C gcc64/ -xf gcc64.tar.xz
+             tar -C gcc32/ -xf gcc32.tar.xz
         fi
         
         if [ ${{ env.ARM_GCC_VERSION }} = 11.3 ]; then
@@ -90,17 +90,17 @@ jobs:
         fi     
 
         if [ ${{ env.ARM_GCC_VERSION }} = 10.3 ]; then
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-arm-none-eabi.tar.xz
-             tar -C gcc64/ -xf gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf.tar.xz
-             tar -C gcc32/ -xf gcc-arm-10.3-2021.07-x86_64-arm-none-eabi.tar.xz
+             wget -O gcc64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf.tar.xz
+             wget -O gcc32.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-arm-none-eabi.tar.xz
+             tar -C gcc64/ -xf gcc64.tar.xz
+             tar -C gcc32/ -xf gcc32.tar.xz
         fi
 
         if [ ${{ env.ARM_GCC_VERSION }} = 10.2 ]; then                     
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-aarch64-none-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-eabi.tar.xz
-             tar -C gcc64/ -xf gcc-arm-10.2-2020.11-x86_64-aarch64-none-elf.tar.xz
-             tar -C gcc32/ -xf gcc-arm-10.2-2020.11-x86_64-arm-none-eabi.tar.xz
+             wget -O gcc64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-aarch64-none-elf.tar.xz
+             wget -O gcc32.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-eabi.tar.xz
+             tar -C gcc64/ -xf gcc64.tar.xz
+             tar -C gcc32/ -xf gcc32.tar.xz
         fi
 
         if [ ${{ env.ARM_GCC_VERSION }} = 9.2 ]; then
@@ -125,17 +125,17 @@ jobs:
         fi
 
         if [ ${{ env.ARM_GCC_VERSION }} = 8.22 ]; then
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-aarch64-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-arm-eabi.tar.xz
-             tar -C gcc64/ -xf gcc-arm-8.2-2019.01-x86_64-aarch64-elf.tar.xz
-             tar -C gcc32/ -xf gcc-arm-8.2-2019.01-x86_64-arm-eabi.tar.xz
+             wget -O gcc64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-aarch64-elf.tar.xz
+             wget -O gcc32.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-arm-eabi.tar.xz
+             tar -C gcc64/ -xf gcc64.tar.xz
+             tar -C gcc32/ -xf gcc32.tar.xz
         fi
 
         if [ ${{ env.ARM_GCC_VERSION }} = 8.21 ]; then
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2018.08/gcc-arm-8.2-2018.08-x86_64-aarch64-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2018.08/gcc-arm-8.2-2018.08-x86_64-arm-eabi.tar.xz
-             tar -C gcc64/ -xf gcc-arm-8.2-2018.08-x86_64-aarch64-elf.tar.xz
-             tar -C gcc32/ -xf gcc-arm-8.2-2018.08-x86_64-arm-eabi.tar.xz
+             wget -O gcc64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2018.08/gcc-arm-8.2-2018.08-x86_64-aarch64-elf.tar.xz
+             wget -O gcc32.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2018.08/gcc-arm-8.2-2018.08-x86_64-arm-eabi.tar.xz
+             tar -C gcc64/ -xf gcc64.tar.xz
+             tar -C gcc32/ -xf gcc32.tar.xz
         fi
         cd ./gcc64
         mv *-aarch64-* gcc641
