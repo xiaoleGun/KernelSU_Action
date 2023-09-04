@@ -83,10 +83,10 @@ jobs:
         fi
         
         if [ ${{ env.ARM_GCC_VERSION }} = 11.3 ]; then
-             wget https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
-             tar -C gcc64/ -xf arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-elf.tar.xz
-             tar -C gcc32/ -xf arm-gnu-toolchain-11.3.rel1-x86_64-arm-none.tar.xz
+             wget -O gcc64.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-elf.tar.xz
+             wget -O gcc32.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
+             tar -xf gcc64.tar.xz
+             tar -xf gcc32.tar.xz
         fi     
 
         if [ ${{ env.ARM_GCC_VERSION }} = 10.3 ]; then
@@ -137,11 +137,8 @@ jobs:
              tar -C gcc64/ -xf gcc-arm-8.2-2018.08-x86_64-aarch64-elf.tar.xz
              tar -C gcc32/ -xf gcc-arm-8.2-2018.08-x86_64-arm-eabi.tar.xz
         fi
-        cd ./gcc64 
-        mv *-aarch64-* gcc641
-        cd ..
-        cd ./gcc32
-        mv *-arm-* gcc321
+        mv *-aarch64-* gcc64
+        mv *-arm-* gcc32
 
     - name: Download mkbootimg tools
       if: env.BUILD_BOOT_IMG == 'true'
@@ -227,7 +224,7 @@ jobs:
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        export PATH=$GITHUB_WORKSPACE/kernel_workspace/gcc64/gcc641/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc32/gcc321/bin$PATH
+        export PATH=$GITHUB_WORKSPACE/kernel_workspace/gcc64/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc32/bin$PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         if [ ! -z ${{ env.KSU_EXPECTED_SIZE }} ] && [ ! -z ${{ env.KSU_EXPECTED_HASH }} ]; then
@@ -235,7 +232,7 @@ jobs:
           export KSU_EXPECTED_HASH=${{ env.KSU_EXPECTED_HASH }}
         fi
 
-        if [ -f $GITHUB_WORKSPACE/kernel_workspace/gcc64/gcc641/bin/aarch64-none-elf-gcc ]; then
+        if [ -f $GITHUB_WORKSPACE/kernel_workspace/gcc64/bin/aarch64-none-elf-gcc ]; then
             make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-none-elf- CROSS_COMPILE_ARM32=arm-none-eabi- ${{ env.KERNEL_CONFIG }}
             make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-none-elf- CROSS_COMPILE_ARM32=arm-none-eab-
         else
