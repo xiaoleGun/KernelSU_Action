@@ -119,7 +119,7 @@ jobs:
 
         if [ ${{ env.ARM_GCC_VERSION }} = 8.31 ]; then
              wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.02/gcc-arm-8.3-2019.02-x86_64-aarch64-elf.tar.xz
-             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-arm-eabi.tar.xz
+             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.02/gcc-arm-8.3-2019.02-x86_64-arm-eabi.tar.xz
              tar -C gcc64/ -xf gcc-arm-8.3-2019.02-x86_64-aarch64-elf.tar.xz
              tar -C gcc32/ -xf gcc-arm-8.2-2019.01-x86_64-arm-eabi.tar.xz
         fi
