@@ -62,7 +62,6 @@ jobs:
       uses: pierotofy/set-swap-space@master
       with:
         swap-size-gb: 10
-
     - name: Setup build kernel environment
       run: |
         echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
@@ -73,9 +72,9 @@ jobs:
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace $GITHUB_WORKSPACE/kernel_workspace/glibc
         wget https://ftp.gnu.org/gnu/glibc/glibc-2.36.tar.xz
         tar -xf glibc-2.36.tar.xz
-       #cd glibc-2.36
+        #cd glibc-2.36
         mkdir build
-       #cd build
+        #cd build
         #../configure --prefix= $GITHUB_WORKSPACE/kernel_workspace/glibc --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror
         #make -j$(nproc --all) && sudo make install
     
