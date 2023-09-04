@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build Kernel by ${{ github.actor }}
-    runs-on: ubuntu-latest
+    runs-on: debian-bookworm
     if: github.event.repository.owner.id == github.event.sender.id
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
@@ -73,11 +73,11 @@ jobs:
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace $GITHUB_WORKSPACE/kernel_workspace/glibc
         wget https://ftp.gnu.org/gnu/glibc/glibc-2.36.tar.xz
         tar -xf glibc-2.36.tar.xz
-        cd glibc-2.36
+       #cd glibc-2.36
         mkdir build
-        cd build
-        ../configure --prefix= $GITHUB_WORKSPACE/kernel_workspace/glibc --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror
-        make -j$(nproc --all) && sudo make install
+       #cd build
+        #../configure --prefix= $GITHUB_WORKSPACE/kernel_workspace/glibc --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin --disable-sanity-checks --disable-werror
+        #make -j$(nproc --all) && sudo make install
     
     - name: Download Neutron-clang
       run: |
