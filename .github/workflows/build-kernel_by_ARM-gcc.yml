@@ -96,7 +96,8 @@ jobs:
              tar -C gcc32/ -xf gcc-arm-10.3-2021.07-x86_64-arm-none-eabi.tar.xz
         fi
 
-        if [ ${{ env.ARM_GCC_VERSION }} = 10.2 ]; then                      wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-aarch64-none-elf.tar.xz
+        if [ ${{ env.ARM_GCC_VERSION }} = 10.2 ]; then                     
+             wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-aarch64-none-elf.tar.xz
              wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-eabi.tar.xz
              tar -C gcc64/ -xf gcc-arm-10.2-2020.11-x86_64-aarch64-none-elf.tar.xz
              tar -C gcc32/ -xf gcc-arm-10.2-2020.11-x86_64-arm-none-eabi.tar.xz
@@ -231,12 +232,12 @@ jobs:
         fi
 
         if [ -f $GITHUB_WORKSPACE/kernel_workspace/gcc64/bin/aarch64-none-elf-gcc ]; then
-          make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-none-elf- CROSS_COMPILE_ARM32=arm-none-eabi- ${{ env.KERNEL_CONFIG }}
-          make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-none-elf- CROSS_COMPILE_ARM32=arm-none-eab-
+            make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-none-elf- CROSS_COMPILE_ARM32=arm-none-eabi- ${{ env.KERNEL_CONFIG }}
+            make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-none-elf- CROSS_COMPILE_ARM32=arm-none-eab-
         else
             make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-elf- CROSS_COMPILE_ARM32=arm-eabi- ${{ env.KERNEL_CONFIG }}
             make -j$(nproc --all) O=out ARCH=${{ env.ARCH }} CROSS_COMPILE=aarch64-elf- CROSS_COMPILE_ARM32=arm-eabi- 
-       fi
+        fi
 
     - name: Check a kernel output files
       run: |
