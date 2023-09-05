@@ -76,7 +76,7 @@ jobs:
     - name: Download LiuNian-Clang
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        wget -O clang.tar.zst https://github.com/wloot/tc-build/releases/download/v2020.0213/LiuNian_clang-20200213.tar.zst
+        wget -O clang.tar.zst https://github.com/wloot/tc-build/releases/download/v2020.0121/LiuNian_clang-20200121.tar.zst
         mkdir clang-aosp
         tar -C clang-aosp/ -I zstd -xf clang.tar.zst
             
