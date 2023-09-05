@@ -1,4 +1,4 @@
-name: Build kernel by proton clang
+name: Build kernel by LiuNian clang
 on:
   watch:
     types: [started]
