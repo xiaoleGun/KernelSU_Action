@@ -177,4 +177,7 @@ LTO 用于优化内核，但有些时候会导致错误
 - [KernelSU](https://github.com/tiann/KernelSU)
 - [xiaoxindada](https://github.com/xiaoxindada)
 - [xiaoleGun](https://github.com/xiaoleGun/KernelSU_Action)
--
+- [kdrag0n](https://github.com/kdrag0n/proton-clang)
+- [Neebe3289](https://gitlab.com/Neebe3289/android_prebuilts_clang_host_linux-x86)
+- [ZyCromerZ](https://github.com/ZyCromerZ/Clang
+- [ARM] (https://developer.arm.com)
