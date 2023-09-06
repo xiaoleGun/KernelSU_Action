@@ -180,8 +180,12 @@ LTO 用于优化内核，但有些时候会导致错误
 - [qiuqiu](https://blog.qiuqiu233.top/)
 - [wu17481748](https://github.com/wu17481748/LXC-DOCKER-KernelSU_Action)
 - [kdrag0n](https://github.com/kdrag0n/proton-clang)
+- [JonasCardoso](https://github.com/JonasCardoso/Toolchain)
 - [Neebe3289](https://gitlab.com/Neebe3289/android_prebuilts_clang_host_linux-x86)
 - [ZyCromerZ](https://github.com/ZyCromerZ/Clang)
 - [ARM](https://developer.arm.com/-/media/Files/downloads/gnu)
 - [LLVM](https://github.com/llvm/llvm-project/)
+- [mvaisakh](https://github.com/mvaisakh/gcc-build)
+- [HDTC](https://gitlab.com/HDTC/sdclang)
+- [Neutron-Toolchains](https://github.com/Neutron-Toolchains)
 - 
