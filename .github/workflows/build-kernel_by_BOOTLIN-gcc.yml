@@ -75,8 +75,8 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir -p ./gcc32 ./gcc64
         if [ ${{ env.BOOTLIN_GCC_VERSION }} = 9.3 ]; then
-      wget -O gcc64.tar.xz https://toolchains.bootlin.com/downloads/releases/toolchains/aarch64/tarballs/aarch64--glibc--bleeding-edge-2020.02-1.tar.bz2
-      wget -O gcc32.tar.xz https://toolchains.bootlin.com/downloads/releases/toolchains/armv7-eabihf/tarballs/armv7-eabihf--glibc--bleeding-edge-2020.02-1.tar.bz2
+             wget -O gcc64.tar.xz https://toolchains.bootlin.com/downloads/releases/toolchains/aarch64/tarballs/aarch64--glibc--bleeding-edge-2020.02-1.tar.bz2
+             wget -O gcc32.tar.xz https://toolchains.bootlin.com/downloads/releases/toolchains/armv7-eabihf/tarballs/armv7-eabihf--glibc--bleeding-edge-2020.02-1.tar.bz2
              tar -C gcc64/ -xf gcc64.tar.xz
              tar -C gcc32/ -xf gcc32.tar.xz
         fi
