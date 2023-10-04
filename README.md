@@ -79,32 +79,26 @@ SD_CLANG_BRANCH=10
 #  r416183b
 
 
-# 安卓 13
-#  android13-release
-#  r450784d
-
-#主线,高版本内核使用
-#  main
-#  r475365b
+# 安
 
 
 
                     ####CLANG_BRANCH###CLANG_VERSION###
 
-#    main            android13-release    android12-release       android11-release        android10-release
-#
+   main            android13-release    android12-release       android11-release        android10-release
+
 #clang-3289846       clang-r450784d       clang-3289846           clang-3289846            clang-3289846
 #clang-r450784e      clang-3289846        clang-r383902           clang-r353983c           clang-r328903
 #clang-r475365b                           clang-r416183b          clang-r353983c1          clang-r339409b
 #clang-r487747c                           clang-r416183b1         clang-r365631c           clang-r344140b 
 #clang-r498229                                                    clang-r370808            clang-r346389b
 #clang-r498229b                                                   clang-r370808b           clang-r346389c
-#                                                                 clang-r377782b           clang-r349610
-#                                                                 clang-r377782c           clang-r349610b
-#                                                                 clang-r377782d           clang-r353983b
-#                                                                 clang-r383902            clang-r353983c
-#                                                                 clang-r383902b
-#
+                                                                 clang-r377782b           clang-r349610
+                                                                 clang-r377782c           clang-r349610b
+                                                                clang-r377782d           clang-r353983b
+                                                                clang-r383902            clang-r353983c
+                                                               clang-r383902b
+
 
 
 
