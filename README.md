@@ -2,6 +2,165 @@
 
 # LXC-KernelSU Action
 
+一般来说只需要按实际需要修改5－20行的相关内容就可以。包含18个工作流可同时工作可最大化提高编译内核的成功率，助力LXC,KernelSU 。
+#工具链集包含AOSP clang ,LLVM, ARM gcc ,SD-clang(高通的llvm工具链）,Proton-clang, ZyC clang,linaro gcc ,Eva gcc ,Google gcc_4.9 ,Android NDK ,arter97_gcc等
+#内核源地址
+KERNEL_SOURCE=https://github.com/xiaoleGun/android_kernel_xiaomi_wayne-4.19
+#分支
+KERNEL_SOURCE_BRANCH=twrp-12
+#内核配置文件
+KERNEL_CONFIG=vendor/wayne_defconfig
+
+
+#LXC_Docker启用，默认启用。对此项对build-kernel.yml无效，因为build-kernel.yml是官方版，未作任何修改。
+ENABLE_LXC=true
+#KernelSU相关，默认关闭。若需要KernelSU，则修改前3项值为true
+ENABLE_KERNELSU=false
+ADD_KPROBES_CONFIG=false 
+ADD_OVERLAYFS_CONFIG=false
+KERNELSU_TAG=main
+
+#这块几乎可以不动
+KERNEL_IMAGE_NAME=Image
+ARCH=arm64
+
+#安卓12以上可启用LLVM=1 LLVM_IAS=1配置,默认留空
+#EXTRA_CMDS:LD=ld.lld
+#EXTRA_CMDS:LLVM=1 LLVM_IAS=1 
+
+#Ccache,可加速二次构建
+ENABLE_CCACHE=false 
+
+#关闭fstack-protector-strong(clang-r383902b)
+DISABLE_FST=false
+
+#(0)使用Android NDK编译内核，NDK_VERSION可选的值有26,25,24,23,22,21,20,19,18,17,16,15
+NDK_VERSION=21
+
+#(1)谷歌官方的AOSP clang，对Build kernel Google git.yml生效
+#AOSP 工具链参考选择可从70～106行的内容中进行选择
+#更多可从这找 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/
+#请以此为准，进行修改，
+CLANG_BRANCH=android12-release
+CLANG_VERSION=r416183b
+
+#(2)第三方源的AOSP clang
+#此配置对 Build Kernel on ubuntu 20.04（build-kernel_ubuntu20.04.yml)和Build Kernel on ubuntu 22.04（build-kernel_ubuntu22.04.yml)都生效
+TCLANG_BRANCH=clang-r450784e
+
+#目前存在的clang分支如下,即TCLANG_BRANCH的可取值（50～63行的内容）
+#clang-r498229
+#clang-r487747c
+#clang-r487747b
+#clang-r487747
+#clang-r475365b
+#clang-r475365
+#clang-r468909b
+#clang-r468909
+#clang-r450784e
+#clang-r450784d
+#clang-r458507
+#clang-r399163b
+#clang-r383902
+#clang-r353983c
+#
+# 
+
+#(3)使用SD-clang构建内核，高通的clang编译器。默认启用启用分支10,目前存在的分支有 10,12,14,14.03
+SD_CLANG_BRANCH=10
+
+#比较合适的几类配置
+#适合于老内核，安卓11及以下最稳的配置,默认此配置。运行构建时请使用 Build Kernel on ubuntu 20.04 (build-kernel.yml）此配置使用ubuntu 20.04。对于非常老的内核使用Google gcc-4.9构建，自行改一下。
+#  android11-release
+#  r383902b
+
+#安卓12及以上，运行构建时请使用Build Kernel on ubuntu 22.04（build-kernel_ubuntu22.04.yml）
+#  android12-release
+#  r416183b
+
+
+# 安卓 13
+#  android13-release
+#  r450784d
+
+#主线,高版本内核使用
+#  main
+#  r475365b
+
+
+
+                    ####CLANG_BRANCH###CLANG_VERSION###
+
+#    main            android13-release    android12-release       android11-release        android10-release
+#
+#clang-3289846       clang-r450784d       clang-3289846           clang-3289846            clang-3289846
+#clang-r450784e      clang-3289846        clang-r383902           clang-r353983c           clang-r328903
+#clang-r475365b                           clang-r416183b          clang-r353983c1          clang-r339409b
+#clang-r487747c                           clang-r416183b1         clang-r365631c           clang-r344140b 
+#clang-r498229                                                    clang-r370808            clang-r346389b
+#clang-r498229b                                                   clang-r370808b           clang-r346389c
+#                                                                 clang-r377782b           clang-r349610
+#                                                                 clang-r377782c           clang-r349610b
+#                                                                 clang-r377782d           clang-r353983b
+#                                                                 clang-r383902            clang-r353983c
+#                                                                 clang-r383902b
+#
+
+
+
+#自定义工具链选择，选择proton-clang,该工具链针对AArch32、AArch64 和 x86 架构。它是用 LTO 和 PGO 构建的，以尽可能减少编译时间。
+#官方版(已停止维护),最新到clang-13 https://github.com/kdrag0n/proton-clang
+#若需要更旧的clang13以下 可到这找到https://github.com/kdrag0n/proton-clang/releases,自行改相关内容
+#第三方维护版，最新到clang-17 ，默认使用此版。https://gitlab.com/LeCmnGend/proton-clang
+#第三方维护版，目前存在的分支有 clang-13 , clang-14, clang-15, clang-16, clang-17
+
+#(4)若要使用proton-clang，请使用build kernel by protonclang (build-kernel_by_proton-clang.yml)
+ENABLE_PROTON_CLANG=true
+PROTON_CLANG_SOURCE=https://gitlab.com/LeCmnGend/proton-clang
+#PROTON_CLANG_BRANCH可选的值有 clang-13 ,clang-14, clang-15, clang-16, clang-17
+PROTON_CLANG_BRANCH=clang-13
+
+
+
+#(5)与proton-clang类似项目Neutron-clang,官网https://github.com/Neutron-Toolchains/
+#目前存在版本 16,17,18
+NEUTRON_CLANG_VERSION=16
+#目前存在问题・_・?，为不可用状态。不想肝了，有得用就行了。主要是glibc问题，么么
+
+
+
+
+#（6）使用LLVM，构建内核。
+#目前存在版本 16,15,14,13,12,11,10
+LLVM_CLANG_VERSION=10
+
+
+
+#（7）使用ZyC clang，构建内核。该配置对build-kernel_by_ZyC-clang.yml生效
+#目前存在版本 18,17,16.05,16
+ZYC_CLANG_VERSION=16
+
+
+#（8）使用ARM gcc，构建内核。该配置对build-kernel_by_ARM-gcc.yml生效
+#目前存在版本 12.3  11.3  10.3  10.2 9.2 8.32  8.31  8.22  8.21
+ARM_GCC_VERSION=8.21
+
+
+#（9）还有一些固定配置，未列出的编译器，总之一句话，够用了，此编译器集足够编译2018年到现在的所有的内核版本，当然一些细节需要自己处理，自行研究吧。
+
+
+
+
+
+
+
+
+
+~~~~~~~分割线～～～～～～～
+
+
+
+
 用于 Non-GKI Kernel 的 Action，具有一定的普遍性，需要了解内核及 Android 的相关知识得以运用。
 
 ## 警告:warning: :warning: :warning:
