@@ -55,6 +55,7 @@ jobs:
         echo "KSU_EXPECTED_HASH=$(cat $CONFIG_ENV | grep -w "KSU_EXPECTED_HASH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "ENABLE_LXC=$(cat $CONFIG_ENV | grep -w "ENABLE_LXC" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "DISABLE_FST=$(cat $CONFIG_ENV | grep -w "DISABLE_FST" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
+        echo "ENABLE_NETHUNTER=$(cat $CONFIG_ENV | grep -w "ENABLE_NETHUNTER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         
     - name: Set swap to 10G
       uses: pierotofy/set-swap-space@master
@@ -156,7 +157,17 @@ jobs:
         if [ -f $GITHUB_WORKSPACE/kernel_workspace/android-kernel/net/netfilter/xt_qtaguid.c ]; then
             patch -p0 < $GITHUB_WORKSPACE/kernel_workspace/android-kernel/utils/xt_qtaguid.patch
         fi
-       
+        
+    - name: Setup Kali-Nethunter  
+      if: env.ENABLE_NETHUNTER == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/
+        git clone https://github.com/Biohazardousrom/Kali-defconfig-checker.git android-kernel
+        cd android-kernel
+        chmod +x *.sh
+        chmod +x check-kernel-config
+        ./check-kernel-config arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        
     - name: Setup ccache
       if: env.ENABLE_CCACHE == 'true'
       uses: hendrikmuhs/ccache-action@v1.2
