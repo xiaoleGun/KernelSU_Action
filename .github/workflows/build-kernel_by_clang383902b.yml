@@ -161,12 +161,12 @@ jobs:
     - name: Setup Kali-Nethunter  
       if: env.ENABLE_NETHUNTER == 'true'
       run: |
-        cd $GITHUB_WORKSPACE/kernel_workspace/
-        git clone https://github.com/Biohazardousrom/Kali-defconfig-checker.git android-kernel
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        git clone https://github.com/Biohazardousrom/Kali-defconfig-checker.git kali
+        cd kali
         chmod +x *.sh
         chmod +x check-kernel-config
-        ./check-kernel-config arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        ./check-kernel-config $GITHUB_WORKSPACE/kernel_workspace/android-kernel/arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         
     - name: Setup ccache
       if: env.ENABLE_CCACHE == 'true'
