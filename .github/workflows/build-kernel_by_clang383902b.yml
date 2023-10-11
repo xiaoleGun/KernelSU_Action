@@ -163,7 +163,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/
         git clone https://github.com/Biohazardousrom/Kali-defconfig-checker.git android-kernel
-        cd android-kernel
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         chmod +x *.sh
         chmod +x check-kernel-config
         ./check-kernel-config arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
