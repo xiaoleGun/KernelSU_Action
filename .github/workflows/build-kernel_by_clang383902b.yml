@@ -166,7 +166,7 @@ jobs:
         cd kali
         chmod +x *.sh
         chmod +x check-kernel-config
-        ./check-kernel-config $GITHUB_WORKSPACE/kernel_workspace/android-kernel/arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        ./check-kernel-config $GITHUB_WORKSPACE/kernel_workspace/android-kernel/arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} -w
         
     - name: Setup ccache
       if: env.ENABLE_CCACHE == 'true'
