@@ -168,6 +168,7 @@ jobs:
         patch -p1 < kali-nethunter_patches/add-wifi-injection-4.14.patch
         #patch -p1 < kali-nethunter_patches/add-wifi-injection.patch
         patch -p1 < kali-nethunter_patches/fix-ath9k-naming-conflict.patch
+        sleep 8
         git clone https://github.com/Biohazardousrom/Kali-defconfig-checker.git kali
         cd kali
         chmod +x *.sh
