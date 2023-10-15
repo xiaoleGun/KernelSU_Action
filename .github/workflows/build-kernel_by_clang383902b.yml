@@ -164,10 +164,10 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         git clone https://github.com/tomxi1997/kali-nethunter_patches.git
-        patch -p1 < ./kali-nethunter_patches/add-rtl88xxau-5.6.4.2-drivers.patch
-        patch -p1 < ./kali-nethunter_patches/add-wifi-injection-4.14.patch
-        #patch -p1 < ./kali-nethunter_patches/add-wifi-injection.patch
-        patch -p1 < ./kali-nethunter_patches/fix-ath9k-naming-conflict.patch
+        patch -p1 < kali-nethunter_patches/add-rtl88xxau-5.6.4.2-drivers.patch
+        patch -p1 < kali-nethunter_patches/add-wifi-injection-4.14.patch
+        #patch -p1 < kali-nethunter_patches/add-wifi-injection.patch
+        patch -p1 < kali-nethunter_patches/fix-ath9k-naming-conflict.patch
         git clone https://github.com/Biohazardousrom/Kali-defconfig-checker.git kali
         cd kali
         chmod +x *.sh
