@@ -14,6 +14,7 @@ jobs:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
       CCACHE_HARDLINK: "true"
+      CI: "false"
     steps:
     - uses: actions/checkout@v3
     - name: Prepare Configuration
