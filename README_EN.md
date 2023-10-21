@@ -129,7 +129,7 @@ Customize the size and hash values of the KernelSU manager signature, if you don
 
 `KSU_EXPECTED_SIZE=0x033b`
 
-`KSU_EXPECTED_HASH=0xb0b91415`
+`KSU_EXPECTED_HASH=c371061b19d8c7d7d6133c6a9bafe198fa944e50c1b31c9d8daa8d7f1fc2d2d6`
 
 You can type `ksud debug get-sign <apk_path>` to get the size and hash of the apk signature.
 

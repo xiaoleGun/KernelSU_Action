@@ -128,7 +128,7 @@ Fork 本仓库到你的储存库然后按照以下内容编辑 config.env，之�
 
 `KSU_EXPECTED_SIZE=0x033b`
 
-`KSU_EXPECTED_HASH=0xb0b91415`
+`KSU_EXPECTED_HASH=c371061b19d8c7d7d6133c6a9bafe198fa944e50c1b31c9d8daa8d7f1fc2d2d6`
 
 可键入`ksud debug get-sign <apk_path>`获取apk签名的size值和hash值
 
