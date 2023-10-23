@@ -4,6 +4,9 @@ on:
     types: [started]
 
   workflow_dispatch:
+  schedule:
+      # Runs at 00:00, only on Monday, Wednesday, Saturday, and Sunday.. See http://crontab.guru
+      - cron: '0 0 * * 1,3,6,0'
 
 jobs:
   build:
