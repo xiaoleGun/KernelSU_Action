@@ -75,8 +75,8 @@ jobs:
     - name: Download Neutron-clang
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        mkdir -p "$HOME/toolchains/neutron-clang"
-        cd "$HOME/toolchains/neutron-clang"
+        mkdir -p "./toolchains/neutron-clang"
+        cd "./toolchains/neutron-clang"
         curl -LO "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman"
         chmod +x antman
 
