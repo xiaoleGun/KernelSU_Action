@@ -86,8 +86,10 @@ Enter the Clang version to use.
 | ------------- | ----------------------------- | ------------------ |
 | 12.0.5 | Android S | r416183b |
 | 14.0.6 | Android T | r450784d |
-| 14.0.7 | | r450784e |
-| 15.0.1 | | r458507 |
+| 14.0.7 |               | r450784e |
+| 15.0.1 |               | r458507 |
+| 17.0.1 |               | r487747b |
+| 17.0.2 | Android U | r487747c |
 
 Generally, Clang12 can compile most of the 4.14 and above kernels. My MI 6X 4.19 uses r450784d.
 
