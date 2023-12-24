@@ -143,6 +143,13 @@ Inject parameters into the defconfig automatically.
 
 This parameter provides support for the KernelSU module and system partition read and write. Inject parameters into Defconfig automatically.
 
+### Apply KernelSU Patch
+
+If kprobe does not work in your kernel (may be an upstream or kernel bug below 4.8), then you can try enabling this parameter
+
+Automatically modify kernel source code to support KernelSU  
+See also: [Intergrate for non-GKI devices](https://kernelsu.org/guide/how-to-integrate-for-non-gki.html#manually-modify-the-kernel-source)
+
 ### Enable ccache
 
 Enable the cache to make the second kernel compile faster. It can reduce the time by at least 2/5.
