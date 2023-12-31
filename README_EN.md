@@ -150,6 +150,22 @@ If kprobe does not work in your kernel (may be an upstream or kernel bug below 4
 Automatically modify kernel source code to support KernelSU  
 See also: [Intergrate for non-GKI devices](https://kernelsu.org/guide/how-to-integrate-for-non-gki.html#manually-modify-the-kernel-source)
 
+### AnyKernel3
+
+#### Use custom AnyKernel3
+
+Can use custom AnyKernel3
+
+#### Custom AnyKernel3 Source
+
+> If it is a git repository, please fill in the link containing `.git`
+
+Supports direct links to git repositories or zip compressed packages
+
+#### AnyKernel3 Branch
+
+Customize the warehouse branch of AnyKernel3
+
 ### Enable ccache
 
 Enable the cache to make the second kernel compile faster. It can reduce the time by at least 2/5.

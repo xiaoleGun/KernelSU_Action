@@ -159,6 +159,22 @@ LTO 用于优化内核，但有些时候会导致错误
 自动修改内核源码以支持 KernelSU  
 参见：[如何为非GKI设备集成 KernelSU](https://kernelsu.org/zh_CN/guide/how-to-integrate-for-non-gki.html#modify-kernel-source-code)
 
+### AnyKernel3
+
+#### Use custom AnyKernel3
+
+可以使用自定义的 AnyKernel3
+
+#### Custom AnyKernel3 Source
+
+> 如果是 git 仓库，请填写包含`.git`的链接
+
+支持 git 仓库或者 zip 压缩包的直链
+
+#### AnyKernel3 Branch
+
+自定义 AnyKernel3 的仓库分支
+
 ### Enable ccache
 
 启用缓存，让第二次编译内核更快，最少可以减少 2/5 的时间
