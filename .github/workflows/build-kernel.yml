@@ -191,7 +191,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         if [ ${{ env.APPLY_KSU_PATCH }} = true ]; then
-            bash $GITHUB_WORKSPACE/patches.sh
+            bash $GITHUB_WORKSPACE/patches/patches.sh
         fi
         if [ ${{ env.ADD_KPROBES_CONFIG }} = true -a ${{ env.APPLY_KSU_PATCH }} != true ]; then
             echo "CONFIG_MODULES=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
