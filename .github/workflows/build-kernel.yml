@@ -191,8 +191,8 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         if [ ${{ env.APPLY_KSU_PATCH }} = true ]; then
-            if git apply --check $GITHUB_WORKSPACE/ksu.patch; then
-                git apply $GITHUB_WORKSPACE/ksu.patch
+            if git apply --check $GITHUB_WORKSPACE/patches/ksu.patch; then
+                git apply $GITHUB_WORKSPACE/patches/ksu.patch
             else
                 echo "KernelSU patches cannot be applied"
                 exit 1
