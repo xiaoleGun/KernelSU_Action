@@ -2,7 +2,7 @@
 
 This action is for Non-GKI Kernels and has some universality and requires knowledge of the kernel and Android.
 
-## Warning:warning::warning::warning:
+## Warning :warning::warning::warning:
 
 If you are not the author of the Kernel, and are using someone else's labor to build KernelSU, please use it for personal use only and do not share it with others. This is to show respect for the author's labor achievements.
 

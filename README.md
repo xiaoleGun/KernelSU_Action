@@ -4,7 +4,7 @@
 
 用于 Non-GKI Kernel 的 Action，具有一定的普遍性，需要了解内核及 Android 的相关知识得以运用。
 
-## 警告:warning: :warning: :warning:
+## 警告 :warning: :warning: :warning:
 
 如果你不是内核作者，使用他人的劳动成果构建 KernelSU，请仅供自己使用，不要分享给别人，这是对原作者的劳动成果的尊重。
 
