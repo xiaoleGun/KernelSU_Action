@@ -21,7 +21,7 @@
 
 > 编译成功后，会在`Action`上传 AnyKernel3，已经关闭设备检查，请在 Twrp 刷入。
 
-Fork 本仓库到你的储存库然后按照以下内容编辑 config.env，之后点击`Star`或`Action`，在左侧可看见`Build Kernel`选项，点击选项会看见右边的大对话框的上面会有`Run workflows`点击它会启动构建。
+Fork 本仓库到你的储存库然后按照以下内容编辑 config.env，之后点击`星標`或`Action`，在左侧可看见`Build Kernel`选项，点击选项会看见右边的大对话框的上面会有`Run workflows`点击它会启动构建。
 
 ### Kernel Source
 
@@ -172,6 +172,10 @@ LTO 用于优化内核，但有些时候会导致错误
 故名思义，提供一个源系统可以正常开机的 boot 镜像，需要直链，最好是同一套内核源码以及与你当前系统同一套设备树从 aosp 构建出来的。ramdisk 里面包含分区表以及 init，没有的话构建出来的镜像会无法正常引导。
 
 例如: https://raw.githubusercontent.com/xiaoleGun/KernelSU_action/main/boot/boot-wayne-from-Miku-UI-latest.img
+
+### 測試(測試排版用的以後會改)
+Nothing官方內核gate地址
+https://github.com/NothingOSS/android_kernel_msm-5.4_nothing_sm7325
 
 ## 感谢
 
