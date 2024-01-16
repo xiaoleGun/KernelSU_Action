@@ -71,8 +71,8 @@ jobs:
         #patch glibc 
         wget -c https://ftp.gnu.org/gnu/glibc/glibc-2.38.tar.gz
         tar -xf glibc-2.38.tar.gz
-        cd glibc-2.38
-        ./configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin && make -j10 && make install
+        cd glibc-2.38 && mkdir build && cd build
+        ../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin && make -j10 && make install
 
   
 
