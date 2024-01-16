@@ -73,8 +73,8 @@ jobs:
     - name: Download arter97_gcc-11.1
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        git clone https://github.com/arter97/arm32-gcc.git gcc-32 --depth=1
-        git clone https://github.com/arter97/arm64-gcc.git gcc-64 --depth=1
+        git clone https://github.com/tomxi1997/arter97-arm32-gcc-11.1.git gcc-32 
+        git clone https://github.com/tomxi1997/arter97-arm64-gcc-11.1.git gcc-64 
 
     - name: Download mkbootimg tools
       if: env.BUILD_BOOT_IMG == 'true'
