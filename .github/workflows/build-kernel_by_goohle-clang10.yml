@@ -82,7 +82,7 @@ jobs:
         wget -O gcc64.tar.xz https://kali.download/nethunter-images/toolchains/google_aarch64-4.9.tar.xz
         tar -C gcc64/ -xf gcc64.tar.xz 
         wget -O gcc32.tar.xz https://kali.download/nethunter-images/toolchains/google_armhf-4.9.tar.xz
-        tar -C gcc32/ -xf gcc32.tar.xz -xf 
+        tar -C gcc32/ -xf gcc32.tar.xz 
         
 
     - name: Download mkbootimg tools
