@@ -198,3 +198,4 @@ LTO 用于优化内核，但有些时候会导致错误
 - [HDTC](https://gitlab.com/HDTC/sdclang)
 - [Neutron-Toolchains](https://github.com/Neutron-Toolchains)
 - [kali](https://kali.download/nethunter-images/toolchains/)
+- [Mandi-Sa](https://github.com/Mandi-Sa/clang/)
