@@ -197,4 +197,4 @@ LTO 用于优化内核，但有些时候会导致错误
 - [mvaisakh](https://github.com/mvaisakh/gcc-build)
 - [HDTC](https://gitlab.com/HDTC/sdclang)
 - [Neutron-Toolchains](https://github.com/Neutron-Toolchains)
-- 
+- [kali](https://kali.download/nethunter-images/toolchains/)
