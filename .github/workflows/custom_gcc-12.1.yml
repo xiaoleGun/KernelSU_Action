@@ -74,7 +74,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone https://github.com/tomxi1997/gcc-arm64-12.1.git gcc64
-        git clone https://github.com/tomxi1997/gcc-arm32-12.1.git gcc32
+        git clone https://github.com/tomxi1997/gcc-arm-12.1.git gcc32
 
     - name: Download mkbootimg tools
       if: env.BUILD_BOOT_IMG == 'true'
