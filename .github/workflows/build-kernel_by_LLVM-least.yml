@@ -130,9 +130,8 @@ jobs:
              wget -O binutils239.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.39.tar.xz
              tar -C binutils/ -xf binutils239.tar.xz
         fi
-  
-
-        if [ ${{ env.ELECTRON_BINUTILS_VERSION }} = 2.38 ]; then
+        
+         if [ ${{ env.ELECTRON_BINUTILS_VERSION }} = 2.38 ]; then
              wget -O binutils238.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.38.tar.xz
              tar -C binutils/ -xf binutils238.tar.xz
         fi
