@@ -138,12 +138,16 @@ jobs:
         fi
 
 
-        if [ ${{ env.ELECTRON_BINUTILS_VERSION }} = 2.36 ]; then
-             wget -O binutils236.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.36.1.tar.xz
-             tar -C binutils/ -xf binutils236.tar.xz
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION }} = 2.36.1 ]; then
+             wget -O binutils2361.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.36.1.tar.xz
+             tar -C binutils/ -xf binutils2361.tar.xz
         fi
          
-
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION }} = 2.36 ]; then
+             wget -O binutils236.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.36.tar.xz
+             tar -C binutils/ -xf binutils236.tar.xz
+        fi
+        
         if [ ${{ env.ELECTRON_BINUTILS_VERSION }} = 2.35 ]; then
              wget -O binutils235.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.35.tar.xz
              tar -C binutils/ -xf binutils235.tar.xz 
