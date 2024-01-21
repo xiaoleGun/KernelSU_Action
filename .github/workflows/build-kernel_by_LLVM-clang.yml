@@ -56,7 +56,7 @@ jobs:
         echo "ENABLE_LXC=$(cat $CONFIG_ENV | grep -w "ENABLE_LXC" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "TCLANG_BRANCH=$(cat $CONFIG_ENV | grep -w "TCLANG_BRANCH" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
         echo "LLVM_CLANG_VERSION=$(cat $CONFIG_ENV | grep -w "LLVM_CLANG_VERSION" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
-
+        echo "ELECTRON_BINUTILS_VERSION1=$(cat $CONFIG_ENV | grep -w "ELECTRON_BINUTILS_VERSION1" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
 
     - name: Set swap to 10G
       uses: pierotofy/set-swap-space@master
@@ -75,7 +75,7 @@ jobs:
     - name: Download LLVM-clang
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        mkdir llvm-clang
+        mkdir llvm-clang && mkdir binutils 
         if [ ${{ env.LLVM_CLANG_VERSION }} = 16.0.0 ]; then
              wget -O clang16.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
              tar -C llvm-clang/ -xf clang16.tar.xz
@@ -131,7 +131,53 @@ jobs:
              tar -C llvm-clang/ -xf clang801.tar.xz
         fi
               
-     
+
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.41 ]; then
+             wget -O binutils241.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.41.tar.xz
+             tar -C binutils/ -xf binutils241.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.40 ]; then  
+             wget -O binutils240.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.40.tar.xz
+             tar -C binutils/ -xf binutils240.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.39 ]; then
+              wget -O binutils239.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.39.tar.xz
+              tar -C binutils/ -xf binutils239.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.38 ]; then
+              wget -O binutils238.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.38.tar.xz
+              tar -C binutils/ -xf binutils238.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.37 ]; then
+             wget -O binutils237.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.37.tar.xz
+             tar -C binutils/ -xf binutils237.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.36.1 ]; then
+              wget -O binutils2361.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.36.1.tar.xz
+              tar -C binutils/ -xf binutils2361.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.36 ]; then
+              wget -O binutils236.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.36.tar.xz
+              tar -C binutils/ -xf binutils236.tar.xz
+        fi
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.35 ]; then
+             wget -O binutils235.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.35.tar.xz
+             tar -C binutils/ -xf binutils235.tar.xz 
+        fi
+        
+
+         
+
+        
+             
 
  
     - name: Download mkbootimg tools
@@ -223,7 +269,7 @@ jobs:
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        export PATH=$GITHUB_WORKSPACE/kernel_workspace/llvm-clang/bin:$PATH
+        export PATH=$GITHUB_WORKSPACE/kernel_workspace/llvm-clang/bin:$GITHUB_WORKSPACE/kernel_workspace/binutils/bin:$PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         if [ ! -z ${{ env.KSU_EXPECTED_SIZE }} ] && [ ! -z ${{ env.KSU_EXPECTED_HASH }} ]; then
