@@ -76,41 +76,64 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir llvm-clang
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 16 ]; then
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 16.0.0 ]; then
              wget -O clang16.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
              tar -C llvm-clang/ -xf clang16.tar.xz
         fi
         
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 15 ]; then
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 15.0.6 ]; then
              wget -O clang15.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz
              tar -C llvm-clang/ -xf clang15.tar.xz
         fi
 
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 14 ]; then
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 14.0.0 ]; then
              wget -O clang14.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
              tar -C llvm-clang/ -xf clang14.tar.xz
         fi
 
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 13 ]; then                                               
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 13.0.0 ]; then                                               
              wget -O clang13.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.0/clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
              tar -C llvm-clang/ -xf clang13.tar.xz 
         fi
 
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 12 ]; then
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 12.0.0 ]; then
              wget -O clang12.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
              tar -C llvm-clang/ -xf clang12.tar.xz
         fi
+
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 11.1.0 ]; then
+             wget -O clang111.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-20.10.tar.xz
+             tar -C llvm-clang/ -xf clang111.tar.xz
+        fi
         
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 11 ]; then
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 11.0.0 ]; then
              wget -O clang11.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
              tar -C llvm-clang/ -xf clang11.tar.xz
         fi
 
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 10 ]; then
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 10.0.0 ]; then
              wget -O clang10.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
              tar -C llvm-clang/ -xf clang10.tar.xz
         fi
 
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 10.0.1 ]; then
+             wget -O clang101.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/clang+llvm-10.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+             tar -C llvm-clang/ -xf clang101.tar.xz
+        fi
+        
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 9.0.1 ]; then
+             wget -O clang901.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang+llvm-9.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+             tar -C llvm-clang/ -xf clang901.tar.xz
+        fi
+
+        if [ ${{ env.LLVM_CLANG_VERSION }} = 8.0.1 ]; then
+             wget -O clang801.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-8.0.1/clang+llvm-8.0.1-x86_64-linux-gnu-ubuntu-14.04.tar.xz
+             tar -C llvm-clang/ -xf clang801.tar.xz
+        fi
+              
+     
+
+ 
     - name: Download mkbootimg tools
       if: env.BUILD_BOOT_IMG == 'true'
       run: |
