@@ -1,7 +1,5 @@
 name: Build Kernel
 on:
-  watch:
-    types: [started]
 
   workflow_dispatch:
 
@@ -9,7 +7,6 @@ jobs:
   build:
     name: Build Kernel by ${{ github.actor }}
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
