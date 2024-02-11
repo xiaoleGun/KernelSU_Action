@@ -159,6 +159,12 @@ LTO 用于优化内核，但有些时候会导致错误
 自动修改内核源码以支持 KernelSU  
 参见：[如何为非GKI设备集成 KernelSU](https://kernelsu.org/zh_CN/guide/how-to-integrate-for-non-gki.html#modify-kernel-source-code)
 
+### Remove unused packages
+
+清理无用的包，以获得更大的磁盘空间
+
+如果你需要这些包，请关闭此项
+
 ### AnyKernel3
 
 #### Use custom AnyKernel3
