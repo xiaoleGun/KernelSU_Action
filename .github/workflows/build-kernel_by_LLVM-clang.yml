@@ -168,11 +168,47 @@ jobs:
               tar -C binutils/ -xf binutils236.tar.xz
         fi
 
+        
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.35.2 ]; then
+             wget -O binutils2352.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/V6/electron-binutils-2.35.2.tar.xz
+             tar -C binutils/ -xf binutils2352.tar.xz 
+        fi
+
+        
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.35.1 ]; then
+             wget -O binutils2351.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/V6/electron-binutils-2.35.1.tar.xz
+             tar -C binutils/ -xf binutils2351.tar.xz 
+        fi
+
+
         if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.35 ]; then
              wget -O binutils235.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/v5/electron-binutils-2.35.tar.xz
              tar -C binutils/ -xf binutils235.tar.xz 
         fi
+
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.34 ]; then
+             wget -O binutils234.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/V6/electron-binutils-2.34.tar.xz
+             tar -C binutils/ -xf binutils234.tar.xz 
+        fi
+
+
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.33.1 ]; then
+             wget -O binutils2331.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/V6/electron-binutils-2.33.1.tar.xz
+             tar -C binutils/ -xf binutils2331.tar.xz 
+        fi
+
         
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.32 ]; then
+             wget -O binutils232.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/V6/electron-binutils-2.32.tar.xz
+             tar -C binutils/ -xf binutils232.tar.xz 
+        fi
+
+        
+        if [ ${{ env.ELECTRON_BINUTILS_VERSION1 }} = 2.31 ]; then
+             wget -O binutils231.tar.xz https://github.com/tomxi1997/Electron-binutils-build-for-arm64-x86_64/releases/download/V6/electron-binutils-2.31.tar.xz
+             tar -C binutils/ -xf binutils231.tar.xz 
+        fi
 
          
 
