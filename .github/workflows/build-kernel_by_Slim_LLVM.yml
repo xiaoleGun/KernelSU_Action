@@ -62,7 +62,6 @@ jobs:
       uses: pierotofy/set-swap-space@master
       with:
         swap-size-gb: 10
-
     - name: Setup build kernel environment
       run: |
         echo "BUILD_TIME=$(TZ=Asia/Shanghai date "+%Y%m%d%H%M")" >> $GITHUB_ENV
@@ -71,18 +70,12 @@ jobs:
         #sudo apt-get install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler python2 python3
         sudo apt install -y lld llvm gcc binutils-arm-linux-gnueabi binutils-aarch64-linux-gnu curl wget vim git ccache automake flex lzop bison gperf build-essential zip zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler kmod python3 python3-pip
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
-                mkdir -p $GITHUB_WORKSPACE/kernel_workspace
-
+              
     - name: Download Slim LLVM and electron-binutils
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir llvm-clang && mkdir binutils 
-        if [ ${{ env.LLVM_CLANG_VERSION }} = 16.0.0 ]; then
-             wget -O clang16.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-             tar -C llvm-clang/ -xf clang16.tar.xz
-        fi
-        
-       if [ ${{ env.SLIM_LLVM_CLANG_VERSION }} = 17.0.6 ]; then     
+        if [ ${{ env.SLIM_LLVM_CLANG_VERSION }} = 17.0.6 ]; then     
              wget -O clang17.tar.xz https://github.com/tomxi1997/Toolchain-for-amd64-hosts/releases/download/v1/llvm-17.0.6-x86_64.tar.xz
              tar -C llvm-clang/ -xf clang17.tar.xz
         fi
