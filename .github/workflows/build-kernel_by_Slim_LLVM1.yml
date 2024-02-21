@@ -77,7 +77,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir llvm-clang && mkdir binutils 
         if [ ${{ env.SLIM_LLVM_CLANG_VERSION }} = 17.0.6 ]; then
-             wget -O clang17.tar.xz wget -O clang17.tar.xz https://github.com/tomxi1997/Toolchain-for-amd64-hosts/releases/download/v1/llvm-17.0.6-x86_64.tar.xz 
+             wget -O clang17.tar.xz https://github.com/tomxi1997/Toolchain-for-amd64-hosts/releases/download/v1/llvm-17.0.6-x86_64.tar.xz 
              tar -C llvm-clang/ -xf clang17.tar.xz
         fi
 
