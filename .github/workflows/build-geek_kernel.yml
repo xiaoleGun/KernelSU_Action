@@ -141,6 +141,13 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export KD=${{ env.KERNEL_CONFIG }}
         export KV=${{ env.KERNEL_VERSION }}
+        export KV1=$(make kernelversion)
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        echo "        "
+        echo "-------------------此内核源码的内核版本为:$KV1--------------------------------"
+        echo "        "
+        echo "-------------------当前你设置的内核配置（KERNEL_VERSION）KV值为:$KV----------------------"
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel.git kali-nethunter-kernel
         git clone https://github.com/tomxi1997/kali-nethunter_patches.git patch
         cp patch/Kali-Nethunter-plus-OPEN-CONFIG.sh .
