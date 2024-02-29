@@ -135,7 +135,7 @@ jobs:
         if [ ${{ env.DISABLE_CC_WERROR }} = true ]; then
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
-
+      
     - name: Setup Kali-Nethunter
       if: env.ENABLE_KALI == 'true'
       run: |
@@ -145,8 +145,8 @@ jobs:
         git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel.git kali-nethunter-kernel
         wget https://github.com/tomxi1997/kali-nethunter_patches/blob/main/Kali-Nethunter-plus-OPEN-CONFIG.sh
         wget https://github.com/tomxi1997/kali-nethunter_patches/blob/main/Kali-kernel-Patch.sh
-       chmod +x *.sh
-       ./Kali-kernel-Patch.sh
+        chmod +x *.sh
+        ./Kali-kernel-Patch.sh
         
         
     - name: Setup Wireguard
