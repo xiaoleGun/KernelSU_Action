@@ -142,8 +142,9 @@ jobs:
         export KD=${{ env.KERNEL_CONFIG }}
         export KV=${{ env.KERNEL_VERSION }}
         git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel.git kali-nethunter-kernel
-        wget https://github.com/tomxi1997/kali-nethunter_patches/blob/main/Kali-Nethunter-plus-OPEN-CONFIG.sh
-        wget https://github.com/tomxi1997/kali-nethunter_patches/blob/main/Kali-kernel-Patch.sh
+        git clone https://github.com/tomxi1997/kali-nethunter_patches.git patch
+        cp patch/Kali-Nethunter-plus-OPEN-CONFIG.sh .
+        cp patch/Kali-kernel-Patch.sh .
         chmod +x *.sh
         ./Kali-kernel-Patch.sh
         
