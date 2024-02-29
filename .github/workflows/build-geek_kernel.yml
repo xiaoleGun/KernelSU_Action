@@ -136,7 +136,7 @@ jobs:
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
     - name: Setup Kali-Nethunter
-      if: env.ENABLE_KALI == 'true'
+      #if: env.ENABLE_KALI == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export KD=${{ env.KERNEL_CONFIG }}
@@ -157,7 +157,7 @@ jobs:
         
         
     - name: Setup Wireguard
-      if: env.ENABLE_WIREGUARD == 'true' 
+      #if: env.ENABLE_WIREGUARD == 'true' 
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         echo "CONFIG_WIREGUARD=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
@@ -202,7 +202,7 @@ jobs:
         fi
        
     - name: Setup ccache
-      if: env.ENABLE_CCACHE == 'true'
+      #if: env.ENABLE_CCACHE == 'true'
       uses: hendrikmuhs/ccache-action@v1.2
       with:
         key: build-kernel-${{ env.DEVICE }}${{ env.UPLOADNAME }}
@@ -213,7 +213,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         #export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/clang-${{ env.CLANG_VERSION }}/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin:$PATH
-        sudo ln -sf $GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/aarch64-linux-android-as /usr/bin/as
+        #sudo ln -sf $GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/aarch64-linux-android-as /usr/bin/as
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         if [ ! -z ${{ env.KSU_EXPECTED_SIZE }} ] && [ ! -z ${{ env.KSU_EXPECTED_HASH }} ]; then
