@@ -146,7 +146,7 @@ jobs:
         echo "        "
         echo "-------------------此内核源码的内核版本为:$KV1--------------------------------"
         echo "        "
-        echo "-------------------当前你设置的内核配置（KERNEL_VERSION）KV值为:$KV----------------------"
+        echo "----------当前你设置的内核版本（KERNEL_VERSION）KV值为:$KV----------------------"
         echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel.git kali-nethunter-kernel
         git clone https://github.com/tomxi1997/kali-nethunter_patches.git patch
