@@ -154,7 +154,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         echo "CONFIG_WIREGUARD=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
-        git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/zx2c4/wireguard-linux wireguard
+        git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/zx2c4/wireguard-linux wireguard --depth=1
         if [ -f $GITHUB_WORKSPACE/kernel_workspace/android-kernel/net/wireguard ]; then
             mv net/wireguard net/wireguard-bak
             mv wireguard ./net/
