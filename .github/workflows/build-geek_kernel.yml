@@ -158,7 +158,7 @@ jobs:
         
         
     - name: Setup Wireguard
-      #if: env.ENABLE_WIREGUARD == 'true' 
+      if: env.ENABLE_WIREGUARD == 'true' 
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         echo "CONFIG_WIREGUARD=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
