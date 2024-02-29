@@ -212,6 +212,8 @@ jobs:
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        export ARCH=arm64
+        export SUBARCH=arm64
         #export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         #export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/clang-${{ env.CLANG_VERSION }}/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin:$PATH
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/google_clang/clang-r383902b-11.0.2/bin:$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/google_gcc/aarch64-linux-android-4.9/bin:$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/google_gcc/arm-linux-androideabi-4.9/bin:$PATH
