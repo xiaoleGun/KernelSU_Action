@@ -136,7 +136,6 @@ jobs:
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
 
-    
     - name: Setup Kali-Nethunter
       if: env.ENABLE_KALI == 'true'
       run: |
@@ -154,8 +153,7 @@ jobs:
       if: env.ENABLE_WIREGUARD == 'true' 
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        echo "CONFIG_WIREGUARD=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CON
-FIG }}
+        echo "CONFIG_WIREGUARD=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/zx2c4/wireguard-linux wireguard
         if [ -f $GITHUB_WORKSPACE/kernel_workspace/android-kernel/net/wireguard ]; then
             mv net/wireguard net/wireguard-bak
