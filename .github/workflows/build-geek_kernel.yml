@@ -135,7 +135,6 @@ jobs:
         if [ ${{ env.DISABLE_CC_WERROR }} = true ]; then
             echo "CONFIG_CC_WERROR=n" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
-      
     - name: Setup Kali-Nethunter
       if: env.ENABLE_KALI == 'true'
       run: |
