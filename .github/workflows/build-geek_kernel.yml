@@ -213,7 +213,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         #export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/clang-${{ env.CLANG_VERSION }}/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin:$PATH
-        ln -sf $GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/aarch64-linux-android-as /usr/bin/as
+        sudo ln -sf $GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/aarch64-linux-android-as /usr/bin/as
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         if [ ! -z ${{ env.KSU_EXPECTED_SIZE }} ] && [ ! -z ${{ env.KSU_EXPECTED_HASH }} ]; then
