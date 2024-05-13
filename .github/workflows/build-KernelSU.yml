@@ -1,4 +1,4 @@
-name: Build OnePlus11 C14 KernelSU
+name: Build WSA Miracle r3 KernelSU
 on:
   workflow_dispatch:
 
@@ -24,7 +24,7 @@ jobs:
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
     - name: Download kernel source
       run: |
-        git clone https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8550 -b oneplus/sm8550_u_14.0.0_oneplus11 kernel_workspace --depth=1
+        git clone https://github.com/Project-Miracle/android_kernel_microsoft_wsa/tree/A13/kernel_workspace --depth=1
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
         git clone https://github.com/OnePlusOSS/android_kernel_oneplus_sm8550 -b oneplus/sm8550_u_14.0.0_oneplus11 common --depth=1
@@ -80,5 +80,5 @@ jobs:
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
       with:
-        name: OnePlus11 C14-AnyKernel3${{ env.UPLOADNAME }}-${{ env.BUILD_TIME }}
+        name: WSA Miracle r3 KernelSU${{ env.UPLOADNAME }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3/*
