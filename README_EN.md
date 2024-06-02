@@ -119,10 +119,12 @@ Enable KernelSU for troubleshooting kernel failures or compiling the kernel sepa
 
 #### KernelSU Branch or Tag
 
+[KernelSU 1.0 no longer supports non-GKI kernels](https://github.com/tiann/KernelSU/issues/1705). The last supported version is [v0.9.5](https://github.com/tiann/KernelSU/tree/v0.9.5), please make sure to use the correct branch.
+
 Select the branch or tag of KernelSU:
 
-- main branch (development version): `KERNELSU_TAG=main`
-- Latest TAG (stable version): `KERNELSU_TAG=`
+- ~~main branch (development version): `KERNELSU_TAG=main`~~
+- Latest TAG (stable version): `KERNELSU_TAG=v0.9.5`
 - Specify the TAG (such as `v0.5.2`): `KERNELSU_TAG=v0.5.2`
 
 #### KernelSU Manager signature size and hash
