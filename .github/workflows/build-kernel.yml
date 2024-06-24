@@ -1,6 +1,5 @@
 name: Build Kernel
 on:
-
   workflow_dispatch:
 
 jobs:
@@ -101,7 +100,7 @@ jobs:
                 tar -C clang-aosp/ -zxvf clang.tar.gz
             else
                 git clone ${{ env.CUSTOM_CLANG_SOURCE }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
-            fi        
+            fi
         else
             wget -O clang.zip ${{ env.CUSTOM_CLANG_SOURCE }}
             mkdir clang-aosp
@@ -133,7 +132,7 @@ jobs:
         if [ ${{ env.USE_CUSTOM_GCC_64 }} = true ]; then
           if [[ ${{ env.CUSTOM_GCC_64_SOURCE }} =~ git ]]; then
               if [[ ${{ env.CUSTOM_GCC_64_SOURCE }} == *'.tar.gz' ]]; then
-                wget -O gcc-64.tar.gz ${{ env.CUSTOM_CLANG_SOURCE }}
+                wget -O gcc-64.tar.gz ${{ env.CUSTOM_GCC_64_SOURCE }}
                 mkdir gcc-64
                 tar -C gcc-64/ -zxvf gcc-64.tar.gz
               else
@@ -150,7 +149,7 @@ jobs:
         if [ ${{ env.USE_CUSTOM_GCC_32 }} = true ]; then
           if [[ ${{ env.CUSTOM_GCC_32_SOURCE }} =~ git ]]; then
               if [[ ${{ env.CUSTOM_GCC_32_SOURCE }} == *'.tar.gz' ]]; then
-                wget -O gcc-32.tar.gz ${{ env.CUSTOM_CLANG_SOURCE }}
+                wget -O gcc-32.tar.gz ${{ env.CUSTOM_GCC_32_SOURCE }}
                 mkdir gcc-32
                 tar -C gcc-32/ -zxvf gcc-32.tar.gz
               else
@@ -189,7 +188,7 @@ jobs:
             echo "FORMAT_MKBOOTING=$(echo `tools/unpack_bootimg.py --boot_img=boot-source.img --format mkbootimg`)" >> $GITHUB_ENV
             echo "HAVE_SOURCE_BOOT_IMAGE=true" >> $GITHUB_ENV
         fi
-  
+
     - name: Setup KernelSU
       if: env.ENABLE_KERNELSU == 'true'
       run: |
@@ -270,7 +269,7 @@ jobs:
                exit 1
            fi
        fi
-  
+
     - name: Make Anykernel3
       if: env.CHECK_FILE_IS_OK == 'true' && env.USE_CUSTOM_ANYKERNEL3 != 'true'
       run: |
@@ -321,7 +320,7 @@ jobs:
             echo "Boot image is empty"
             exit 1
         fi
-    
+
     - name: Upload ${{ env.KERNEL_IMAGE_NAME }}
       if: env.CHECK_FILE_IS_OK == 'true'
       uses: actions/upload-artifact@v4
