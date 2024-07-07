@@ -29,9 +29,6 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
         git clone https://github.com/OnePlusOSS/android_kernel_oneplus_sm8550 -b oneplus/sm8550_u_14.0.0_ace3 common --depth=1
-        cd common/scripts
-        sed -i 's/ -dirty//g' setlocalversion
-        sed -i 's/ -g / -android13-8-g /g' setlocalversion
 
     - name: Download Clang-aosp
       run: |
@@ -39,12 +36,6 @@ jobs:
         mkdir clang-aosp
         wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master-kernel-build-2022/clang-r450784e.tar.gz
         tar -C clang-aosp/ -zxvf clang-r450784e.tar.gz
-
-    - name: Setup KernelSU
-      run: |
-        cd $GITHUB_WORKSPACE/kernel_workspace/kernel_platform/common
-        rm -rf KernelSU drivers/kernelsu
-        curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main
 
     - name: Build kernel
       run: |
