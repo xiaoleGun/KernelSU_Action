@@ -29,7 +29,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
         git clone https://github.com/PoXiao777/android_kernel_oneplus_sm8550 common --depth=1
-        wget https://raw.githubusercontent.com/PoXiao777/Kernel-Builder_Action/main/patches/Kali-Nethunter-full-OPEN-CONFIG.sh && chmod777 Kali-Nethunter-full-OPEN-CONFIG.sh
+        wget https://raw.githubusercontent.com/PoXiao777/Kernel-Builder_Action/main/patches/Kali-Nethunter-full-OPEN-CONFIG.sh && chmod 777 Kali-Nethunter-full-OPEN-CONFIG.sh
         ./Kali-Nethunter-full-OPEN-CONFIG.sh common/arch/arm64/configs/gki_defconfig -w
 
     - name: Download Clang-aosp
