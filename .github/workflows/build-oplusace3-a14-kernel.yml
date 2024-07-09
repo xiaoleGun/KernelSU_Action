@@ -75,18 +75,12 @@ jobs:
         name: Image
         path: kernel_workspace/out/arch/arm64/boot/Image
 
-    - name: Upload Modules-1
+    - name: Upload Modules
       uses: actions/upload-artifact@v4
       with:
-        name: Kmd1-${{ env.BUILD_TIME }}.tar.gz
-        path: kernel_workspace/kernel_platform/common/lib/modules/5.15.123-Pro+/*
-
-    - name: Upload Modules-2
-      uses: actions/upload-artifact@v4
-      with:
-        name: Kmd2-${{ env.BUILD_TIME }}.tar.gz
+        name: Kmd-${{ env.BUILD_TIME }}.tar.gz
         path: kernel_workspace/out/lib/modules/5.15.123-Pro+/*
-        
+
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
       with:
