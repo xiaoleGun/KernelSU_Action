@@ -61,7 +61,9 @@ jobs:
         scripts/config --file ${OUT_DIR}/.config -e LTO_CLANG -d LTO_NONE -e LTO_CLANG_THIN -d LTO_CLANG_FULL -e THINLTO
         THREAD=$(($(nproc --all) - 1))
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}"
-
+        make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}" INSTALL_MOD_PATH="." INSTALL_MOD_STRIP=1 modules_install
+        tar -zcvf $GITHUB_WORKSPACE/kernel_workspace/out/lib/modules/ $GITHUB_WORKSPACE/kernel_workspace/out/kmd.tar.gz
+        
     - name: Make Anykernel3
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -73,6 +75,12 @@ jobs:
       with:
         name: Image
         path: kernel_workspace/out/arch/arm64/boot/Image
+
+    - name: Upload Modules
+      uses: actions/upload-artifact@v4
+      with:
+        name: Kmd-{{ env.BUILD_TIME }}.tar.gz
+        path: $GITHUB_WORKSPACE/kernel_workspace/out/kmd.tar.gz
 
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
