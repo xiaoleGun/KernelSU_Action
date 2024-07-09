@@ -62,7 +62,7 @@ jobs:
         THREAD=$(($(nproc --all) - 1))
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}"
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}" INSTALL_MOD_PATH="." INSTALL_MOD_STRIP=1 modules_install
-        tar -zcvf kmd.tar.xz out/lib/modules/5.15.123-Pro+/kernel/
+        tar -zcvf kmd.tar.xz $GITHUB_WORKSPACE/kernel_workspace/out/lib/modules/5.15.123-Pro+/kernel/
         
     - name: Make Anykernel3
       run: |
