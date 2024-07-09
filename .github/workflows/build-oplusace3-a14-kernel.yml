@@ -80,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Kmd-${{ env.BUILD_TIME }}.tar.xz
-        path: kernel_workspace/kmd.tar.xz
+        path: kernel_workspace/kernel_platform/common/kmd.tar.xz
         
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
