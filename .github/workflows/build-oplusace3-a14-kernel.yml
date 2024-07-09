@@ -62,7 +62,6 @@ jobs:
         THREAD=$(($(nproc --all) - 1))
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}"
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}" INSTALL_MOD_PATH="." INSTALL_MOD_STRIP=1 modules_install
-        tar -zcvf kmd.tar.gz $GITHUB_WORKSPACE/kernel_workspace/out/lib/modules/5.15.123-Pro+/kernel/net/wireless/
         
     - name: Make Anykernel3
       run: |
@@ -76,11 +75,17 @@ jobs:
         name: Image
         path: kernel_workspace/out/arch/arm64/boot/Image
 
-    - name: Upload Modules
+    - name: Upload Modules-1
       uses: actions/upload-artifact@v4
       with:
-        name: Kmd-${{ env.BUILD_TIME }}.tar.gz
-        path: kernel_workspace/kernel_platform/common/kmd.tar.gz
+        name: Kmd1-${{ env.BUILD_TIME }}.tar.gz
+        path: kernel_workspace/kernel_platform/common/lib/modules/5.15.123-Pro+/*
+
+    - name: Upload Modules-2
+      uses: actions/upload-artifact@v4
+      with:
+        name: Kmd2-${{ env.BUILD_TIME }}.tar.gz
+        path: kernel_workspace/out/lib/modules/5.15.123-Pro+/*
         
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
