@@ -79,7 +79,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Kmd-${{ env.BUILD_TIME }}.tar.gz
-        path: kernel_workspace/out/lib/modules/5.15.123-Pro+/*
+        path: kernel_workspace/out/lib/modules/*
 
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
