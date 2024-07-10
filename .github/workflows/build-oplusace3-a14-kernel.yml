@@ -62,6 +62,8 @@ jobs:
         THREAD=$(($(nproc --all) - 1))
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}"
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}" INSTALL_MOD_PATH="." INSTALL_MOD_STRIP=1 modules_install
+        rm -rf kernel_workspace/out/lib/modules/5.15.123-Pro+/source/
+        rm -rf kernel_workspace/out/lib/modules/5.15.123-Pro+/build/
         
     - name: Make Anykernel3
       run: |
