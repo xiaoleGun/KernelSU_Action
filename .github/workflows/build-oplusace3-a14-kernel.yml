@@ -30,9 +30,7 @@ jobs:
         cd kernel_platform
         git clone https://github.com/PoXiao777/android_kernel_oneplus_sm8550 common --depth=1
         wget https://github.com/PoXiao777/Kernel-Builder_Action/raw/main/patches/pro_defconfig
-        wget https://raw.githubusercontent.com/PoXiao777/Kernel-Builder_Action/main/patches/kalama_GKI.config
         mv pro_defconfig common/arch/arm64/configs/gki_defconfig
-        mv kalama_GKI.config common/arch/arm64/configs/vendor/kalama_GKI.config
         
     - name: Download Clang-aosp
       run: |
