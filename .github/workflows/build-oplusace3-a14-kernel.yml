@@ -44,7 +44,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         KERNEL_DIR=./kernel_platform/common
         OUT_DIR=../../out
-        DEFCONFIG="gki_defconfig"
+        DEFCONFIG="gki_defconfig vendor/kalama_GKI.config"
         LTO=thin
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export CLANG_TRIPLE=aarch64-linux-gnu-
