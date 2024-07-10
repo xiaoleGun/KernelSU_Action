@@ -60,7 +60,7 @@ jobs:
         make -j"$THREAD" "${TOOL_ARGS[@]}" O=${OUT_DIR}  ${DEFCONFIG}
         scripts/config --file ${OUT_DIR}/.config -e LTO_CLANG -d LTO_NONE -e LTO_CLANG_THIN -d LTO_CLANG_FULL -e THINLTO
         THREAD=$(($(nproc --all) - 1))
-        make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}"
+        make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}" CONFIG_CFG80211=y
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}" INSTALL_MOD_PATH="." INSTALL_MOD_STRIP=1 modules_install
         
         rm -rf $GITHUB_WORKSPACE/kernel_workspace/out/lib/modules/5.15.123-Pro+/build
