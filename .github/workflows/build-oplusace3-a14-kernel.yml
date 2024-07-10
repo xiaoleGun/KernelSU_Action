@@ -81,7 +81,7 @@ jobs:
     - name: Upload Modules
       uses: actions/upload-artifact@v4
       with:
-        name: Kmd-${{ env.BUILD_TIME }}.tar.gz
+        name: Kmd-${{ env.BUILD_TIME }}
         path: kernel_workspace/out/lib/modules/*
 
     - name: Upload AnyKernel3
