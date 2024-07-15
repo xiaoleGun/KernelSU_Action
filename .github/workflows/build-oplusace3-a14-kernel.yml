@@ -56,6 +56,8 @@ jobs:
         LD=ld.lld AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf OBJSIZE=llvm-size STRIP=llvm-strip && TOOL_ARGS+=("LD=${LD}" "AR=${AR}" "NM=${NM}" "OBJCOPY=${OBJCOPY}" "OBJDUMP=${OBJDUMP}" "STRIP=${STRIP}")
         LLVM=1 LLVM_IAS=1 && TOOL_ARGS+=("LLVM=${LLVM}" "LLVM_IAS=${LLVM_IAS}")
         cd ${KERNEL_DIR}
+        wget https://github.com/PoXiao777/Kernel-Builder_Action/raw/main/patches/BBRPlus-5.15.patch
+        patch -p1 < BBRPlus-5.15.patch
         THREAD=14
         make -j"$THREAD" "${TOOL_ARGS[@]}" O=${OUT_DIR}  ${DEFCONFIG}
         scripts/config --file ${OUT_DIR}/.config -e LTO_CLANG -d LTO_NONE -e LTO_CLANG_THIN -d LTO_CLANG_FULL -e THINLTO
