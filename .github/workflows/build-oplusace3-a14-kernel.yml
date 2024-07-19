@@ -29,8 +29,8 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
         git clone https://github.com/PoXiao777/android_kernel_oneplus_sm8550 common --depth=1
-        wget https://github.com/PoXiao777/Kernel-Builder_Action/raw/main/patches/docker_defconfig
-        mv docker_defconfig common/arch/arm64/configs/gki_defconfig
+        wget https://github.com/PoXiao777/Kernel-Builder_Action/raw/main/patches/test_defconfig
+        mv test_defconfig common/arch/arm64/configs/gki_defconfig
         
     - name: Download Clang-aosp
       run: |
