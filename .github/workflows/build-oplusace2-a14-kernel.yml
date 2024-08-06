@@ -29,6 +29,8 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
         git clone https://github.com/OnePlusOSS/android_kernel_oneplus_sm8475/ -b oneplus/sm8475_u_14.0.0_oneplus_ace_2 common --depth=1
+        wget https://github.com/PoXiao777/Kernel-Builder_Action/raw/main/patches/taro.config
+        mv taro.config common/arch/arm64/configs/gki_defconfig
         
     - name: Download Clang-aosp
       run: |
@@ -42,7 +44,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         KERNEL_DIR=./kernel_platform/common
         OUT_DIR=../../out
-        DEFCONFIG="gki_defconfig waipio_GKI.config"
+        DEFCONFIG="gki_defconfig"
         LTO=thin
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export CLANG_TRIPLE=aarch64-linux-gnu-
