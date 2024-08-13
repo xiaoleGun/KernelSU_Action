@@ -36,6 +36,11 @@ jobs:
         wget https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/b669748458572622ed716407611633c5415da25c/clang-r416183b.tar.gz
         tar -C clang-aosp/ -zxvf clang-r416183b.tar.gz
 
+        cd $GITHUB_WORKSPACE/kernel_workspace
+        mkdir gcc-aosp
+        wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/heads/android-s-beta-5.tar.gz
+        tar -C gcc-aosp/ -zxvf aarch64-linux-android-4.9-refs_heads_android-s-beta-5.tar.gz
+
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -43,7 +48,8 @@ jobs:
         OUT_DIR=../../out
         DEFCONFIG="gki_defconfig vendor/waipio_GKI.config"
         LTO=thin
-        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
+        export PATH="$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH"
+        export CROSS_COMPILE=aarch64-linux-gnu-
         export CLANG_TRIPLE=aarch64-linux-gnu-
         export ARCH=arm64
         export SUBARCH=arm64
