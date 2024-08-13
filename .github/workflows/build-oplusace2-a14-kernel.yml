@@ -64,6 +64,7 @@ jobs:
         scripts/config --file ${OUT_DIR}/.config -e LTO_CLANG -d LTO_NONE -e LTO_CLANG_THIN -d LTO_CLANG_FULL -e THINLTO
         THREAD=$(($(nproc --all) - 1))
         echo "KBUILD_CFLAGS += -w" >> drivers/thermal/Makefile
+        echo "KBUILD_CFLAGS += -w" >> drivers/android/Makefile
         make -j"$THREAD" O=${OUT_DIR} "${TOOL_ARGS[@]}"
         
     - name: Make Anykernel3
