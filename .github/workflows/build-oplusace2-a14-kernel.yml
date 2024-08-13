@@ -39,7 +39,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir gcc-aosp
         wget https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/refs/heads/android-s-beta-5.tar.gz
-        tar -C gcc-aosp/ -zxvf aarch64-linux-android-4.9-refs_heads_android-s-beta-5.tar.gz
+        tar -C gcc-aosp/ -zxvf android-s-beta-5.tar.gz
 
     - name: Build kernel
       run: |
