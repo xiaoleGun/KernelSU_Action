@@ -1,4 +1,4 @@
-name: Build OnePlus Ace 3 A14 Kernel
+name: Build OnePlus Ace 3 Pro A14 Kernel
 on:
   workflow_dispatch:
 
