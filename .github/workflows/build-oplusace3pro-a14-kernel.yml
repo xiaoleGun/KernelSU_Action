@@ -29,8 +29,6 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
         git clone https://github.com/OnePlusOSS/android_kernel_oneplus_sm8650/ -b oneplus/sm8650_u_14.1.0_oneplus_ace3pro common --depth=1
-        wget https://raw.githubusercontent.com/PoXiao777/Kernel-Builder_Action/main/patches/opace3p.config
-        mv opace3p.config common/arch/arm64/
     - name: Download Clang-aosp
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
@@ -43,7 +41,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         KERNEL_DIR=./kernel_platform/common
         OUT_DIR=../../out
-        DEFCONFIG="opace3p.config"
+        DEFCONFIG="gki_defconfig vendor/pineapple_GKI.config"
         LTO=thin
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export CLANG_TRIPLE=aarch64-linux-gnu-
