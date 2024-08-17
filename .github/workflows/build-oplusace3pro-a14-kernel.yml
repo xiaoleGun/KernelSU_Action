@@ -76,5 +76,5 @@ jobs:
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
       with:
-        name: AK3-OPAce3-A14-${{ env.BUILD_TIME }}
+        name: AK3-OPAce3P-A14-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3/*
