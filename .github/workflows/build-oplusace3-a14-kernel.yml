@@ -39,6 +39,12 @@ jobs:
         wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master-kernel-build-2022/clang-r450784e.tar.gz
         tar -C clang-aosp/ -zxvf clang-r450784e.tar.gz
 
+    - name: Setup KernelSU-Next
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/kernel_platform/common
+        rm -rf KernelSU drivers/kernelsu
+        curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next
+
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
