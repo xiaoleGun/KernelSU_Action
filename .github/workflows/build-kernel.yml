@@ -9,7 +9,10 @@ on:
       config:
         description: "Config file to build (path, relative to the repo root)"
         required: false
-        default: "config.env"
+        # This branch is the Mi 8 baseline stage.  Keeping its profile as the
+        # dispatch default prevents an accidental build of the repository's
+        # generic config.env (which targets a different device).
+        default: "config/dipper-baseline.env"
         type: string
       # "config" on the options below means "use whatever the config file says".
       # It is the default so that running the form without touching anything
@@ -186,7 +189,44 @@ jobs:
           max-size: 2G
 
       - name: Build kernel
-        run: bash scripts/build.sh all
+        shell: bash
+        run: |
+          # Keep the web log readable.  The complete compiler output remains
+          # available as an artifact below when a deeper investigation is
+          # needed.
+          build_log="$RUNNER_TEMP/kernel-build.log"
+          if bash scripts/build.sh all >"$build_log" 2>&1; then
+            echo "Kernel build completed. Last 80 log lines:"
+            tail -n 80 "$build_log"
+            exit 0
+          else
+            status=$?
+            echo "::error::Kernel build failed. Showing the first error with context; download the kernel-build-log artifact for the complete output."
+            # DTC reports failures as uppercase "ERROR:", while make itself
+            # may be the only process that prints an error marker.  Match both
+            # forms so parallel compiler output cannot hide the true failure.
+            first_error=$(grep -ni -m1 -E '(^|[[:space:]])(fatal[[:space:]]+)?error:|undefined reference|collect2: error|make(\[[0-9]+\])?: \*\*\*' "$build_log" || true)
+            if [ -n "$first_error" ]; then
+              line=${first_error%%:*}
+              start=$(( line > 25 ? line - 25 : 1 ))
+              end=$(( line + 40 ))
+              echo "First error at log line $line:"
+              sed -n "${start},${end}p" "$build_log"
+            else
+              echo "No compiler-style error line was found; last 120 log lines:"
+              tail -n 120 "$build_log"
+            fi
+            exit "$status"
+          fi
+
+      - name: Upload complete kernel build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel-build-log-${{ env.DEVICE }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/kernel-build.log
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Package artifacts
         run: bash scripts/package.sh all

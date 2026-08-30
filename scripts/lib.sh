@@ -103,13 +103,42 @@ retry() {
 
 # ------------------------------------------------------------- downloading ---
 
-# fetch URL DEST -- resumable, retrying download.
+# fetch URL DEST -- retrying download with an integrity check for archives.
 fetch() {
-	local url=$1 dest=$2
+	local url=$1 dest=$2 tmp="${2}.partial"
+	local attempt=1 delay=5
 	info "fetching ${url}"
-	retry 4 curl -fsSL --connect-timeout 30 --retry 3 --retry-delay 3 -o "$dest" "$url" \
-		|| die "failed to download ${url}"
-	[ -s "$dest" ] || die "downloaded file is empty: ${url}"
+	rm -f "$dest" "$tmp"
+
+	while [ "$attempt" -le 4 ]; do
+		# Do not write straight to DEST: a proxy/server can terminate a streamed
+		# archive cleanly enough for curl to exit 0, while gzip/tar later finds an
+		# unexpected EOF.  Only promote a verified file to DEST.
+		if curl -fsSL --connect-timeout 30 --retry 3 --retry-delay 3 \
+			--retry-all-errors -o "$tmp" "$url" && [ -s "$tmp" ]; then
+			case "$dest" in
+				*.tar.gz | *.tgz) gzip -t "$tmp" ;;
+				*.tar.xz)         xz -t "$tmp" ;;
+				*.tar.zst)        zstd -tq "$tmp" ;;
+				*.tar.bz2)        bzip2 -t "$tmp" ;;
+				*.tar)            tar -tf "$tmp" >/dev/null ;;
+				*.zip)            unzip -tqq "$tmp" ;;
+				*)                true ;;
+			esac && {
+				mv "$tmp" "$dest"
+				return 0
+			}
+		fi
+
+		rm -f "$tmp"
+		if [ "$attempt" -lt 4 ]; then
+			warn "download was incomplete or invalid; retrying in ${delay}s (${attempt}/4): ${url}"
+			sleep "$delay"
+			delay=$((delay * 2)); [ "$delay" -gt 60 ] && delay=60
+		fi
+		attempt=$((attempt + 1))
+	done
+	die "failed to download a valid file after 4 attempts: ${url}"
 }
 
 # fetch_stdout URL -- print a URL's body, retrying. Used for small text files.
