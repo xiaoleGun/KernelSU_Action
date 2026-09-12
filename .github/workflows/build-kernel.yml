@@ -125,7 +125,11 @@ jobs:
       IN_EXTRA_DEFCONFIG: ${{ inputs.extra_defconfig }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4  
+      - name: Integrate ReSukiSU
+        run: |
+          cd kernel
+          bash ../integrate_ksu.sh
 
       - name: Resolve configuration
         run: bash scripts/config.sh
