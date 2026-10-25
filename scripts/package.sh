@@ -75,7 +75,8 @@ make_boot_image() {
 		|| die "could not stage the new kernel into the unpacked ramdisk"
 
 	# shellcheck disable=SC2086
-	python3 "${tools}/mkbootimg.py" $fmt -o boot.img || die "mkbootimg failed"
+	eval "python3 \"${tools}/mkbootimg.py\" ${fmt} -o boot.img" \
+		|| die "mkbootimg failed"
 	[ -s "${WORKSPACE}/boot.img" ] || die "boot.img was not produced"
 
 	ok "boot.img built ($(du -h "${WORKSPACE}/boot.img" | cut -f1))"
